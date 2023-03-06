@@ -1,0 +1,51 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+
+<mapper namespace="qna">
+   
+   <select id="qnaList" resultType="hashmap" parameterType="hashmap">
+      <include refid="common.pagingPre"/>
+      <![CDATA[
+        SELECT ROW_NUMBER() OVER (ORDER BY Q.Q_REGDATE DESC) RNUM, 
+        Q.Q_PRIVATE, C.C_CONTENT, Q.Q_TITLE, Q.Q_REGDATE, M.M_NICKNAME, Q.Q_CONTENT, M.M_IDX, Q.Q_IDX, C.C_REGDATE
+      FROM QNA Q, MEMBER M, COMMENT_T C
+      WHERE M.M_IDX(+) = Q.M_IDX
+      AND Q.Q_DEL_YN='N'
+      AND M.M_DEL_YN!='Y'
+      AND C.C_TABLE(+) = 'Q'
+      AND C.C_ARTICLE(+) = Q.Q_IDX
+      AND C.C_DEL_YN(+) = 'N'
+     ]]>
+   <include refid="common.pagingPost"/>
+   </select>
+   
+   <!-- 회원 - QNA 작성 -->
+   <insert id="insertQna" parameterType="hashmap">
+ <![CDATA[
+      INSERT INTO QNA
+      (Q_IDX, M_IDX, Q_TITLE, Q_CONTENT, Q_REGDATE, Q_PRIVATE, Q_DEL_YN)
+     VALUES
+      (Q_IDX.NEXTVAL, #{M_IDX}, #{Q_TITLE}, #{Q_CONTENT}, SYSDATE, #{Q_PRIVATE}, 'N')
+      ]]>
+   </insert>
+   
+   <!-- 자기가 남긴 QNA 삭제 -->
+   <update id="deleteQna" parameterType="hashmap">
+   <![CDATA[
+     UPDATE QNA
+        SET Q_DEL_YN='Y'
+        WHERE Q_IDX=#{Q_IDX}
+      ]]>
+   </update>
+   
+   <!-- 관리자 - 댓글 작성 -->
+   <insert id="insertQnaComment" parameterType="hashmap">
+    <![CDATA[
+      INSERT INTO COMMENT_T
+      (C_IDX, M_IDX, C_CONTENT, C_WRITER, C_REGDATE, C_LEVEL, C_TABLE, C_ARTICLE, C_MODI_YN, C_DEL_YN)
+     VALUES
+      (C_IDX.NEXTVAL, #{M_IDX}, #{C_CONTENT}, #{C_WRITER}, SYSDATE, 0, 'Q', #{Q_IDX}, 'N', 'N')
+      ]]>
+   </insert>
+  
+</mapper>

@@ -1,0 +1,61 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+
+<mapper namespace="common">
+	<!-- 전자정부 페이징 -->
+	<sql id="pagingPre">
+		<![CDATA[
+		SELECT
+			AAA.*
+		FROM(
+			SELECT
+				COUNT(*) OVER() AS TOTAL_COUNT,
+				AA.*
+			FROM(
+		]]>
+	</sql>
+	<sql id="pagingPost">
+		<![CDATA[
+			) AA
+		) AAA
+		WHERE
+			AAA.RNUM BETWEEN #{START} AND #{END}
+		]]>
+	</sql>
+
+	<!--############################################################################################################################## -->
+
+
+	<!--모임 찜 insert -->
+	<insert id="zzimInsert" parameterType="hashmap">
+         <![CDATA[
+     INSERT INTO ZZIM
+    (Z_IDX, M_IDX, Z_ARTICLE, Z_TABLE, Z_DEL_YN) 
+    VALUES (Z_IDX.NEXTVAL, #{M_IDX}, #{Z_ARTICLE}, #{Z_TABLE}, 'N')
+            ]]>
+	</insert>
+
+	<!--모임 찜 Delete -->
+	<insert id="zzimDelete" parameterType="hashmap">
+         <![CDATA[
+    DELETE ZZIM 
+    WHERE M_IDX = #{M_IDX}  
+    AND Z_TABLE = #{Z_TABLE}  
+    AND Z_ARTICLE = #{Z_ARTICLE}
+            ]]>
+	</insert>
+
+
+
+
+	<!-- 메인페이지 -->
+	<select id="main" resultType="hashmap">
+
+	</select>
+
+	<!-- 회원가입 -->
+	<insert id="join">
+
+	</insert>
+
+</mapper>

@@ -1,0 +1,97 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+
+<mapper namespace="comment">
+
+	<!-- 댓글 조회-->
+	<select id="commentList" parameterType="hashmap" resultType="hashmap">
+		<![CDATA[
+		SELECT 
+			C.C_IDX, C.M_IDX, C.C_TABLE, F.FR_IDX, Q.Q_IDX, C.C_CONTENT, C.C_WRITER, C.C_REGDATE, C.C_MODI_YN, C.C_REF, C.C_STEP, C.C_LEVEL, C.C_DEL_YN
+		FROM COMMENT_T C 
+			INNER JOIN FREE F 
+			ON C.B_IDX = F.FR_IDX
+    		LEFT JOIN QNA Q
+     		ON C.B_IDX = Q.Q_IDX
+		WHERE 
+			C.C_TABLE = #{C.C_TABLE} 
+			AND C.B_IDX = #{C.B_IDX} 
+			AND C.C_DEL_YN = 'N'
+			ORDER BY C.C_REF DESC, C.C_STEP 
+		]]>
+	</select>
+
+	<!-- 댓글 작성 -->
+	<insert id="commentInsert" parameterType="hashmap">
+		<![CDATA[
+			INSERT INTO COMMENT_T
+				(C_IDX,
+				M_IDX,
+				C_TABLE,
+				B_IDX,
+				C_CONTENT,
+				C_WRITER,
+				C_REF)
+			VALUES
+				(C_IDX.NEXTVAL,
+				#{M_IDX},
+				#{C_TABLE},
+				#{B_IDX},
+				#{C_CONTENT},
+				#{C_WRITER},
+				#{C_REF})
+		]]>
+	</insert>
+
+	<!-- 대댓글 작성 -->
+	<insert id="commentInsert2" parameterType="hashmap">
+		<![CDATA[
+			INSERT INTO COMMENT_T
+				(C_IDX,
+				M_IDX,
+				C_TABLE,
+				B_IDX,
+				C_CONTENT,
+				C_WRITER,
+				C_REF,
+				C_STEP,
+				C_LEVLE)
+			VALUES
+				(C_IDX.NEXTVAL,
+				#{M_IDX},
+				#{C_TABLE},
+				#{B_IDX},
+				#{C_CONTENT},
+				#{C_WRITER},
+				#{C_REF},
+				#{C_STEP}+'1',
+				#{C_LEVEL}+'1')
+		]]>
+	</insert>
+
+	<!-- 댓글 수정 -->
+	<update id="commentUpdate">
+		<![CDATA[
+			UPDATE
+				COMMENT_T
+			SET
+				C_CONTENT = #{C_CONTENT}
+				AND C_MODI_YN = 'Y'
+			WHERE
+				C_IDX = #{C_IDX}
+		]]>
+	</update>
+
+	<!-- 댓글 삭제 -->
+	<update id="commentDelete">
+		<![CDATA[
+			UPDATE
+				COMMENT_T
+			SET
+				C_DEL_YN='Y'
+			WHERE
+				C_IDX = #{C_IDX}
+		]]>
+	</update>
+	
+</mapper>

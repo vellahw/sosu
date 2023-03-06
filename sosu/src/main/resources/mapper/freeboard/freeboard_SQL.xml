@@ -1,0 +1,226 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+
+<mapper namespace="freeboard">
+   
+   <!-- 자유게시판 -->   
+   <select id="freeList" resultType="hashmap" parameterType="hashmap">
+      <!-- <include refid="common.pagingPre"/> -->
+      <![CDATA[
+         SELECT 
+            FR. * , NVL(F.F_SVNAME,0) AS FF_SVNAME, M. *
+         FROM 
+            FREE FR, FILE_T F, MEMBER M      
+         WHERE 
+            F.F_TABLE(+) = 'F'
+         AND 
+            F.F_MAIN_YN(+) ='Y' 
+          AND 
+             FR.FR_DEL_YN(+) = 'N'
+            AND 
+               FR.M_IDX = M.M_IDX
+          AND 
+             F.F_ARTICLE(+) =FR.FR_IDX 
+          AND 
+             FR_CATEGORY = #{MO_CATEGORY}
+          ORDER BY FR.FR_REGDATE DESC
+      ]]>   
+      <!-- <include refid="common.pagingPost"/> -->   
+   </select>
+
+   <!-- 자유게시글 상세 -->
+   <select id="freeDetail" parameterType="hashmap" resultType="hashmap">
+   <![CDATA[
+      SELECT FR.*
+      FROM 
+         FREE FR
+          WHERE 
+             FR_IDX = #{FR_IDX}
+          AND 
+             FR_DEL_YN = 'N'
+   ]]>
+   </select>
+   
+   <!-- 자유게시판 상세 이미지 띄우기 -->
+   <select id="freeDetailImg" resultType="hashmap" parameterType="hashmap">
+   <![CDATA[   
+      SELECT 
+         F_SVNAME, F_MAIN_YN
+        FROM 
+           FILE_T F, FREE FR
+        WHERE 
+           F.F_TABLE(+) = 'F'
+        AND 
+           F.F_ARTICLE(+) = FR.FR_IDX
+        AND 
+           F.F_DEL_YN = 'N'
+        AND 
+           FR.FR_IDX = #{FR_IDX}
+        ORDER BY F.F_MAIN_YN DESC
+      ]]>   
+   </select>
+   
+   <!-- 자유게시판 등록 -->
+   <insert id="insertFree" parameterType="hashmap">
+   <selectKey keyProperty="FR_IDX" order="BEFORE" resultType="int">
+         SELECT FR_IDX.NEXTVAL FROM DUAL
+    </selectKey>      
+       INSERT INTO FREE
+           (FR_IDX,
+           M_IDX,
+         FR_TITLE,
+         FR_CONTENT,
+         FR_CATEGORY,
+         FR_REGDATE,
+         RE_MOD_YN,
+         FR_DEL_YN,
+         FR_WRITER,
+         FR_COUNT)
+        VALUES
+            (#{FR_IDX},
+            #{M_IDX},
+            #{FR_TITLE},
+            #{FR_CONTENT},
+            #{FR_CATEGORY},
+            sysdate,
+            'N',
+         'N',
+         #{FR_WRITER},
+         0)
+   </insert>
+   
+   <!-- 자유게시판 수정 -->
+   <update id="updateFree" parameterType="hashmap">
+      UPDATE 
+         FREE
+      SET 
+         FR_TITLE = #{FR_TITLE},
+         FR_CATEGORY = #{FR_CATEGORY},
+         FR_CONTENT = #{FR_CONTENT},
+         RE_MOD_YN = 'Y',
+         FR_REGDATE = sysdate                        
+      WHERE 
+         FR_IDX = #{FR_IDX}
+      AND 
+         M_IDX = #{M_IDX}
+   </update>
+   
+   <!-- 자유게시판 삭제 -->
+   <update id="deleteFree" parameterType="hashmap">
+      UPDATE 
+         FREE   
+      SET 
+         FR_DEL_YN = 'Y'                              
+      WHERE 
+         FR_IDX = #{FR_IDX}
+      AND 
+         M_IDX = #{M_IDX}
+   </update>
+   
+   <!-- 자유게시판 프로필 -->   
+   <select id="freeMemberList" resultType="hashmap" parameterType="hashmap">
+   <![CDATA[
+      SELECT NVL(F.F_SVNAME,0) AS PROFILE
+      FROM 
+         MEMBER M, FILE_T F
+        WHERE 
+           F.F_TABLE(+) = 'P'
+        AND 
+           F.F_ARTICLE(+) = M.M_IDX
+        AND 
+           M.M_IDX = #{M_IDX}
+   ]]>      
+   </select>
+
+   <!-- 자유게시판 검색 -->
+   <select id="freeSearch" parameterType="hashmap" resultType= "hashmap">
+      SELECT 
+         * 
+      FROM 
+         FREE
+      WHERE (
+      <trim prefixOverrides="AND">
+         <if test="FR_DEL_YN == 'Y'.toString()">
+            AND FR_DEL_YN = 'Y'
+         </if>
+         <if test="FR_DEL_YN != 'Y'.toString()">
+            AND FR_DEL_YN = 'N'
+         </if>
+         <choose>
+            <when test="searchType == 'T'.toString()">
+               AND (FR_TITLE like '%' || #{keyword} || '%')
+            </when>
+            <when test="searchType == 'C'.toString()">
+               AND (FR_CONTENT like '%' || #{keyword} || '%')
+            </when>
+            <when test="searchType == 'A'.toString()">
+               AND ((FR_TITLE like '%' || #{keyword} || '%') OR (FR_CONTENT like '%' || #{keyword} || '%'))
+            </when>
+         </choose>
+      </trim>
+      ) 
+      ORDER BY FR_REGDATE DESC
+   </select>
+    
+   <!-- 찜 -->
+   <insert id="insertZzim" parameterType="hashmap">
+      INSERT INTO ZZIM
+         (Z_IDX,
+          M_IDX,
+          Z_TABLE,
+         Z_ARTICLE)
+      VALUES
+          (Z_IDX.NEXTVAL,
+          #{M_IDX},
+          'F',
+          #{Z_ARTICLE})
+   </insert>
+   
+   <!-- 찜 취소 -->
+   <update id="deleteZzim" parameterType="hashmap">
+      UPDATE
+         ZZIM
+      SET
+         Z_DEL_YN = 'Y'
+      WHERE
+         Z_TABLE = 'F'
+      AND
+         M_IDX = #{M_IDX}
+      AND
+         Z_ARTICLE = #{FR_IDX}
+   </update>
+   
+   <!-- 찜 수 -->
+   <select id="zzimFree" parameterType="hashmap" resultType="hashmap">
+      SELECT 
+         COUNT(Z.Z_ARTICLE) AS FRZ_COUNT
+      FROM 
+         ZZIM Z, FREE F
+      WHERE 
+         Z.Z_TABLE = 'F'
+        AND 
+           Z.Z_ARTICLE = F.FR_IDX
+        AND 
+           F.FR_IDX = #{FR_IDX}
+   </select>
+   
+   <!-- 찜 유무 -->
+   <select id="freeZzimCheck" parameterType="hashmap" resultType="hashmap">
+    <![CDATA[
+         SELECT 
+            COUNT(Z_IDX) AS FZ_CHECK
+         FROM 
+            ZZIM Z, FREE FR, MEMBER M
+         WHERE 
+            Z.M_IDX = M.M_IDX
+         AND 
+            FR.FR_IDX = Z.Z_ARTICLE
+         AND 
+            Z.Z_TABLE = 'F'
+         AND 
+            FR.FR_IDX = #{FR_IDX}
+         AND 
+            M.M_IDX = #{M_IDX}
+    ]]>
+   </select>
+</mapper>

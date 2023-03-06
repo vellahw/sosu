@@ -1,0 +1,225 @@
+@charset "UTF-8";
+main {
+	display: flex;
+    flex-flow: column nowrap;
+    margin: 0px auto;
+    width: 100%;
+    max-width: 750px;
+    min-height: 1px;
+    margin-top: 150px;
+}
+
+main article {
+	padding: 30px 0px;
+    border-bottom: 1px;
+}
+
+hr {
+	color: rgb(155, 155, 155);
+}
+
+main article section {
+	margin-bottom: 20px;
+    white-space: inherit;
+    font-size: 20px;
+    line-height: 22px;
+}
+
+.info {
+	display: flex;
+    -webkit-box-pack: justify;
+    justify-content: space-between;
+    -webkit-box-align: center;
+    align-items: center;
+    margin-bottom: 20px;
+}
+
+.profile {
+	flex: 0 0 auto;
+    margin-right: 14px;
+    width: 48px;
+    height: 48px;
+    border-radius: 24px;
+    overflow: hidden;
+}
+
+.info_notPhoto > div:last-child {
+    -webkit-box-flex: 1;
+    flex: 1 1 auto;
+}
+.info_notPhoto {
+	margin-right: auto;
+}
+
+.name {
+	font-weight: bold;
+    font-size: 20px;
+    line-height: 12px;
+    margin-bottom: 10px;
+}
+
+.info_SD {
+	display: flex;
+    -webkit-box-align: center;
+    align-items: center;
+}
+
+.starpoint {
+	display: flex;
+    flex-flow: row nowrap;
+}
+
+.review_date {
+	margin-left: 6px;
+    line-height: 10px;
+    color: rgb(155, 155, 155);
+    font-size: 10px;
+}
+
+.join_moim {
+	color: rgb(155, 155, 155);
+    display: inline-block;
+    margin-top: 15pt;
+}
+
+.join_moim > div {
+    margin-bottom: 10px;
+    line-height: 10px;
+    font-size: 15px;
+}
+
+.title_moim {
+	cursor: pointer;
+    color: inherit;
+}
+
+.AVGstarpoint {
+	margin-left: 6px;
+    line-height: 10px;
+    color: rgb(155, 155, 155);
+    font-size: 30px;
+}
+
+.h1_review {
+	margin-left: 6px;
+}
+
+/* 리뷰 작성자 프사 */
+.review_profile {
+   border-radius: 100%;
+   object-fit: cover;
+   object-position: top;
+   width: 46px;
+   height: 46px;
+}
+
+.rv_img {
+	width:400pt;
+	height:250pt;
+	position: relative;
+	margin-bottom: 15pt;
+}
+
+.rv_img > img{
+	position: absolute;
+	width: 100%;
+  	height: 100%; 
+	top: 50%;
+	left: 50%;
+	transform: translate(-50%, -50%);
+}
+
+.rv_btn{
+	text-align: end;
+}
+
+.contents {
+	margin-top: 30px;
+	white-space: pre-line;
+}
+
+/* 링크 밑줄 제거 */
+.btn_a {
+  	text-decoration: none;
+}
+
+.btn_a:link, .btn_a:visited {
+     background-color: #F16F19;
+     color: darkblue;
+     padding: 15px 25px;
+     text-align: center;
+     text-decoration: none;
+     display: inline-block;
+}
+
+.btn_a:hover, .btn_a:active {
+     background-color: #fff;
+}
+
+.reviewHeader {
+	
+}
+
+@import url('https://fonts.googleapis.com/css2?family=Noto+Sans+KR&display=swap');
+
+:root {
+  --button-color: #ffffff;
+  --button-bg-color: #0d6efd;
+  --button-hover-bg-color: #025ce2;
+}
+
+button {
+  -webkit-appearance: none;
+  -moz-appearance: none;
+  appearance: none;
+  
+  background: var(--button-bg-color);
+  color: var(--button-color);
+  
+  margin: 0;
+  padding: 0.5rem 1rem;
+  
+  font-family: 'Noto Sans KR', sans-serif;
+  font-size: 23px;
+  font-weight: 400;
+  text-align: center;
+  text-decoration: none;
+  
+  border: none;
+  border-radius: 4px;
+  
+  display: inline-block;
+  width: auto;
+  
+  box-shadow: 0 4px 6px -1px rgba(0, 0, 0, 0.1), 0 2px 4px -1px rgba(0, 0, 0, 0.06);
+  
+  cursor: pointer;
+  
+  transition: 0.5s;
+}
+
+button.success {
+  --button-bg-color: #28a745;
+  --button-hover-bg-color: #218838;
+}
+
+button.error {
+  --button-bg-color: #dc3545;
+  --button-hover-bg-color: #c82333;
+}
+
+button.warning {
+  --button-color: #212529;
+  --button-bg-color: #ffc107;
+  --button-hover-bg-color: #e0a800;
+}
+
+button:active,
+button:hover,
+button:focus {
+  background: var(--button-hover-bg-color);
+  outline: 0;
+}
+button:disabled {
+  opacity: 0.5;
+}

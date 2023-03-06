@@ -1,0 +1,323 @@
+@charset "UTF-8";
+/*새로넣은거*/
+
+#chat_list{
+    display: flex;
+    min-width: 311px;
+    flex-direction: column;
+    -webkit-box-pack: justify;
+    height: 500px;
+    min-height:832px;
+    overflow: hidden auto;
+    border-right: 1px solid #e6e6e6;
+}
+
+nav.sidebar{
+	display: flex;
+    flex-direction: column;
+    border-left: 1px solid #0017580d;
+    border-right: 1px solid #0017580d;
+    padding: 20px 13px;
+    width: 72px;
+    background-color: #eaebee;
+}
+
+.sidebar-img{
+	width: 44px;
+    height: 44px;
+    border-radius: 100%;	
+    box-shadow: 0px 0px 0 2px #e6e6e6, 0px 0px 0 4px rgb(255 126 54);
+}
+
+#sec_chatting{
+	position: relative;
+	display: flex;
+	flex-direction: column;
+	min-width: 812px;
+	max-width: 812px;
+	min-height:800px;
+}
+
+#none{
+	display: flex;
+	-webkit-box-pack: center;
+	justify-content: center;
+	-webkit-box-align: center;
+	align-items: center;
+	width: 100%;
+	height: 100%;
+	flex-direction: column;
+}
+
+#one{
+display: flex;
+    -webkit-box-align: center;
+    align-items: center;
+    height: 72px;
+    border-bottom: 1px solid #e6e6e6;
+    padding: 0px;
+    width:811px;
+}
+
+#notNone{
+	display: flex;
+    flex-direction: column;
+    width: 100%;
+    height: 100%;
+}
+
+#two{
+	overflow: hidden auto;
+    padding: 0px 20px;
+    background-color: var(--seed-scale-color-gray-00);
+}
+
+#chatarea{
+    height: 600px;
+    overflow: hidden auto;
+    width: 811px;
+    background-color: #fff;
+}
+
+.img-pro-chat-room{
+	width: 50px;
+    height: 50px;
+    border-radius: 50%;
+    margin-left: 10px;
+    margin-right: 20px;
+}
+
+#my-nickname{
+	position: relative;
+    display: flex;
+    height: 64px;
+    min-height: 64px;
+    border-bottom: 1px solid #e6e6e6;
+    padding: 0px 20px;
+    -webkit-box-align: center;
+    align-items: center;
+}
+
+#chat-search{
+	display: flex;
+    flex-direction: row-reverse;
+    height: 44px;
+    min-height: 44px;
+    padding: 0px 6px;
+    border-bottom: 1px solid #e6e6e6;
+    font-size: 12px;
+    -webkit-box-align: center;
+    align-items: center;
+}
+
+
+
+/* #chat_list{
+    border: 1px solid #F2F2F2;
+    float: left;
+    width: 25%;
+    height: 600px;
+    margin-left: 30px;
+    position: relative;
+    padding: 0px;
+    overflow: hidden auto;
+} */
+
+
+/* #nick-img-area{
+    text-align: left;
+    height: 70px;
+    width: 60%;
+    border: 1px solid #e6e6e6;
+    margin-left: 407px;
+} */
+
+/* #two{
+   display: none;
+
+} */
+
+#chat-one{
+   display: flex;
+    padding: 16px;
+    height: 40px;
+    align-items: center;
+    position: relative;
+    overflow: hidden;
+    cursor: pointer;
+}
+
+.list-nick{
+   font-weight: bold;
+    float: left;
+    font-size:14px;
+}
+
+.New-MSG{
+   overflow-x: hidden;
+    text-overflow: ellipsis;
+    white-space: nowrap;
+    font-size: 13px;
+    color: #8D929A;
+    margin-left: 20px;
+    padding: 15px;
+}
+
+.unread-MSG{
+   width: 30px;
+    height: 30px;
+    background: #f26f0f;
+    border-radius: 50%;
+    color: #fff;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    margin-top: 15px;
+}
+
+/* #chatarea{
+   width: 60%;
+    height: 520px;
+    border: 1px solid #e6e6e6;
+    overflow-y: scroll;
+    margin-left: 10px;
+} */
+
+/*내가 보낸 채팅창*/
+#my-Div{
+    contain: content;
+    display: flex;
+    -webkit-box-pack: end;
+    justify-content: flex-end;
+    padding: 4px;
+}
+#msg-send-time-my{
+   display: flex;
+    font-size: 12px;
+    float: right;
+    align-items: flex-end;
+    color:#B1B4BA
+}
+#mymessage{
+    background-color: RGB(254, 111, 15);
+    float: right;
+    color: #fff;
+    padding: 10px 14px;
+    max-width: 484px;
+    font-size: 14px;
+    line-height: 150%;
+    border-radius: 10px;
+    margin-right: 20px;
+    margin-left: 6px;
+}
+
+/*상대방이 보낸 채팅창*/
+#your-Div{
+   contain:content;
+   display: flex;
+    -webkit-box-pack: start;
+    justify-content: start;
+    padding: 4px;
+}
+
+#msg-send-time-you{
+   display: flex;
+    font-size: 12px;
+    align-items: flex-end;
+    flex-direction: row-reverse;
+    color:#B1B4BA
+}
+
+#yourmessage{
+   background-color: RGB(234, 235, 238);
+    float: left;
+   color: black;
+   padding: 10px 14px;
+    max-width: 484px;
+    font-size: 14px;
+    line-height: 150%;
+    border-radius: 10px;
+    margin-left:20px;
+    margin-right: 6px;
+}
+
+#nick{
+   float: left;
+    width: 20px;
+    margin-right: 610px;
+    margin-bottom: -16px;
+}
+
+/* #one{
+   display:block;
+} */
+
+
+
+#message{
+    height: 62px;
+    line-height: 150%;
+    padding: 8px 12px;
+    width: 761px;
+    resize: none;
+    font-size: 14px;
+    border: none;
+    outline: none;
+    background-color: var(--seed-semantic-color-paper-default);
+}
+
+#sendarea{
+    display: flex;
+    border-radius: 8px;
+    border: 1px solid black;
+    margin-left: 15px;
+    width: 785px;
+    margin: 12px;
+}
+
+
+#send{
+    border-radius: 4px;
+    width: 64px;
+    height: 32px;
+    line-height: 150%;
+    font-weight: bold;
+    font-size: 14px;
+    background-color: #DDDEE3;
+    color: rgb(255, 255, 255);
+    transition: background-color 0.5s ease 0s, color 0.5s ease 0s;
+    border: 0px;
+    margin-right: 12px;
+    float: right;
+    margin-bottom: 10px;
+
+}
+
+#send:hover{
+   background:#f26f0f;
+}
+
+.img-pro-chat{
+    width: 50px;
+    height: 50px;
+    border-radius: 50%;
+}
+
+
+.other-nick-name{
+	margin-top: 25px;
+    border: 0px;
+    font-size: 15px;
+    width: auto;
+    margin-bottom: 17px;
+    vertical-align: bottom;
+	background-color: #fff;
+}
+
+#exit{
+   border: 0px;
+    background: #fe6f0f;
+    color: white;
+    height: 30px;
+    width: 50px;
+}

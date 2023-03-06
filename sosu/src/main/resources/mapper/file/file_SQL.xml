@@ -1,0 +1,36 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+
+<mapper namespace="file">
+
+
+   <!-- 회원 프로필사진 띄우기 -->
+   <select id="memberProfile" parameterType="hashmap"
+      resultType="hashmap">
+         <![CDATA[
+      SELECT NVL(F.F_SVNAME,0) AS PROFILE
+        FROM MEMBER M, FILE_T F
+        WHERE F.F_TABLE(+) = 'P'
+        AND F.F_ARTICLE(+) = M.M_IDX
+        AND M.M_IDX = #{M_IDX}
+         ]]>
+   </select>
+   
+   <!-- 이미지 등록하기 -->
+   <insert id="imgInsert" parameterType="hashmap">
+       <![CDATA[
+      INSERT INTO FILE_T(F_IDX, F_TABLE, F_ARTICLE, F_OGNAME, F_SVNAME, F_SIZE,
+      F_MAIN_YN, F_DEL_YN, F_REG_DATE)
+      VALUES (F_IDX.NEXTVAL, #{F_TABLE}, #{F_ARTICLE}, #{F_OGNAME}, #{F_SVNAME},
+      #{F_SIZE}, #{F_MAIN_YN}, 'N', SYSDATE)
+       ]]>
+   </insert>
+
+    <!-- 이미지 삭제하기 -->
+   <update id="FileDelete" parameterType="hashmap">
+     UPDATE FILE_T
+     SET F_DEL_YN = 'Y'
+     WHERE F_SVNAME = #{chArr}
+   </update>
+</mapper>
+   

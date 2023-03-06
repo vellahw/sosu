@@ -1,0 +1,317 @@
+@charset "UTF-8";
+
+.a-tag{
+   color:black;
+   text-decoration:none !important;
+}
+.a-tag-h3{
+    text-align: left;
+    margin-left: 326px;
+    margin-bottom: 50px;
+    margin-top: 100px;
+}
+
+.qna-table{
+   margin-left: auto;
+      margin-right: auto;
+      text-align:center;
+}
+
+.qna-table thead th{
+    padding: 1.375rem 1.75rem;
+    line-height: 1.5;
+    font-size: 18px;
+    font-weight: bold;
+
+}
+
+.qna-table tbody td{
+   font-size: 16px;
+    padding: 1em 0px 0px 0px;
+}
+
+p.qna-mem{
+   color:red;
+}
+
+.qna-btn {
+    border: 0px;
+    background-color: #fd8731;
+    color: #fff;
+    height: 27px;
+    cursor: pointer;
+    float: inherit;
+    margin-left: 45%;
+}
+
+
+
+/*회원 상세보기 페이지 CSS*/
+.admin-qna-table{
+   margin-left: auto;
+      margin-right: auto;
+      text-align:center;
+
+}
+.admin-qna-table .header{
+    font-size: 18px;
+    font-weight: bold;
+    text-align: left;
+    vertical-align: middle;
+    padding: 5px 0px 9px 45px;
+}
+
+.admin-qna-table .contents{
+    text-align: left;
+    font-size: 15px;
+    vertical-align: middle;
+    padding: 5px 0px 10px 10px;
+    width: 350px;
+    height: 25px;
+    border: 1px solid #e6e6e6;
+}
+
+.admin-qna-table .contents-btn{
+    text-align: left;
+    font-size: 15px;
+    vertical-align: middle;
+    padding: 5px 0px 10px 0px;
+    width: 350px;
+    height: 25px;
+}
+
+
+.qna-div{
+   background-color: #F2F2F2;
+    margin-bottom: 15px;
+    margin-left: 250px;
+    margin-right: 250px;
+}
+
+.img-size{
+    width: 25px;
+    height: 25px;
+    margin-bottom: -6px;
+}
+
+
+.collapsible {
+            color: black;
+            cursor: pointer;
+            padding: 0px;
+            width: 52%; /*다름*/
+            height : 33px;
+            border: none;
+            text-align: left;
+            outline: none;
+            font-size: 15px;
+            background:#fff;
+        }
+        .active,
+        .collapsible:hover {
+            font-weight:bold;
+        }
+        .content { 
+              margin-top: 8px;
+    padding: 0 18px;
+    max-height: 0;
+    overflow: hidden;
+    transition: max-height 0.2s ease-out;
+    margin-left: 3px;
+    width: 717px;
+    display: inline-block;
+    color: black;
+    cursor: pointer;
+    background: #fff;
+        }
+        
+        .collapsible:after {
+            
+            color: white;
+            font-weight: bold;
+            float: right;
+            margin-left: 5px;
+        }
+        .active:after {
+            content: "\2212";
+        }
+        
+.admin-reply{
+   background: rgb(249, 249, 249);
+}        
+  
+  .done-reply{
+    display: inline-block;
+    border: 0px;
+    background: #fd8731;
+    color: #fff;
+    width: 60px;
+    text-align: center;
+    font-size: 13px;
+    height: 21px;
+    line-height: 21px;
+}
+
+.wait-reply{
+    display: inline-block;
+    border: 0px;
+    background: black;
+    color: #fff;
+    width: 60px;
+    text-align: center;
+    font-size: 13px;
+    height: 21px;
+    line-height: 21px;
+}
+
+.nickname{
+    display: block;
+    text-align: left;
+    padding: 0px 0px 0px 10px;
+    height: 25px;
+    font-size: 16px;
+    font-weight: bold;
+}
+
+.q-content{
+    text-align: left;
+    padding: 0px 0px 0px 10px;
+    font-size: 13px;
+}
+
+.deleteqna{
+   border:0px;
+   background:black;
+   color:white;
+   height:25px;
+   cursor: pointer;
+}
+
+.input-form {
+   margin-left: auto;
+   margin-right: auto;
+   text-align:center;
+}
+
+
+.input-form tbody th {
+   margin-top: 10px;
+   padding: 0.375rem 0.75rem;
+   font-weight: 400;
+   line-height: 1.5;
+   font-size: 1rem;
+}
+
+.header{
+   font-size:14.5px;
+   text-align:left;
+   vertical-align:middle;
+   padding: 5px 0px 9px 0px;   
+}
+
+label {
+   font-weight: bold;
+}
+
+.contnets{
+   text-align: left;
+   font-size:13px;
+   vertical-align:middle;
+   padding: 5px 0px 9px 0px;   
+}
+
+.contnets input{
+   width: 500px;
+   height: 27px;
+   border: 1px solid #e6e6e6;
+   padding: 2px 0 2px 12px;
+}
+
+
+.contnets textarea{
+   width: 500px;
+   height: 27px;
+   border: 1px solid #e6e6e6;
+   padding: 2px 0 2px 12px;
+}
+
+.brtn{
+   width:84px;
+   background-color: #fd8731;
+   color:#fff;
+   border:0px;
+   height:34px;
+   font-size: 15px;
+   font-weight: bold;
+   cursor: pointer;
+}
+
+.write-btn{
+    border: 0px;
+    background-color: #fd8731;
+    color: #fff;
+    height: 27px;
+    cursor: pointer;
+    align: right;
+    right: auto;
+}
+
+
+
+
+
+
+
+
+
+        
+/*=========================== 
+          notice.jsp              
+  ===========================    */        
+        
+        
+        .noticecontent {
+margin-top: 22px;
+    padding: 0 18px;
+    max-height: 0;
+    overflow: hidden;
+    transition: max-height 0.2s ease-out;
+    margin-left: 0px;
+    width: 675px;
+    text-align: left;
+    display: inline-block;
+    color: black;
+    cursor: pointer;
+    background: #e6e6e6;
+    font-size: 13px;
+        }
+        
+       .noticeicon{
+   display: inline-block;
+    color: #fff;
+    width: 50px;
+    text-align: center;
+    background-color: #fd8731;
+    border: none;
+    height: 21px;
+    font-size: 15px;
+    line-height: 21px;
+       } 
+        
+     .noticeupdatecontent {
+    height: 198px;
+    width: 372px;
+    border: 1px solid #e6e6e6;
+    font-size: 14px;
+   background-color: white;
+}  
+.notice-btn{
+   border: 0px;
+    background-color: #fd8731;
+    color: #fff;
+    width: 100px;
+    height: 27px;
+    margin-left:43%;
+    cursor: pointer;
+}
+        

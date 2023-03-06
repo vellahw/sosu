@@ -1,0 +1,120 @@
+@charset "UTF-8";
+
+.admin-table{
+	margin-left: auto;
+   	margin-right: auto;
+   	text-align:center;
+    border-collapse: collapse;
+}
+
+
+.admin-table thead th{
+    padding: 1.375rem 1.75rem;
+    line-height: 1.5;
+    font-size: 18px;
+    font-weight: bold;
+    border-bottom: 1px solid #e6e6e6;
+        
+
+}
+
+.admin-table tbody td{
+	font-size: 16px;
+    padding: 1em 0px 0px 0px;
+        border-bottom: 1px solid #e6e6e6;
+}
+
+p.stop-mem{
+	color:red;
+}
+
+.detail-btn{
+	border: 0px;
+    background-color: #fd8731;
+    color: #fff;
+    width: 60px;
+    height: 27px;
+   cursor: pointer;
+}
+
+/*회원 상세보기 페이지 CSS*/
+.admin-detail-table{
+	margin-left: auto;
+   	margin-right: auto;
+   	text-align:center;
+
+}
+.admin-detail-table .header{
+    font-size: 15px;
+    font-weight: bold;
+    text-align: left;
+    vertical-align: middle;
+    padding: 5px 0px 9px 60px;
+}
+
+.admin-detail-table .contents{
+    text-align: left;
+    font-size: 15px;
+    vertical-align: middle;
+    padding: 5px 0px 10px 10px;
+    width: 350px;
+    height: 25px;
+    border: 1px solid #e6e6e6;
+}
+
+.img-deta{
+	width: 300px;
+	height: 300px;
+	border-radius: 100%;
+	object-fit : cover;
+	object-position: top;
+}
+
+.admin-detail-table .contents-btn{
+    text-align: left;
+    font-size: 15px;
+    vertical-align: middle;
+    padding: 5px 0px 10px 0px;
+    width: 350px;
+    height: 25px;
+}
+
+.stoped-btn{
+	border: 0px;
+    background-color: #fd8731;
+    color: #fff;
+    width: 60px;
+    height: 27px;
+    cursor:pointer;
+}
+
+ .gray-box{
+	background-color:	#e6e6e6;
+}	
+
+.report-nickname{
+	border: 0px;
+    background-color: black;
+    color: white;
+    width: 55px;
+    height: 28px;
+    cursor: pointer;
+}
+
+.admin-detail-table .report-contents{
+    font-size: 15px;
+    vertical-align: middle;
+    padding: 0px 0px 0px 3px;
+    width: 150px;
+    height: 14px;
+    background-color: #fff;
+    text-align:left;
+}	
+
+.detail-div{
+	background-color: #F2F2F2;
+    margin-bottom: 15px;
+    margin-left: 250px;
+    margin-right: 250px;
+}
+

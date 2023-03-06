@@ -1,0 +1,94 @@
+<?xml version="1.0" encoding="euc-kr" ?>
+<!DOCTYPE tiles-definitions PUBLIC
+"-//Apache Software Foundation//DTD Tiles Configuration 3.0//EN"
+  "http://tiles.apache.org/dtds/tiles-config_3_0.dtd">
+
+<tiles-definitions>
+
+ <!-- 1. 기본 템플릿 생성
+    	header, body, footer를 가진 layout.jsp라는 기본 레이아웃을 정의
+     -->
+	<!-- 메인 레이아웃 -->
+	<definition name="main_layout" template="/WEB-INF/views/layout/layout.jsp">
+		<put-attribute name="header" value="/WEB-INF/views/layout/header.jsp" />
+		<put-attribute name="body" value="/WEB-INF/views/main.jsp" />
+		<put-attribute name="footer" value="/WEB-INF/views/layout/footer.jsp" />
+	</definition>
+	
+	<!-- 메인 리스트 -->
+	<definition name="mainlist" extends="main_layout">
+		<put-attribute name="body" value="/WEB-INF/views/mainlist.jsp"/>
+	</definition>
+
+	<!-- 모임 관련 -->
+	<definition name="moim/*" extends="main_layout">
+		<put-attribute name="body" value="/WEB-INF/views/moim/{1}.jsp"/>
+	</definition>
+	
+	 <!-- 회원가입 -->
+   <definition name="/com/join/*" extends="main_layout">
+      <put-attribute name="body" value="/WEB-INF/views/com/join/{1}.jsp"/>
+   </definition>
+   
+   <!-- 로그인 관련 -->
+   <definition name="/com/login/*" extends="main_layout">
+      <put-attribute name="body" value="/WEB-INF/views/com/login/{1}.jsp"/>
+   </definition>
+   
+   <!-- 멤버 관련  -->
+   <definition name="/members/mypage/*" extends="main_layout">
+      <put-attribute name="body" value="/WEB-INF/views/members/mypage/{1}.jsp"/>
+   </definition>
+	
+	<!-- 리뷰 관련 -->
+	<definition name="members/review/*" extends="main_layout">
+		<put-attribute name="body" value="/WEB-INF/views/members/review/{1}.jsp"/>
+	</definition> 
+	
+	<!-- QNA 관련 -->
+ 	<definition name="/qna/*" extends="main_layout">
+		<put-attribute name="body" value="/WEB-INF/views/qna/{1}.jsp"/>
+	</definition>
+	
+	<!-- 공지사항 관련 -->
+	 <definition name="/notice/*" extends="main_layout">
+		<put-attribute name="body" value="/WEB-INF/views/notice/{1}.jsp"/>
+	</definition>
+	
+	<!-- 채팅 관련 -->
+	 <definition name="/chat" extends="main_layout">
+		<put-attribute name="body" value="/WEB-INF/views/chat.jsp"/>
+	</definition>
+	
+	<!-- 자유게시판 관련 -->
+   <definition name="board/*" extends="main_layout">
+      <put-attribute name="body" value="/WEB-INF/views/board/{1}.jsp"/>
+   </definition>
+	
+
+	  <!-- 관리자 페이지 -->
+  <definition name="admin_main_layout" template="/WEB-INF/views/layout/layout.jsp">
+		<put-attribute name="header" value="/WEB-INF/views/layout/admin_header.jsp" />
+		<put-attribute name="body" value="/WEB-INF/views/admin_main.jsp" />
+		<put-attribute name="footer" value="/WEB-INF/views/layout/footer.jsp" />
+	</definition>
+   
+   <!-- 관리자 멤버 페이지 -->
+   <definition name="/admin/member/*" extends="admin_main_layout">
+      <put-attribute name="body" value="/WEB-INF/views/admin/member/{1}.jsp"/>
+   </definition>
+   
+   <!-- 관리자 QNA 페이지 -->
+   <definition name="/admin/qna/*" extends="admin_main_layout">
+      <put-attribute name="body" value="/WEB-INF/views/admin/qna/{1}.jsp"/>
+   </definition>
+   
+   <!-- 관리자 공지사항 페이지 -->
+   <definition name="/admin/notice/*" extends="admin_main_layout">
+      <put-attribute name="body" value="/WEB-INF/views/admin/notice/{1}.jsp"/>
+   </definition>
+   
+
+
+	
+</tiles-definitions>
