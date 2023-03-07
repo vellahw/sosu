@@ -68,7 +68,7 @@
             </c:otherwise>
          </c:choose>
          
-   <!-- 페이징 -->
+  <!-- 페이징 -->
    <div class="page_wrap">
    <div class="page_nation">
       <ul>

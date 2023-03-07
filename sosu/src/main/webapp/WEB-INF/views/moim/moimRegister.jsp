@@ -158,7 +158,7 @@ history.replaceState({}, null, location.pathname);
                <button type="button" class="searchMap"
                   		onclick="kaMap()">주소 검색</button>
                <br/>   		
-               <input type="text" id="detailAddress" placeholder="상세주소 입력" style="display: none;" name="DEADDRESS">
+               <input type="text" id="detailAddress" placeholder="상세주소 입력" name="DEADDRESS">
                <div id="map" style="width:500px;height:400px; margin-top: 10px;"></div>
                <input type="hidden" name="WII">
                <input type="hidden" name="KYUNG">

@@ -31,14 +31,14 @@
 
       <br />
       <div class="row gy-5" style="margin-bottom: 20px;">
-      	<p style="font-weight: bold; margin-bottom: 30px; padding-left: 11px; font-size: 24px;">문화/예술
-        	<span style="font-size: 15px;">(총 ${count1.MO_COUNT}개)</span>
+         <p style="font-weight: bold; margin-bottom: 30px; padding-left: 11px; font-size: 24px;">문화/예술
+           <span style="font-size: 15px;">(총 ${count1.MO_COUNT}개)</span>
         
         <c:if test="${count1.MO_COUNT gt 4}">
-	    	<a href ="/moim/culture.sosu?KEYWORD=${KEYWORD}">
-		        <input type="hidden" name="KEYWORD" value="${KEYWORD}">
-		        <button type = "button" class="mrgbtn" style="float: right; margin-right: 30px; margin-top: 8px;">더보기</button>
-	        </a>
+          <a href ="/moim/culture.sosu?KEYWORD=${KEYWORD}">
+              <input type="hidden" name="KEYWORD" value="${KEYWORD}">
+              <button type = "button" class="mrgbtn" style="float: right; margin-right: 30px; margin-top: 8px;">더보기</button>
+           </a>
         </c:if>
         </p>
             <c:forEach begin="0" end="3" items="${list1}" var="m" varStatus="var">
@@ -57,15 +57,15 @@
          <br />
 
          <div class="row gy-5" style="margin-bottom: 20px;">
-      	 <p style="font-weight: bold; margin-bottom: 22px;padding-left: 11px; font-size: 24px;">스포츠
-        	<span style="font-size: 15px;">(총 ${count2.MO_COUNT}개)</span>
+          <p style="font-weight: bold; margin-bottom: 22px;padding-left: 11px; font-size: 24px;">스포츠
+           <span style="font-size: 15px;">(총 ${count2.MO_COUNT}개)</span>
         
-	        <c:if test="${count2.MO_COUNT gt 4}">
-		    	<a href ="/moim/sports.sosu?KEYWORD=${KEYWORD}">
-			        <input type="hidden" name="KEYWORD" value="${KEYWORD}">
-			        <button type = "button" class="mrgbtn" style="float: right; margin-right: 30px; margin-top: 8px;">더보기</button>
-		        </a>
-	        </c:if>
+           <c:if test="${count2.MO_COUNT gt 4}">
+             <a href ="/moim/sports.sosu?KEYWORD=${KEYWORD}">
+                 <input type="hidden" name="KEYWORD" value="${KEYWORD}">
+                 <button type = "button" class="mrgbtn" style="float: right; margin-right: 30px; margin-top: 8px;">더보기</button>
+              </a>
+           </c:if>
          </p>
             <c:forEach begin="0" end="3" items="${list2}" var="m" varStatus="var">
                <c:if test="${count2.MO_COUNT ne 0}">
@@ -83,15 +83,15 @@
          <br />
 
          <div class="row gy-5" style="margin-bottom: 20px;">
-      	 <p style="font-weight: bold; margin-bottom: 22px;padding-left: 11px; font-size: 24px;">게임
-        	<span style="font-size: 15px;">(총 ${count3.MO_COUNT}개)</span>
+          <p style="font-weight: bold; margin-bottom: 22px;padding-left: 11px; font-size: 24px;">게임
+           <span style="font-size: 15px;">(총 ${count3.MO_COUNT}개)</span>
         
-	        <c:if test="${count3.MO_COUNT gt 4}">
-		    	<a href ="/moim/game.sosu?KEYWORD=${KEYWORD}">
-			        <input type="hidden" name="KEYWORD" value="${KEYWORD}">
-			        <button type = "button" class="mrgbtn" style="float: right; margin-right: 30px; margin-top: 8px;">더보기</button>
-		        </a>
-	        </c:if>
+           <c:if test="${count3.MO_COUNT gt 4}">
+             <a href ="/moim/game.sosu?KEYWORD=${KEYWORD}">
+                 <input type="hidden" name="KEYWORD" value="${KEYWORD}">
+                 <button type = "button" class="mrgbtn" style="float: right; margin-right: 30px; margin-top: 8px;">더보기</button>
+              </a>
+           </c:if>
          </p>
          
             <c:forEach begin="0" end="3" items="${list3}" var="m" varStatus="var">
@@ -110,15 +110,15 @@
 
 
         <div class="row gy-5" style="margin-bottom: 20px;">
-      	 <p style="font-weight: bold; margin-bottom: 22px;padding-left: 11px; font-size: 24px;">아웃도어/여행
-        	<span style="font-size: 15px;">(총 ${count4.MO_COUNT}개)</span>
+          <p style="font-weight: bold; margin-bottom: 22px;padding-left: 11px; font-size: 24px;">아웃도어/여행
+           <span style="font-size: 15px;">(총 ${count4.MO_COUNT}개)</span>
         
-	        <c:if test="${count4.MO_COUNT gt 4}">
-		    	<a href ="/moim/outdoor.sosu?KEYWORD=${KEYWORD}">
-			        <input type="hidden" name="KEYWORD" value="${KEYWORD}">
-			        <button type = "button" class="mrgbtn" style="float: right; margin-right: 30px; margin-top: 8px;">더보기</button>
-		        </a>
-	        </c:if>
+           <c:if test="${count4.MO_COUNT gt 4}">
+             <a href ="/moim/outdoor.sosu?KEYWORD=${KEYWORD}">
+                 <input type="hidden" name="KEYWORD" value="${KEYWORD}">
+                 <button type = "button" class="mrgbtn" style="float: right; margin-right: 30px; margin-top: 8px;">더보기</button>
+              </a>
+           </c:if>
          </p>
             <c:forEach begin="0" end="3" items="${list4}" var="m" varStatus="var">
                <c:if test="${count4.MO_COUNT ne 0}">
@@ -136,15 +136,15 @@
 
 
          <div class="row gy-5" style="margin-bottom: 20px;">
-      	 <p style="font-weight: bold; margin-bottom: 22px;padding-left: 11px; font-size: 24px;">음식
-        	<span style="font-size: 15px;">(총 ${count5.MO_COUNT}개)</span>
+          <p style="font-weight: bold; margin-bottom: 22px;padding-left: 11px; font-size: 24px;">음식
+           <span style="font-size: 15px;">(총 ${count5.MO_COUNT}개)</span>
         
-	        <c:if test="${count5.MO_COUNT gt 4}">
-		    	<a href ="/moim/food.sosu?KEYWORD=${KEYWORD}">
-			        <input type="hidden" name="KEYWORD" value="${KEYWORD}">
-			        <button type = "button" class="mrgbtn" style="float: right; margin-right: 30px; margin-top: 8px;">더보기</button>
-		        </a>
-	        </c:if>
+           <c:if test="${count5.MO_COUNT gt 4}">
+             <a href ="/moim/food.sosu?KEYWORD=${KEYWORD}">
+                 <input type="hidden" name="KEYWORD" value="${KEYWORD}">
+                 <button type = "button" class="mrgbtn" style="float: right; margin-right: 30px; margin-top: 8px;">더보기</button>
+              </a>
+           </c:if>
          </p>
             <c:forEach begin="0" end="3" items="${list5}" var="m" varStatus="var">
                <c:if test="${count5.MO_COUNT ne 0}">
@@ -161,15 +161,15 @@
          <br />
 
          <div class="row gy-5" style="margin-bottom: 50px;">
-      	 <p style="font-weight: bold; margin-bottom: 22px;padding-left: 11px; font-size: 24px;">기타
-        	<span style="font-size: 15px;">(총 ${count6.MO_COUNT}개)</span>
+          <p style="font-weight: bold; margin-bottom: 22px;padding-left: 11px; font-size: 24px;">기타
+           <span style="font-size: 15px;">(총 ${count6.MO_COUNT}개)</span>
         
-	        <c:if test="${count6.MO_COUNT gt 4}">
-		    	<a href ="/moim/etc.sosu?KEYWORD=${KEYWORD}">
-			        <input type="hidden" name="KEYWORD" value="${KEYWORD}">
-			        <button type = "button" class="mrgbtn" style="float: right; margin-right: 30px; margin-top: 8px;">더보기</button>
-		        </a>
-	        </c:if>
+           <c:if test="${count6.MO_COUNT gt 4}">
+             <a href ="/moim/etc.sosu?KEYWORD=${KEYWORD}">
+                 <input type="hidden" name="KEYWORD" value="${KEYWORD}">
+                 <button type = "button" class="mrgbtn" style="float: right; margin-right: 30px; margin-top: 8px;">더보기</button>
+              </a>
+           </c:if>
          </p>
             <c:forEach begin="0" end="3" items="${list6}" var="m" varStatus="var">
                <c:if test="${count6.MO_COUNT ne 0}">

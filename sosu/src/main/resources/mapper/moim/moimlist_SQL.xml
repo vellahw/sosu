@@ -14,7 +14,7 @@
       M.*,
       SUBSTR(MO_TITLE,1,16) AS MOTT,
       NVL(F.F_SVNAME,0) AS MF_SVNAME,
-      MEM.*
+      MEM.M_NICKNAME
       FROM MOIM M, FILE_T F, MEMBER MEM
       WHERE F.F_DEL_YN(+) = 'N'
       AND F.F_MAIN_YN(+) = 'Y'

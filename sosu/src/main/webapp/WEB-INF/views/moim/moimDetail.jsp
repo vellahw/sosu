@@ -23,11 +23,12 @@
       <input type="hidden" name="KYUNG" value="${Detail.DEADDRESS}" id="deaddress"> 
       
       <main>
-         <div class="detailBody">
+        <div class="detailBody">
             <div class="imgArea">
                <!-- 메인 사진 -->
                   <c:if test="${Detail.MF_SVNAME ne '0'}">
-                     <img src="/resources/img/upload/${Detail.MF_SVNAME}" style="max-height: 561px;max-width: -webkit-fill-available;">
+                     <img src="/resources/img/upload/${Detail.MF_SVNAME}"onerror="this.style.display='none'"
+                     style="max-height: 561px;max-width: -webkit-fill-available;">
                   </c:if>
             </div>
 
@@ -76,13 +77,13 @@
                </p>
                <p>♫ ${Detail.MO_DETAILCATEGORY}</p>
                <p class="showMap-container" style ="margin-bottom:0px" >
-               	⚑ ${Detail.MO_DETAILREGION}
-               	<c:if test = "${Detail.MAP_IDX ne null}">
-               	<button class="showMap-title">지도보기</button>
-               	<div class="showMap-answer">
-               		<div id="map" style="width:500px;height:400px;"></div>
-               	</div>
-               	</c:if>
+                  ⚑ ${Detail.MO_DETAILREGION}
+                  <c:if test = "${Detail.MAP_IDX ne null}">
+                  <button class="showMap-title">지도보기</button>
+                  <div class="showMap-answer">
+                     <div id="map" style="width:500px;height:400px;margin-top:10px;"></div>
+                  </div>
+                  </c:if>
                </p>
                <p>
                   ✈
@@ -299,7 +300,7 @@
                                                 style="margin-right: 3px; margin-left: 5px; transform: translate(4px, -38px);"
                                                 type="submit">승인</button>
                                           </form>
-									
+                           
                                           <form action="/moim/moimMemberBan.sosu"
                                              style="display: inline;" onsubmit="return ban();">
                                              <input type="hidden" value="${w.P_IDX}" name="P_IDX">
@@ -476,7 +477,7 @@ window.onload = () => {
      
      // 지도 보기 클릭시 콜백 처리
      for( let i=0; i < showMapContainer.length; i++ ) {
-    	 showMapContainer[i].addEventListener('click', function() { // 클릭시 처리할 일
+        showMapContainer[i].addEventListener('click', function() { // 클릭시 처리할 일
          showMapAnswer[i].classList.toggle('active');
        });
      };
@@ -491,16 +492,16 @@ var add = $('#address').val();
 var deadd = $('#deaddress').val();
 var container = document.getElementById('map'); //지도를 담을 영역의 DOM 레퍼런스
 var options = { //지도를 생성할 때 필요한 기본 옵션
-	center: new kakao.maps.LatLng(wii, kyung), //지도의 중심좌표.
-	level: 3 //지도의 레벨(확대, 축소 정도)
+   center: new kakao.maps.LatLng(wii, kyung), //지도의 중심좌표.
+   level: 3 //지도의 레벨(확대, 축소 정도)
 };
 
 var map = new kakao.maps.Map(container, options); //지도 생성 및 객체 리턴
 
 //지도를 클릭한 위치에 표출할 마커
 var marker = new kakao.maps.Marker({ 
-	// 지도 중심좌표에 마커를 생성
-	position: map.getCenter() 
+   // 지도 중심좌표에 마커를 생성
+   position: map.getCenter() 
 }); 
 //지도에 마커를 표시
 marker.setMap(map);
