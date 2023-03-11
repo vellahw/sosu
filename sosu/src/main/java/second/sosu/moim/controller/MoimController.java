@@ -43,22 +43,17 @@ public class MoimController {
 
 		commandMap.getMap().put("MO_CATEGORY", MO_CATEGORY);
 
-		int total = moimService.moimTotalCount(commandMap.getMap()); // 모임 총 갯수
-
-		commandMap.getMap().put("amount", cri.getAmount());
-		commandMap.getMap().put("pageNum", cri.getPageNum());
-
-		int ramount = (int) commandMap.get("amount");
-		int rpageNum = (int) commandMap.get("pageNum");
-
-		cri.setAmount(ramount);
-		cri.setPageNum(rpageNum);
-
+		Map<String, Object> map = moimService.moimCount(commandMap.getMap());
+		
+		int mo_total = Integer.parseInt(String.valueOf(map.get("MO_COUNT"))); // 모임 총 갯수
+		
+		commandMap.put("amount", cri.getAmount());
+		commandMap.put("pageNum", cri.getPageNum());
+		
 		ModelAndView mv = new ModelAndView("/moim/moimlist");
 		mv.setViewName("moim/moimlist");
 
 		moimService.moimClose();
-		Map<String, Object> map = moimService.moimCount(commandMap.getMap());
 
 		if (MO_REGION != null) {
 			commandMap.put("MO_REGION", MO_REGION);
@@ -101,7 +96,7 @@ public class MoimController {
 		mv.addObject("list", moimService.moimList(commandMap.getMap(), session));
 		mv.addObject("count", map);
 		mv.addObject("sessionss", session.getAttribute("M_IDX"));
-		mv.addObject("pageMaker", new PageDTO(cri, total, moimService.moimList(commandMap.getMap(), session)));
+		mv.addObject("pageMaker", new PageDTO(cri, mo_total, moimService.moimList(commandMap.getMap(), session)));
 		mv.addObject("MO_REGION", commandMap.get(MO_REGION));
 
 		return mv;

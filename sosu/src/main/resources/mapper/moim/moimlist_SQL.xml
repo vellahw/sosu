@@ -51,20 +51,6 @@
       ]]>
    </sql>
 
-
-   <!-- 페이징을 위한 모임 수 -->
-   <select id="moimTotalCount" parameterType="hashmap"
-      resultType="int">
-      SELECT COUNT(*) AS MO_COUNT
-      FROM MOIM
-      WHERE MO_DEL_YN = 'N'
-      AND
-      MO_CATEGORY = #{MO_CATEGORY}
-      <if test="MO_REGION != null">
-         AND MO_REGION = #{MO_REGION}
-      </if>
-   </select>
-
    <!-- 모임 검색(헤더, 해시태그) -->
    <select id="moimSearchList" parameterType="hashmap"
       resultType="hashmap">

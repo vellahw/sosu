@@ -42,6 +42,7 @@ public class MoimDao extends AbstractDAO {
 					moimList.get(i).get("MO_IDX"));
 			moimList.get(i).put("MOMEM_COUNT", moimMemCount.get("MOMEM_COUNT"));
 		}
+		
 		// 모임 스크랩 수
 		for (int i = 0; i < moimList.size(); i++) {
 
@@ -112,12 +113,6 @@ public class MoimDao extends AbstractDAO {
 	public Map<String, Object> moimCount(Map<String, Object> map) throws Exception {
 		Map<String, Object> moimCount = (Map<String, Object>) selectOne("moim.moimCount", map);
 		return moimCount;
-	}
-
-	// 페이징을 위한 모임 토탈 카운트
-	public int moimTotalCount(Map<String, Object> map) {
-
-		return (int) selectOne("moim.moimTotalCount", map);
 	}
 
 	// 모임 상세보기

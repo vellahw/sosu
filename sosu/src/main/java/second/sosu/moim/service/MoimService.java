@@ -20,9 +20,6 @@ public interface MoimService {
    // 모임 갯수
    Map<String, Object> moimCount(Map<String, Object> map) throws Exception;
 
-   // 페이징을 위한 모임 토탈 카운트
-   int moimTotalCount(Map<String, Object> map);
-
    // 모임에 참가한 인원 리스트
    List<Map<String, Object>> moimMemberList(Map<String, Object> map, CommandMap commandMap) throws Exception;
 

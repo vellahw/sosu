@@ -48,12 +48,6 @@ public class MoimServiceImpl implements MoimService {
 		return resultMap;
 	}
 
-	// 페이징을 위한 모임 토탈 카운트
-	@Override
-	public int moimTotalCount(Map<String, Object> map) {
-		return moimDao.moimTotalCount(map);
-	}
-
 	// 모임 상세보기
 	@Override
 	public Map<String, Object> moimDetail(Map<String, Object> map, HttpSession session) throws Exception {
@@ -94,6 +88,7 @@ public class MoimServiceImpl implements MoimService {
 			moimDao.moimMapInsert(map);
 
 		} catch (Exception e) {
+			e.printStackTrace();
 		}
 
 		List<Map<String, Object>> list = fileUtils.fileInsert(map, request);

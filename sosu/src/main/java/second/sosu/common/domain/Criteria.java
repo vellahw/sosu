@@ -1,7 +1,5 @@
 package second.sosu.common.domain;
 
-import org.springframework.web.util.UriComponentsBuilder;
-
 import lombok.Getter;
 import lombok.Setter;
 import lombok.ToString;
@@ -26,15 +24,5 @@ public class Criteria {
       public Criteria(int pageNum, int amount) {
          this.pageNum = pageNum;
          this.amount = amount;
-      }
-      
-      // Uri 추가 메소드
-      public String getListLink() {
-         UriComponentsBuilder builder = UriComponentsBuilder.fromPath("")
-            .queryParam("pageNum", this.pageNum)
-            .queryParam("amount", this.getAmount())
-            .queryParam("type", this.getType())
-            .queryParam("keyword", this.getKeyword());
-         return builder.toUriString();
       }
 }
