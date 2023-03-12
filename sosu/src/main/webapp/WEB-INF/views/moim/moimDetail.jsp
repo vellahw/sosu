@@ -13,14 +13,12 @@
       style="text-align: center; width: 1000px; margin: 80px auto;">
 
       <input type="hidden" name="MO_IDX" value="${MO_IDX}" id="idx">
-      <input type="hidden" name="MO_CATEGORY" value="${MO_CATEGORY}"
-         id="cate"> 
-      <input type="hidden" name="sessionss" value="${sessionss}"
-         id="session"> 
+      <input type="hidden" name="MO_CATEGORY" value="${MO_CATEGORY}" id="cate"> 
+      <input type="hidden" name="sessionss" value="${sessionss}" id="session"> 
       <input type="hidden" name="WII" value="${Detail.WII}" id="WII"> 
       <input type="hidden" name="KYUNG" value="${Detail.KYUNG}" id="KYUNG"> 
-      <input type="hidden" name="KYUNG" value="${Detail.ADDRESS}" id="address"> 
-      <input type="hidden" name="KYUNG" value="${Detail.DEADDRESS}" id="deaddress"> 
+      <input type="hidden" name="ADDRESS" value="${Detail.ADDRESS}" id="address"> 
+      <input type="hidden" name="DEADDRESS" value="${Detail.DEADDRESS}" id="deaddress"> 
       
       <main>
         <div class="detailBody">
