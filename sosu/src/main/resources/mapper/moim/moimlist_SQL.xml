@@ -362,7 +362,7 @@
    <!-- 모임장소 수정 -->
    <update id="moimMapModify" parameterType="hashmap">
        <![CDATA[
-      UPDATE MOIM SET
+      UPDATE KAKAOMAP SET
       WII= #{WII},
       KYUNG = #{KYUNG},
       ADDRESS= #{ADDRESS}, 

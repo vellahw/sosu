@@ -130,14 +130,11 @@ public class MoimServiceImpl implements MoimService {
 	public void moimModify(Map<String, Object> map, HttpServletRequest request) throws Exception {
 
 		moimDao.moimModify(map);
-
-		if (map.get("MAP_IDX") == null) {
+		
 			try {
 				map.put("MO_IDX", map.get("MO_IDX"));
 				moimDao.moimMapInsert(map);
 			} catch (Exception e) {
-			}
-		} else if (map.get("MAP_IDX") != null) {
 			moimDao.moimMapModify(map);
 		}
 

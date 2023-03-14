@@ -1,6 +1,6 @@
 history.replaceState({}, null, location.pathname);
 
-$(document).ready(function() {
+$(function() {
     var mF = $("#mImg").val();
     var mFF = $("#mfsv").val();
     var addr = $("#ADDRESS").val();
@@ -34,6 +34,8 @@ $(document).ready(function() {
         };
 
         var map = new kakao.maps.Map(container, options); //지도 생성 및 객체 리턴 	
+
+        kaMap();
 
         // 마커가 표시될 위치입니다 
         var markerPosition  = new kakao.maps.LatLng(wii, kyung); 
@@ -386,7 +388,7 @@ function kaMap() {
            // 우편번호와 주소 정보를 해당 필드에 넣음
            document.getElementById("ADDRESS").value = addr;
            //상세주소 입력 폼으로 포커스 이동
-          // document.getElementById("detailAddress").focus();
+          // document.getElementById("DEADDRESS").focus();
 
 		   // 주소 검색 후 지도에 마커 표시하기
            geocoder.addressSearch(addr, function(result, status) {
@@ -400,7 +402,7 @@ function kaMap() {
 			  var kyung = result[0].x; //경도
 			  
 			   
-           $("#detailAddress").css("display", "block");
+           $("#DEADDRESS").css("display", "block");
            $("#map").css("display", "block");
 				
 			  //hidden input value 바꿔주기
