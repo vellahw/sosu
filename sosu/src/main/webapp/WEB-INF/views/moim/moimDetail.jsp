@@ -427,7 +427,7 @@
 
             <!-- 목록으로 버튼 -->
             <button type="button" class="mrgbtn"
-               onclick="javascript:history.back();">목록으로</button>
+               onclick="location.href='/moim/${MO_CATEGORY}.sosu'">목록으로</button>
 
             <!-- 방장일 때 보이는 -->
             <c:if
@@ -506,8 +506,9 @@ marker.setMap(map);
 
 // 인포윈도우로 장소에 대한 설명을 표시
 var infowindow = new kakao.maps.InfoWindow({
-    content: '<div style="width:150px;text-align:center;padding:6px 0;">'+add+'&nbsp;'+deadd+'</div>'
+    content: '<div style="width:150px;text-align:center;padding:6px 0;">'+add+'<br>'+deadd+'</div>'
 });
 infowindow.open(map, marker);
+
 </script>
 </body>

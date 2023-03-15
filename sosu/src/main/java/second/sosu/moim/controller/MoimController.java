@@ -168,7 +168,7 @@ public class MoimController {
 		commandMap.getMap().put("MO_IDX", MO_IDX);
 
 		Map<String, Object> map = moimService.moimDetail(commandMap.getMap(), session);
-
+		
 		// 모임에 참여한 인원 리스트
 		List<Map<String, Object>> list = moimService.moimMemberList(commandMap.getMap(), commandMap);
 
@@ -316,7 +316,7 @@ public class MoimController {
 		List<Map<String, Object>> Flist = moimService.selectMoimImg(commandMap.getMap(), commandMap);
 
 		Map<String, Object> map = moimService.moimDetail(commandMap.getMap(), session);
-
+		
 		String MO_DETAIL = map.get("MO_DETAIL").toString();
 		MO_DETAIL = MO_DETAIL.replaceAll("<br/>", "\r\n");
 		map.put("MO_DETAIL", MO_DETAIL);
@@ -330,17 +330,24 @@ public class MoimController {
 	// 모임 수정 구동
 	@RequestMapping("/moim/moimModify.pro")
 	public ModelAndView moimModify(@RequestParam("MO_CATEGORY") String MO_CATEGORY,
-			@RequestParam("MO_IDX") String MO_IDX, CommandMap commandMap, HttpServletRequest request) throws Exception {
+			@RequestParam("MO_IDX") String MO_IDX, CommandMap commandMap, HttpServletRequest request, HttpSession session) throws Exception {
 		// ajax로 받아오기 위해 @RequestParam 사용
 
 		ModelAndView mv = new ModelAndView("redirect:/moim/" + MO_CATEGORY + "/" + MO_IDX + ".sosu");
 
-		String MO_DETAIL = (String) (commandMap.get("MO_DETAIL"));
-		MO_DETAIL = MO_DETAIL.replaceAll("(\r\n|\r|\n|\n\r)", "<br/>");
+		String MO_DETAIL = (String) commandMap.get("MO_DETAIL");
+		
+		MO_DETAIL = MO_DETAIL.replaceAll(System.lineSeparator(), "<br/>");
 		commandMap.put("MO_DETAIL", MO_DETAIL);
-
+		
+		Map<String, Object> map = moimService.moimDetail(commandMap.getMap(), session);
+		
+		if(commandMap.get("MAP_IDX") != null){
+			moimService.moimMapModify(map);
+		}
+		
 		moimService.moimModify(commandMap.getMap(), request);
-
+		
 		return mv;
 	}
 

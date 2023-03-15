@@ -193,7 +193,7 @@
          </tr> 
          
          <tr>
-            <th class="header"><label for="MO_MAP" >모임 장소</label></th>
+            <th class="header"><label for="ADDRESS" >모임 장소</label></th>
             <td class="contents">
                <input type="text" class="form-control" id="ADDRESS" readonly="readonly" name="ADDRESS" value="${modify.ADDRESS}">
                <button type="button" class="searchMap"
@@ -257,7 +257,7 @@
    </tbody>
    </table>
    
-        <input type="hidden" name="MO_IDX" value="${modify.MO_IDX}">
+        <input type="hidden" id="MO_IDX" name="MO_IDX" value="${modify.MO_IDX}">
          <button type="submit" id="moB" class="mrgbtn" style="">수정</button>
          </form>
       </div>

@@ -35,8 +35,6 @@ $(function() {
 
         var map = new kakao.maps.Map(container, options); //지도 생성 및 객체 리턴 	
 
-        kaMap();
-
         // 마커가 표시될 위치입니다 
         var markerPosition  = new kakao.maps.LatLng(wii, kyung); 
 
@@ -48,6 +46,7 @@ $(function() {
         // 마커가 지도 위에 표시되도록 설정합니다
         marker.setMap(map);
         
+        /*====== undefined 공백으로 바꿔주기====== */
         function defaultCheckString (checkStr, defaultStr){
             if(checkStr == undefined || checkStr == null){
                 return defaultStr;
@@ -56,11 +55,119 @@ $(function() {
         }
 
         var infowindow = new kakao.maps.InfoWindow({
-        content: '<div style="width:150px;text-align:center;padding:6px 0;">'+addr+'&nbsp;'+defaultCheckString(deaddr, '')+'</div>'
+        content: '<div style="width:150px;text-align:center;padding:6px 0;">'+addr+'<br>'+defaultCheckString(deaddr, '')+'</div>'
         });
         infowindow.open(map, marker);
     }
 });
+
+/* 다음 주소검색 및 마커 표시 */
+var geocoder = new kakao.maps.services.Geocoder();
+
+/* 주소 검색 onclick */
+function kaMap() {
+   var width = 500; //팝업의 너비
+   var height = 600; //팝업의 높이
+   new daum.Postcode({
+       width: width, 
+       height: height,
+   
+       oncomplete: function(data) {
+           // 팝업에서 검색결과 항목을 클릭했을때 실행할 코드를 작성하는 부분.
+           // 각 주소의 노출 규칙에 따라 주소를 조합한다.
+           // 내려오는 변수가 값이 없는 경우엔 공백('')값을 가지므로, 이를 참고하여 분기 한다.
+           var addr = ''; // 주소 변수
+           var extraAddr = ''; // 참고항목 변수
+           //사용자가 선택한 주소 타입에 따라 해당 주소 값을 가져온다.
+           if (data.userSelectedType === 'R') { // 사용자가 도로명 주소를 선택했을 경우
+               addr = data.roadAddress;
+           } else { // 사용자가 지번 주소를 선택했을 경우(J)
+               addr = data.jibunAddress;
+           }
+           // 사용자가 선택한 주소가 도로명 타입일때 참고항목을 조합한다.
+           if(data.userSelectedType === 'R'){
+               // 법정동명이 있을 경우 추가한다. (법정리는 제외)
+               // 법정동의 경우 마지막 문자가 "동/로/가"로 끝난다.
+               if(data.bname !== '' && /[동|로|가]$/g.test(data.bname)){
+                   extraAddr += data.bname;
+               }
+               // 건물명이 있고, 공동주택일 경우 추가한다.
+               if(data.buildingName !== '' && data.apartment === 'Y'){
+                   extraAddr += (extraAddr !== '' ? ', ' + data.buildingName : data.buildingName);
+               }
+               // 표시할 참고항목이 있을 경우, 괄호까지 추가한 최종 문자열을 만든다.
+               if(extraAddr !== ''){
+                   extraAddr = ' (' + extraAddr + ')';
+               }
+               // 조합된 참고항목을 해당 필드에 넣음
+           
+           } else {
+           }
+           
+           // 우편번호와 주소 정보를 해당 필드에 넣음
+           document.getElementById("ADDRESS").value = addr;
+           //상세주소 입력 폼으로 포커스 이동
+           document.getElementById("DEADDRESS").focus();
+
+		   // 주소 검색 후 좌표 이동 + 마커 표시
+           geocoder.addressSearch(addr, function(result, status) {
+           
+             // 정상적으로 검색이 완료됐으면 
+             if (status === kakao.maps.services.Status.OK) {
+             
+              //위도, 경도 저장
+              var letlng = new kakao.maps.LatLng(result[0].y, result[0].x);
+			  var wii = result[0].y; //위도
+			  var kyung = result[0].x; //경도
+			  
+			  //hidden input value 바꿔주기
+			  $("input[name=WII]").val(wii); 
+			  $("input[name=KYUNG]").val(kyung);
+			  $("#DEADDRESS").val('');
+			  
+			  function panTo() {
+			    // 이동할 위도 경도 위치를 생성합니다 
+			    var moveLatLon = new kakao.maps.LatLng(wii, kyung);
+			    
+			    // 지도 중심을 부드럽게 이동시킵니다
+			    // 만약 이동할 거리가 지도 화면보다 크면 부드러운 효과 없이 이동합니다
+			    map.panTo(moveLatLon);            
+			  }        
+				
+			  //지도 새로 생성하기
+			  var container = document.getElementById('map'); //지도를 담을 영역의 DOM 레퍼런스
+			  var options = { //지도를 생성할 때 필요한 기본 옵션
+			     center: new kakao.maps.LatLng(wii, kyung), //지도의 중심좌표.
+			     level: 3 //지도의 레벨(확대, 축소 정도)
+			  };
+			
+              var map = new kakao.maps.Map(container, options); 
+
+              // 결과값으로 받은 위치를 마커로 표시
+              var marker = new kakao.maps.Marker({
+                  map: map,
+                  position: letlng
+              });
+         
+              // 인포윈도우로 장소에 대한 설명을 표시
+              var infowindow = new kakao.maps.InfoWindow({
+                  content: '<div style="width:150px;text-align:center;padding:6px 0;">'+addr+'</div>'
+              });
+              infowindow.open(map, marker);
+         
+              // 지도의 중심을 결과값으로 받은 위치로 이동
+              map.setCenter(letlng);
+            } 
+         }); 
+       }
+   }).open({
+    //팝업 가운데 정렬
+    left: (window.screen.width / 2) - (width / 2),
+    top: (window.screen.height / 2) - (height / 2),
+    //팝업창 타이틀 지정
+    popupTitle: '모임 장소 검색하기'
+   });
+}
 
 //세부지역 선택 유지를 위한 ===========================
 var jung = ["종로", "인사동", "동대문", "서울역", "이태원", "을지로"];
@@ -341,100 +448,6 @@ function maxLengthCheck(object){
     }    
 }
 
-/*============= 다음 주소검색 및 마커 표시 =============*/
-var geocoder = new kakao.maps.services.Geocoder();
-
-/* 주소 검색 onclick */
-function kaMap() {
-   var width = 500; //팝업의 너비
-   var height = 600; //팝업의 높이
-   new daum.Postcode({
-       width: width, 
-       height: height,
-   
-       oncomplete: function(data) {
-           // 팝업에서 검색결과 항목을 클릭했을때 실행할 코드를 작성하는 부분.
-           // 각 주소의 노출 규칙에 따라 주소를 조합한다.
-           // 내려오는 변수가 값이 없는 경우엔 공백('')값을 가지므로, 이를 참고하여 분기 한다.
-           var addr = ''; // 주소 변수
-           var extraAddr = ''; // 참고항목 변수
-           //사용자가 선택한 주소 타입에 따라 해당 주소 값을 가져온다.
-           if (data.userSelectedType === 'R') { // 사용자가 도로명 주소를 선택했을 경우
-               addr = data.roadAddress;
-           } else { // 사용자가 지번 주소를 선택했을 경우(J)
-               addr = data.jibunAddress;
-           }
-           // 사용자가 선택한 주소가 도로명 타입일때 참고항목을 조합한다.
-           if(data.userSelectedType === 'R'){
-               // 법정동명이 있을 경우 추가한다. (법정리는 제외)
-               // 법정동의 경우 마지막 문자가 "동/로/가"로 끝난다.
-               if(data.bname !== '' && /[동|로|가]$/g.test(data.bname)){
-                   extraAddr += data.bname;
-               }
-               // 건물명이 있고, 공동주택일 경우 추가한다.
-               if(data.buildingName !== '' && data.apartment === 'Y'){
-                   extraAddr += (extraAddr !== '' ? ', ' + data.buildingName : data.buildingName);
-               }
-               // 표시할 참고항목이 있을 경우, 괄호까지 추가한 최종 문자열을 만든다.
-               if(extraAddr !== ''){
-                   extraAddr = ' (' + extraAddr + ')';
-               }
-               // 조합된 참고항목을 해당 필드에 넣음
-           
-           } else {
-               
-           }
-           
-           // 우편번호와 주소 정보를 해당 필드에 넣음
-           document.getElementById("ADDRESS").value = addr;
-           //상세주소 입력 폼으로 포커스 이동
-          // document.getElementById("DEADDRESS").focus();
-
-		   // 주소 검색 후 지도에 마커 표시하기
-           geocoder.addressSearch(addr, function(result, status) {
-           
-             // 정상적으로 검색이 완료됐으면 
-             if (status === kakao.maps.services.Status.OK) {
-             
-              //위도, 경도 저장
-              var letlng = new kakao.maps.LatLng(result[0].y, result[0].x);
-			  var wii = result[0].y; //위도
-			  var kyung = result[0].x; //경도
-			  
-			   
-           $("#DEADDRESS").css("display", "block");
-           $("#map").css("display", "block");
-				
-			  //hidden input value 바꿔주기
-			  $("input[name=WII]").val(wii); 
-			  $("input[name=KYUNG]").val(kyung);
-				
-              // 결과값으로 받은 위치를 마커로 표시
-              var marker = new kakao.maps.Marker({
-                  map: map,
-                  position: letlng
-              });
-         
-              // 인포윈도우로 장소에 대한 설명을 표시
-              var infowindow = new kakao.maps.InfoWindow({
-                  content: '<div style="width:150px;text-align:center;padding:6px 0;">'+addr+'</div>'
-              });
-              infowindow.open(map, marker);
-         
-              // 지도의 중심을 결과값으로 받은 위치로 이동
-              map.setCenter(letlng);
-            } 
-         }); 
-       }
-   }).open({
-    //팝업 가운데 정렬
-    left: (window.screen.width / 2) - (width / 2),
-    top: (window.screen.height / 2) - (height / 2),
-    //팝업창 타이틀 지정
-    popupTitle: '모임 장소 검색하기'
-   });
-}
-
     /* 입력된 바이트(글자수) 값 제어 */
     function fn_checkByte(obj) {
         const maxByte = 1400; //최대 100바이트
@@ -511,7 +524,7 @@ function kaMap() {
            
         } else {
          var mo_cate = $(".mo_cate option:selected").val();
-       var m = $("#MO_IDX").val();
+       	 var m = $("#MO_IDX").val();
       
        var fnameList = [];        
          

@@ -86,6 +86,7 @@ public class MoimServiceImpl implements MoimService {
 		try {
 			map.put("MO_IDX", map.get("MO_IDX"));
 			moimDao.moimMapInsert(map);
+			map.put("IS_NEW", "Y");
 
 		} catch (Exception e) {
 			e.printStackTrace();
@@ -130,19 +131,17 @@ public class MoimServiceImpl implements MoimService {
 	public void moimModify(Map<String, Object> map, HttpServletRequest request) throws Exception {
 
 		moimDao.moimModify(map);
-		
-			try {
-				map.put("MO_IDX", map.get("MO_IDX"));
-				moimDao.moimMapInsert(map);
-			} catch (Exception e) {
-			moimDao.moimMapModify(map);
-		}
 
 		List<Map<String, Object>> list = fileUtils.fileInsert(map, request);
 
 		for (int i = 0, size = list.size(); i < size; i++) {
 			moimDao.moimImg(list.get(i));
 		}
+	}
+	
+	@Override
+	public void moimMapModify(Map<String, Object> map) throws Exception {
+		moimDao.moimMapModify(map);
 	}
 
 	// 모임 이미지 삭제

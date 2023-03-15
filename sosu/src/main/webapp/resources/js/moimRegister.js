@@ -187,12 +187,10 @@ function kaMap() {
                
            }
            
-           
-           
            // 우편번호와 주소 정보를 해당 필드에 넣음
            document.getElementById("MO_MAP").value = addr;
            //상세주소 입력 폼으로 포커스 이동
-          // document.getElementById("detailAddress").focus();
+           document.getElementById("detailAddress").focus();
 
 		   // 주소 검색 후 지도에 마커 표시하기
            geocoder.addressSearch(addr, function(result, status) {
