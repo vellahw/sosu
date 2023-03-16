@@ -56,8 +56,9 @@ public interface MoimService {
    // 모임 수정
    void moimModify(Map<String, Object> map, HttpServletRequest request) throws Exception;
    
-   void moimMapModify(Map<String, Object> map) throws Exception;
-
+   // 모임 지도 insert
+   void moimMapInsert(Map<String, Object> map) throws Exception;
+   
    // 모임 이미지 삭제
    void MoimImgDelete(String F_SVNAME) throws Exception;
 

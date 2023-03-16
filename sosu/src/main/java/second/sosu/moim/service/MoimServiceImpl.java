@@ -102,36 +102,36 @@ public class MoimServiceImpl implements MoimService {
 	// 모임 참가
 	@Override
 	public void moimJoin(Map<String, Object> map, HttpSession session, CommandMap commandMap) throws Exception {
-		// TODO Auto-generated method stub
-
 		moimDao.moimJoin(map, session, commandMap);
-
 	}
 
 	// 모임 참가
 	@Override
 	public void moimReJoin(Map<String, Object> map, HttpSession session, CommandMap commandMap) throws Exception {
-		// TODO Auto-generated method stub
-
 		moimDao.moimReJoin(map, session, commandMap);
-
 	}
 
 	// 모임 재참여 대기
 	@Override
 	public void moimRePermit(Map<String, Object> map, HttpSession session, CommandMap commandMap) throws Exception {
-		// TODO Auto-generated method stub
-
 		moimDao.moimRePermit(map, session, commandMap);
-
 	}
 
 	// 모임 수정
 	@Override
 	public void moimModify(Map<String, Object> map, HttpServletRequest request) throws Exception {
+		
+		System.out.println("수정 구동시 나오는 map입니다   " + map);
 
+		if(map.get("MAP_IDX") != null || map.get("WII") != null || map.get("WII") != "") {
+			moimDao.moimMapModify(map);
+			
+		} else if (map.get("MAP_IDX") == null || map.get("WII") == null || map.get("WII") == "") {
+			moimDao.moimMapInsert(map);
+		}
+		
 		moimDao.moimModify(map);
-
+		
 		List<Map<String, Object>> list = fileUtils.fileInsert(map, request);
 
 		for (int i = 0, size = list.size(); i < size; i++) {
@@ -140,8 +140,8 @@ public class MoimServiceImpl implements MoimService {
 	}
 	
 	@Override
-	public void moimMapModify(Map<String, Object> map) throws Exception {
-		moimDao.moimMapModify(map);
+	public void moimMapInsert(Map<String, Object> map) throws Exception {
+		moimDao.moimMapInsert(map);
 	}
 
 	// 모임 이미지 삭제
