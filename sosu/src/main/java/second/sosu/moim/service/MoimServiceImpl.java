@@ -86,7 +86,6 @@ public class MoimServiceImpl implements MoimService {
 		try {
 			map.put("MO_IDX", map.get("MO_IDX"));
 			moimDao.moimMapInsert(map);
-			map.put("IS_NEW", "Y");
 
 		} catch (Exception e) {
 			e.printStackTrace();
@@ -119,15 +118,18 @@ public class MoimServiceImpl implements MoimService {
 
 	// 모임 수정
 	@Override
-	public void moimModify(Map<String, Object> map, HttpServletRequest request) throws Exception {
+	public void moimModify(Map<String, Object> map, HttpServletRequest request, HttpSession session) throws Exception {
 		
-		System.out.println("수정 구동시 나오는 map입니다   " + map);
-
-		if(map.get("MAP_IDX") != null || map.get("WII") != null || map.get("WII") != "") {
-			moimDao.moimMapModify(map);
-			
-		} else if (map.get("MAP_IDX") == null || map.get("WII") == null || map.get("WII") == "") {
-			moimDao.moimMapInsert(map);
+		Map<String, Object> dMap = moimDao.moimDetail(map, session);
+		
+		try {
+			if(dMap.get("MAP_IDX") != null) {
+				moimDao.moimMapModify(map);
+			} else if (dMap.get("MAP_IDX") == null) {
+				moimDao.moimMapInsert(map);
+			}
+		} catch (Exception e) {
+			e.printStackTrace();
 		}
 		
 		moimDao.moimModify(map);
@@ -138,6 +140,8 @@ public class MoimServiceImpl implements MoimService {
 			moimDao.moimImg(list.get(i));
 		}
 	}
+	
+	
 	
 	@Override
 	public void moimMapInsert(Map<String, Object> map) throws Exception {

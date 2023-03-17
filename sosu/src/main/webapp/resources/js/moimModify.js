@@ -23,7 +23,7 @@ $(function() {
     var kyung = $('#KYUNG').val();
     
     if(wii == '' || wii == undefined || wii == null) {
-    	//var mapDiv = $('#map').detach();
+       //var mapDiv = $('#map').detach();
     }
     
     if(wii != null){
@@ -33,7 +33,7 @@ $(function() {
             level: 3 //지도의 레벨(확대, 축소 정도)
         };
 
-        var map = new kakao.maps.Map(container, options); //지도 생성 및 객체 리턴 	
+        var map = new kakao.maps.Map(container, options); //지도 생성 및 객체 리턴    
 
         // 마커가 표시될 위치입니다 
         var markerPosition  = new kakao.maps.LatLng(wii, kyung); 
@@ -109,7 +109,7 @@ function kaMap() {
            //상세주소 입력 폼으로 포커스 이동
            document.getElementById("DEADDRESS").focus();
 
-		   // 주소 검색 후 좌표 이동 + 마커 표시
+         // 주소 검색 후 좌표 이동 + 마커 표시
            geocoder.addressSearch(addr, function(result, status) {
            
              // 정상적으로 검색이 완료됐으면 
@@ -117,30 +117,30 @@ function kaMap() {
              
               //위도, 경도 저장
               var letlng = new kakao.maps.LatLng(result[0].y, result[0].x);
-			  var wii = result[0].y; //위도
-			  var kyung = result[0].x; //경도
-			  
-			  //hidden input value 바꿔주기
-			  $("input[name=WII]").val(wii); 
-			  $("input[name=KYUNG]").val(kyung);
-			  $("#DEADDRESS").val('');
-			  
-			  function panTo() {
-			    // 이동할 위도 경도 위치를 생성합니다 
-			    var moveLatLon = new kakao.maps.LatLng(wii, kyung);
-			    
-			    // 지도 중심을 부드럽게 이동시킵니다
-			    // 만약 이동할 거리가 지도 화면보다 크면 부드러운 효과 없이 이동합니다
-			    map.panTo(moveLatLon);            
-			  }        
-				
-			  //지도 새로 생성하기
-			  var container = document.getElementById('map'); //지도를 담을 영역의 DOM 레퍼런스
-			  var options = { //지도를 생성할 때 필요한 기본 옵션
-			     center: new kakao.maps.LatLng(wii, kyung), //지도의 중심좌표.
-			     level: 3 //지도의 레벨(확대, 축소 정도)
-			  };
-			
+           var wii = result[0].y; //위도
+           var kyung = result[0].x; //경도
+           
+           //hidden input value 바꿔주기
+           $("input[name=WII]").val(wii); 
+           $("input[name=KYUNG]").val(kyung);
+           $("#DEADDRESS").val('');
+           
+           function panTo() {
+             // 이동할 위도 경도 위치를 생성합니다 
+             var moveLatLon = new kakao.maps.LatLng(wii, kyung);
+             
+             // 지도 중심을 부드럽게 이동시킵니다
+             // 만약 이동할 거리가 지도 화면보다 크면 부드러운 효과 없이 이동합니다
+             map.panTo(moveLatLon);            
+           }        
+            
+           //지도 새로 생성하기
+           var container = document.getElementById('map'); //지도를 담을 영역의 DOM 레퍼런스
+           var options = { //지도를 생성할 때 필요한 기본 옵션
+              center: new kakao.maps.LatLng(wii, kyung), //지도의 중심좌표.
+              level: 3 //지도의 레벨(확대, 축소 정도)
+           };
+         
               var map = new kakao.maps.Map(container, options); 
 
               // 결과값으로 받은 위치를 마커로 표시
@@ -524,7 +524,7 @@ function maxLengthCheck(object){
            
         } else {
          var mo_cate = $(".mo_cate option:selected").val();
-       	 var m = $("#MO_IDX").val();
+           var m = $("#MO_IDX").val();
       
        var fnameList = [];        
          

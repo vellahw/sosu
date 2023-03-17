@@ -54,7 +54,7 @@ public interface MoimService {
    void moimRePermit(Map<String, Object> map, HttpSession session, CommandMap commandMap) throws Exception;
 
    // 모임 수정
-   void moimModify(Map<String, Object> map, HttpServletRequest request) throws Exception;
+   void moimModify(Map<String, Object> map, HttpServletRequest request, HttpSession session) throws Exception;
    
    // 모임 지도 insert
    void moimMapInsert(Map<String, Object> map) throws Exception;

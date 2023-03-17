@@ -340,7 +340,7 @@ public class MoimController {
 		MO_DETAIL = MO_DETAIL.replaceAll(System.lineSeparator(), "<br/>");
 		commandMap.put("MO_DETAIL", MO_DETAIL);
 		
-		moimService.moimModify(commandMap.getMap(), request);
+		moimService.moimModify(commandMap.getMap(), request, session);
 		
 		return mv;
 	}

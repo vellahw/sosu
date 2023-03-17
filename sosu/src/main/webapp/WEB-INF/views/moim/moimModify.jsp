@@ -203,6 +203,7 @@
                <div id="map" style="width:500px; height:400px; margin-top: 10px;"></div>
                <input type="hidden" name="WII" value="${modify.WII}" id="WII"> 
      	 	   <input type="hidden" name="KYUNG" value="${modify.KYUNG}" id="KYUNG"> 
+     	 	   <input type="hidden" name="MAP_IDX" value="${modify.MAP_IDX}" id="MAP_IDX"> 
             </td>
          </tr> 
             
@@ -257,7 +258,7 @@
    </tbody>
    </table>
    
-        <input type="hidden" id="MO_IDX" name="MO_IDX" value="${modify.MO_IDX}">
+        <input type="text" id="MO_IDX" name="MO_IDX" value="${modify.MO_IDX}">
          <button type="submit" id="moB" class="mrgbtn" style="">수정</button>
          </form>
       </div>
