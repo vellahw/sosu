@@ -1,0 +1,176 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="message">
+   
+   <select id="messageList" parameterType="hashmap" resultType="hashmap">
+      <![CDATA[
+        SELECT
+          MSG_IDX,
+          MSG_ROOM,
+          MSG_SENDER,
+          MSG_RECIVER,
+          TO_CHAR(MSG_SENDT, 'YYYY.MM.DD HH24:MI') AS CHAT_SEND_TIME,
+          TO_CHAR(MSG_READT, 'YYYY.MM.DD HH24:MI') AS CHAT_READ_TIME,
+          MSG_CONTENT,
+          MSG_OPEN_YN
+          FROM  MESSAGE
+          WHERE MSG_IDX IN
+                  (SELECT MAX(NUM)
+                          FROM (SELECT 
+                              MSG_IDX AS NUM,
+                              MSG_ROOM,
+                              MSG_SENDER,
+                              MSG_RECIVER,
+                              MSG_CONTENT,
+                              MSG_OPEN_YN
+                              FROM MESSAGE
+                          WHERE MSG_SENDER =#{M_IDX} OR MSG_RECIVER=#{M_IDX} )
+                          GROUP BY MSG_ROOM)
+                          ORDER BY MSG_IDX DESC
+      ]]>
+   </select>
+   
+   <select id="searchList" parameterType="hashmap" resultType="hashmap">
+      <![CDATA[
+        SELECT
+          MSG.MSG_IDX,
+            M.M_NICKNAME,
+          MSG.MSG_ROOM,
+          MSG.MSG_SENDER,
+          MSG.MSG_RECIVER,
+          TO_CHAR(MSG.MSG_SENDT, 'YYYY.MM.DD HH24:MI') AS CHAT_SEND_TIME,
+          TO_CHAR(MSG.MSG_READT, 'YYYY.MM.DD HH24:MI') AS CHAT_READ_TIME,
+          MSG.MSG_CONTENT,
+          MSG.MSG_OPEN_YN
+          FROM  MESSAGE MSG, MEMBER M
+          WHERE MSG.MSG_IDX IN
+                  (SELECT MAX(NUM)
+                          FROM (SELECT 
+                              MSG_IDX AS NUM,
+                              MSG_ROOM,
+                              MSG_SENDER,
+                              MSG_RECIVER,
+                              MSG_CONTENT,
+                              MSG_OPEN_YN
+                              FROM MESSAGE
+                          WHERE MSG_SENDER =#{M_IDX} OR MSG_RECIVER=#{M_IDX} )
+                          GROUP BY MSG_ROOM)
+                            AND (M.M_IDX = MSG.MSG_SENDER OR M.M_IDX = MSG.MSG_RECIVER)
+                            
+                            AND M.M_NICKNAME LIKE '%'||#{KEYWORD}||'%'
+                          ORDER BY MSG.MSG_IDX DESC
+      ]]>
+   </select>
+   
+   
+   
+      <!-- 채팅하고 있는 사람의 닉네임 : 프로필 사진 불러오기 추가-->
+   <select id="otherNickname" parameterType="hashmap" resultType="hashmap">
+      <![CDATA[
+          SELECT M_NICKNAME, M_DEL_YN, F_SVNAME
+          FROM MEMBER, FILE_T
+          WHERE M_IDX=#{M_IDX} AND M_IDX=F_ARTICLE AND F_TABLE='P' AND M_DEL_YN='N'
+      ]]>
+   </select>
+   
+   <!-- 해당 방의 대화내용 가져오기 아직 하는 중!!-->
+<!-- <select id="chatContent" parameterType="hashmap" resultType="hashmap">
+      <![CDATA[
+         
+      ]]>
+   </select> -->
+   
+   
+         <!--다른 사용자와의 채팅방 번호 출력 -->
+   <select id="messageRoom" parameterType="hashmap" resultType="hashmap">
+      <![CDATA[
+      SELECT DISTINCT MSG_ROOM
+      FROM MESSAGE
+      WHERE (MSG_RECIVER = #{MSG_RECIVER} AND MSG_SENDER = #{M_IDX})
+         OR (MSG_RECIVER = #{M_IDX} AND MSG_SENDER = #{MSG_RECIVER})
+      ]]>         
+   </select>
+   
+   
+   
+   
+   
+      <!-- 다른 사용자와 대화 내용 개수  출력 -->
+   <select id="messageRecord" parameterType="hashmap" resultType="hashmap">
+      <![CDATA[
+      SELECT COUNT(MSG_IDX)
+      FROM MESSAGE
+      WHERE (MSG_RECIVER = #{MSG_RECIVER} AND MSG_SENDER = #{M_IDX})
+         OR (MSG_RECIVER = #{M_IDX} AND MSG_SENDER = #{MSG_RECIVER})
+      ]]>         
+   </select>
+   
+      <!-- 현재 방 최대 번호 구하기 -->
+   <select id="maxRoom"  parameterType="hashmap" resultType="hashmap">
+   <![CDATA[
+      SELECT MAX(MSG_ROOM) AS MAX
+      FROM MESSAGE
+   ]]>   
+   </select>
+   
+   
+   
+   
+   <!-- 채팅 삽입 -->
+   <insert id="messageInsert" parameterType="hashmap">
+   <![CDATA[
+       INSERT INTO MESSAGE
+       (MSG_IDX, MSG_ROOM, MSG_SENDER, MSG_RECIVER, MSG_SENDT, MSG_READT, MSG_CONTENT, MSG_OPEN_YN)
+      VALUES
+       (MSG_IDX.NEXTVAL, #{MSG_ROOM}, #{MSG_SENDER}, #{MSG_RECIVER}, SYSDATE, NULL, #{MSG_CONTENT}, DEFAULT)
+    ]]>
+   </insert>
+    
+   
+
+   <!-- 해당 방의 대화내용 가져오기 -->
+   <select id="chatContent" parameterType="hashmap" resultType="hashmap">
+      <![CDATA[
+         SELECT MSG_IDX, MSG_ROOM, MSG_SENDER, MSG_RECIVER, TO_CHAR(MSG_SENDT, 'YYYY.MM.DD HH24:MI') AS MSG_SEND_TIME, 
+         TO_CHAR(MSG_READT, 'YYYY.MM.DD HH24:MI') AS MSG_READ_TIME, MSG_CONTENT, MSG_OPEN_YN, M_NICKNAME
+         FROM MESSAGE, MEMBER
+         WHERE MSG_RECIVER=M_IDX AND MSG_ROOM=#{MSG_ROOM} AND (MSG_RECIVER=#{M_IDX} OR MSG_SENDER=#{M_IDX})
+         ORDER BY MSG_IDX ASC
+      ]]>
+   </select> 
+   
+   <delete id="deleteRoom" parameterType="hashmap">
+   DELETE FROM MESSAGE
+         WHERE MSG_IDX=
+         (SELECT MSG_IDX
+         FROM MESSAGE
+         WHERE MSG_ROOM=#{MSG_ROOM} AND MSG_CONTENT=#{MSG_CONTENT})
+   </delete>
+   
+   
+   
+   
+   <update id="messageRead" parameterType="hashmap">
+   UPDATE MESSAGE SET MSG_OPEN_YN='0'
+   WHERE MSG_ROOM=#{MSG_ROOM}
+   </update>
+   
+   
+   <select id="noOpenMsg" parameterType="hashmap" resultType="hashmap">
+      <![CDATA[
+         SELECT COUNT(MSG_IDX) AS UNREAD
+         FROM MESSAGE
+            WHERE MSG_RECIVER=#{M_IDX} AND MSG_OPEN_YN=1 AND MSG_ROOM=#{MSG_ROOM}
+      ]]>
+   </select>
+   
+   <!-- 메인에서 안읽은 쪽지 개수 출력하기  --> 
+   <select id="noReadMSG" parameterType="hashmap" resultType="hashmap">
+      <![CDATA[
+         SELECT COUNT(MSG_IDX) AS UNREAD
+         FROM MESSAGE
+         WHERE MSG_RECIVER=#{M_IDX} AND MSG_OPEN_YN=1
+      ]]>
+   </select>
+   
+</mapper>

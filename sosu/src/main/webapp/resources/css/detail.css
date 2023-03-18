@@ -1,0 +1,274 @@
+@charset "UTF-8";
+
+.imgArea {
+   margin-bottom: 30px;
+}
+
+.glightbox {
+   color: #fff;
+}
+
+.my_img {
+   width: 316px;
+   height: 316px;
+   padding-right: 9px;
+   padding-bottom: 9px;
+   filter: brightness(1);
+}
+
+.my_img:hover {
+   filter: brightness(0.7);
+}
+
+.detailArea {
+   text-align: left;
+   margin-bottom: 27px;
+}
+
+.dtitle {
+   font-size: 20px;
+   font-weight: bold;
+}
+
+p {
+   font-size: 17px;
+}
+
+.kingArea {
+   text-align: left;
+   margin-bottom: 20px;
+}
+
+.king {
+   background-color: #fff;
+   border: none;
+   font-size: 17px;
+   margin-top: 9px;
+   margin-top: 18px;
+   margin-left: 6px;
+   vertical-align: top;
+   font-weight: bold;
+   cursor: pointer;
+   padding: 4px 8px 4px 8px;
+}
+
+.ks {
+   font-size: 13px;
+   color: #5f5f5f;
+   padding: 0 0 0 3px;
+   margin-bottom: 10px;
+   transform: translate(99px, -29px);
+   /* position: absolute; */
+   display: flex;
+}
+
+.champ {
+   background-color: #fff;
+   border: none;
+   font-size: 15px;
+   margin-top: 9px;
+   margin-top: 22px;
+   margin-left: -2px;
+   vertical-align: top;
+   font-weight: bold;
+   cursor: pointer;
+   padding: 4px 10px 4px 8px;
+   margin-right: 4px;
+}
+
+.king:hover, .king:active, .champ:hover, .champ:active {
+   color: #fff;
+   background-color: #fd8731;
+   border-radius: 10px;
+}
+
+.hhhbtn {
+   font-size: 34px;
+   font-weight: 400;
+   border: none;
+   background-color: #fff;
+   line-height: 1.5;
+   float: right;
+   margin-top: -8px;
+   margin-right: 24px;
+}
+
+.mrgbtn2 {
+   border: none;
+   background-color: #fd8731;
+   color: #fff;
+   font-size: 15px;
+   padding: 4px 8px 4px 8px;
+   border-radius: 10px;
+}
+
+.mzcount {
+   float: right;
+   font-size: 13px;
+   font-weight: bold;
+   color: #fd3018;
+   transform: translate(43px, 16px);
+}
+
+.magam {
+   background-color: #fff;
+   color: #fd8731;
+   font-weight: bold;
+   padding: 10px;
+   border-radius: 10px;
+   cursor: default;
+}
+
+.magam:hover {
+   background-color: #fd8731;
+   color: #fff;
+}
+
+.mrgbtn3 {
+   border: none;
+   background-color: #fd8731;
+   border: 1px solid #fd8731;
+   color: #fff;
+   font-size: 15px;
+   padding: 4px 8px 4px 8px;
+   border-radius: 10px;
+   display: inline;
+}
+
+.mrgbtn3:hover {
+   background-color: #fff;
+   color: #fd8731;
+}
+
+.kingimg {
+   border-radius: 100%;
+   object-fit: cover;
+   object-position: top;
+   width: 70px;
+   height: 70px;
+   padding: 5px 5px 0 9px;
+}
+
+.partyArea {
+   text-align: left;
+   padding: 0 0 13px 5px;
+}
+
+.modetail {
+   text-align: left;
+   margin-top: 27px;
+   padding-left: 11px;
+}
+
+#btndiv {
+   margin-top: 35px;
+   margin-bottom: 50px;
+}
+
+#btndiv  a {
+   text-decoration: none;
+}
+
+button, input {
+   cursor: pointer;
+}
+
+.myhr {
+   padding-top: 15px;
+   padding-bottom: 15px;
+}
+
+/* 하단 버튼들 */
+.mrgbtn {
+   border: none;
+   background-color: #fff;
+   border: 1px solid #fd8731;
+   color: #fd8731;
+   font-size: 15px;
+   padding: 4px 8px 4px 8px;
+   border-radius: 10px;
+   display: inline;
+}
+
+.mrgbtn:hover, .mrgbtn:active {
+   background-color: #fd8731;
+   color: #fff;
+}
+
+.gbtn {
+   border: none;
+   background-color: #fd8731;
+   color: #fff;
+   font-size: 15px;
+   border-radius: 10px;
+   transform: translate(-22px, -17px);
+}
+
+.gbtn2 {
+   border: none;
+   background-color: #fd8731;
+   color: #fff;
+   font-size: 15px;
+   border-radius: 14px;
+   padding: 4px 8px 4px 8px;
+   margin-right: 5px;
+   transform: translate(0px, -38px);
+}
+
+/* 참여자 리스트 접었다 펴기 */
+.panel-faq-title {
+   cursor: pointer;
+}
+
+.panel-faq-title:active, .panel-faq-title:hover {
+   background-color: #fd8731;
+   color: #fff;
+   border-radius: 10px;
+}
+
+.panel-faq-answer {
+   height: 0;
+   overflow: hidden;
+   /* 변화가 시작되는 쪽에다가 transition 적용해준다 0 -> 300px 
+  왜? 닫기 버튼을 누를 때 변화가 티남 */
+   transition: all 0.5s;
+}
+
+.active2 {
+   display: block;
+   /* 높이를 정해줘야지만 transition이 적용됨 */
+   height: 160px;
+}
+
+/* 지도 접폈 */
+.showMap-title {
+   border: none;
+   background-color: #fff;
+   border: 1px solid #fd8731;
+   color: #fd8731;
+   font-size: 12px;
+   padding: 4px 8px 4px 8px;
+   border-radius: 10px;
+   display: inline;
+   margin-left:5px;
+}
+
+.showMap-title:hover, .showMap-title:focus {
+   background-color: #fd8731;
+   color: #fff;
+}
+
+
+.showMap-answer {
+   height: 0;
+   overflow: hidden;
+   /* 변화가 시작되는 쪽에다가 transition 적용해준다 0 -> 300px 
+  왜? 닫기 버튼을 누를 때 변화가 티남 */
+   transition: all 0.5s;
+}
+
+.active {
+   display: block;
+   /* 높이를 정해줘야지만 transition이 적용됨 */
+   height: 400px;
+}

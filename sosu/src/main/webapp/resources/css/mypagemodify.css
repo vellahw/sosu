@@ -1,0 +1,53 @@
+@charset "UTF-8";
+.img-promodi{
+	width: 100px;
+	height: 100px;
+	border-radius: 100%;
+	object-fit : cover;
+	object-position: top;
+}
+
+.input-form .file-modi{
+	width: 317px;
+	border: 0px;
+}
+.input-form .dbtn{
+	width: 50px;
+    vertical-align: middle;
+    text-align: inherit;
+	border: 0px;
+}
+
+.input-form .checkbtn{
+    width: 75px;
+    background-color: #fd8731;
+    padding-left: 0px;
+    color: #fff;
+    border: 0px;
+    height: 34px;
+    font-size: 15px;
+    font-weight: bold;
+    cursor: pointer;
+}
+
+/*활성화*/
+.btn-gender{
+	 background-color: #fd8731;
+	 color:#fff;
+	 border:0px;
+    width: 30px;
+    height: 30px;
+    font-size: 15px;
+    font-weight: bold;
+}
+
+.btn-bottom{
+   width:84px;
+   background-color: #fd8731;
+   color:#fff;
+   border:0px;
+   height:34px;
+   font-size: 15px;
+   font-weight: bold;
+   cursor: pointer;
+}

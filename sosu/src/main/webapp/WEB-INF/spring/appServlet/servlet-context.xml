@@ -1,0 +1,79 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<beans xmlns:context="http://www.springframework.org/schema/context"
+   xmlns:p="http://www.springframework.org/schema/p"
+   xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+   xmlns="http://www.springframework.org/schema/beans"
+   
+   xmlns:mvc="http://www.springframework.org/schema/mvc"
+   xmlns:aop="http://www.springframework.org/schema/aop"
+   xmlns:websocket="http://www.springframework.org/schema/websocket"
+   xsi:schemaLocation="http://www.springframework.org/schema/websocket http://www.springframework.org/schema/websocket/spring-websocket-4.3.xsd
+      http://www.springframework.org/schema/mvc http://www.springframework.org/schema/mvc/spring-mvc.xsd
+      http://www.springframework.org/schema/beans http://www.springframework.org/schema/beans/spring-beans-3.0.xsd
+      http://www.springframework.org/schema/context http://www.springframework.org/schema/context/spring-context-3.0.xsd
+      http://www.springframework.org/schema/aop http://www.springframework.org/schema/aop/spring-aop.xsd">
+   
+   <!-- 전송된 데이터를 자바빈이 아닌 맵으로 받기 위한 설정 -->
+   <mvc:annotation-driven>
+      <mvc:argument-resolvers>
+         <bean class="second.sosu.common.resolver.CustomMapArgumentResolver"/>
+      </mvc:argument-resolvers>
+   </mvc:annotation-driven>
+   <mvc:interceptors>
+      <mvc:interceptor>
+         <mvc:mapping path="/**"/>
+         <bean id="loggerInterceptor" class="second.sosu.common.interceptor.LoggerInterceptor"/>
+      </mvc:interceptor>
+      <mvc:interceptor>
+         <mvc:mapping path="/login**/**"/>
+         <mvc:mapping path="/join**/**"/>
+         <bean id="loginInterceptor" class="second.sosu.common.interceptor.LoginInterceptor"/>
+      </mvc:interceptor>
+      <mvc:interceptor>
+         <mvc:mapping path="/**"/>
+         <bean id="typeInterceptor" class="second.sosu.common.interceptor.TypeInterceptor"/>
+      </mvc:interceptor>
+   </mvc:interceptors>
+   
+   <!-- 리소스 파일 맵핑 -->
+   <mvc:resources mapping="/resources/**" location="/resources/" />
+
+   <!-- <bean class="org.springframework.web.servlet.mvc.annotation.DefaultAnnotationHandlerMapping"/> -->
+   <!-- 뷰리솔버 순서: 이름으로 뷰 전달 -> URL 기반 뷰 전달 -->
+   <bean class="org.springframework.web.servlet.view.BeanNameViewResolver" p:order="0" />
+   
+   <!-- JSON으로 뷰 전달을 위한 설정 -->
+    <bean id="jsonView" class="org.springframework.web.servlet.view.json.MappingJackson2JsonView" />
+   <bean class="org.springframework.web.servlet.view.UrlBasedViewResolver"
+      p:order="2"
+      p:viewClass="org.springframework.web.servlet.view.JstlView"
+      p:prefix="/WEB-INF/views/" p:suffix=".jsp"/>
+      
+   <!-- Tiles 관련 추가 내용-->
+   <!-- Tiles관련 설정파일 -->
+   <bean id="tilesConfigurer" class="org.springframework.web.servlet.view.tiles3.TilesConfigurer">
+       <property name="definitions">
+           <list>
+               <value>/WEB-INF/tiles.xml</value>
+           </list>
+       </property>
+   </bean>        
+   <!-- Tiles의 우선순위를 1로 해줌. -->
+   <bean id="tilesViewResolver" class="org.springframework.web.servlet.view.UrlBasedViewResolver">
+       <property name="viewClass" value="org.springframework.web.servlet.view.tiles3.TilesView" />
+       <property name="order" value="1" />
+   </bean>   
+   
+   <!-- 빈 스캔 패키지 -->
+   <context:component-scan base-package="second.sosu" />
+   
+   
+   <websocket:handlers>
+      <websocket:mapping handler="chatHandler" path="/chat-ws"/>
+   </websocket:handlers>
+   
+   <!-- <bean id="echoHandler" class="second.sosu.chat.EchoHandler"/> -->
+   
+   
+   
+</beans>
