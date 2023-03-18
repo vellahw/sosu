@@ -23,6 +23,10 @@
       AND M.M_IDX = MEM.M_IDX
       AND M.MO_CATEGORY = #{MO_CATEGORY}
       AND F.F_ARTICLE(+) = M.MO_IDX
+      AND
+      (CASE WHEN TO_CHAR(M.MO_DEADLINE,'YYMMDD')+'3' 
+      <![CDATA[ <= ]]> TO_CHAR(SYSDATE,'YYMMDD') AND M.MO_CLOSE_YN = 'Y'
+       THEN 'Y' ELSE 'N' END) = 'N'
       <if test="MO_REGION != null">
          AND M.MO_REGION = #{MO_REGION}
       </if>
@@ -68,9 +72,12 @@
       AND
       F.F_TABLE(+) = 'M'
       AND F.F_ARTICLE(+) = M.MO_IDX
-      AND MO_CATEGORY =
+      AND M.MO_CATEGORY =
       #{MO_CATEGORY}
       AND M.M_IDX = MEM.M_IDX
+      AND (CASE WHEN TO_CHAR(M.MO_DEADLINE,'YYMMDD')+'3' 
+     <![CDATA[<=]]> TO_CHAR(SYSDATE,'YYMMDD') AND M.MO_CLOSE_YN = 'Y'
+      THEN 'Y' ELSE 'N' END) = 'N'
       <if test="KEYWORD != null">
          AND M.MO_TITLE LIKE '%'||#{KEYWORD}||'%'
       </if>
@@ -86,6 +93,9 @@
       SELECT COUNT(*) AS MO_COUNT
       FROM MOIM
       WHERE MO_DEL_YN = 'N'
+      AND (CASE WHEN TO_CHAR(MO_DEADLINE,'YYMMDD')+'3' 
+     <![CDATA[<=]]> TO_CHAR(SYSDATE,'YYMMDD') AND MO_CLOSE_YN = 'Y'
+      THEN 'Y' ELSE 'N' END) = 'N'
       <if test="MO_CATEGORY != null">
          AND MO_CATEGORY = #{MO_CATEGORY}
       </if>
@@ -282,10 +292,10 @@
    <!-- 리뷰 유무 -->
    <select id="reviewYn" parameterType="hashmap"
       resultType="hashmap">
-	    SELECT COUNT(RV_IDX)  AS RV_YN
-		FROM REVIEW
-		WHERE MO_IDX = #{MO_IDX}
-		AND M_IDX = #{M_IDX}
+       SELECT COUNT(RV_IDX)  AS RV_YN
+      FROM REVIEW
+      WHERE MO_IDX = #{MO_IDX}
+      AND M_IDX = #{M_IDX}
    </select>
    
    <!-- 내가 남긴 리뷰  -->
@@ -384,9 +394,9 @@
    <!-- 모임 마감일과 시간이 지나면 모임마감 -->
    <select id="moimClose" parameterType="hashmap" statementType="CALLABLE">
        <![CDATA[
-       {
-      CALL MO_AUTO_CLOSE
-      }
+     { 
+     CALL MO_AUTO_CLOSE 
+     }
       ]]>
    </select>
 
