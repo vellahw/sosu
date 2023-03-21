@@ -3,8 +3,6 @@ history.replaceState({}, null, location.pathname);
 $(function() {
     var mF = $("#mImg").val();
     var mFF = $("#mfsv").val();
-    var addr = $("#ADDRESS").val();
-    var deaddr = $("#DEADDRESS").val();
 
     if(mF == 'N' || mFF == 0) {
       $('#main').css('display', 'block');
@@ -19,8 +17,10 @@ $(function() {
     });
     
     /*================= 지도 띄우기 =================*/
-    var wii = $('#WII').val();
-    var kyung = $('#KYUNG').val();
+    var wii = $('#WII').val(); //위도
+    var kyung = $('#KYUNG').val(); //경도
+    var addr = $("#ADDRESS").val(); //주소
+    var deaddr = $("#DEADDRESS").val(); //상세주소
     
     if(wii == '' || wii == undefined || wii == null) {
     	//var mapDiv = $('#map').detach();
@@ -29,21 +29,18 @@ $(function() {
     if(wii != null){
         var container = document.getElementById('map');
         var options = { //지도를 생성할 때 필요한 기본 옵션
-            center: new kakao.maps.LatLng(wii, kyung), //지도의 기본 중심좌표
+            center: new kakao.maps.LatLng(wii, kyung),
             level: 3 //지도의 레벨(확대, 축소 정도)
         };
 
-        var map = new kakao.maps.Map(container, options); //지도 생성 및 객체 리턴 	
+        var map = new kakao.maps.Map(container, options); 
 
-        // 마커가 표시될 위치입니다 
         var markerPosition  = new kakao.maps.LatLng(wii, kyung); 
 
-        // 마커를 생성합니다
         var marker = new kakao.maps.Marker({
             position: markerPosition
         });
         
-        // 마커가 지도 위에 표시되도록 설정합니다
         marker.setMap(map);
         
         /*====== undefined 공백으로 바꿔주기====== */
@@ -125,19 +122,16 @@ function kaMap() {
 			  $("input[name=KYUNG]").val(kyung);
 			  $("#DEADDRESS").val('');
 			  
+   		      // 지도 중심을 부드럽게 이동시킵니다
 			  function panTo() {
-			    // 이동할 위도 경도 위치를 생성합니다 
 			    var moveLatLon = new kakao.maps.LatLng(wii, kyung);
-			    
-			    // 지도 중심을 부드럽게 이동시킵니다
-			    // 만약 이동할 거리가 지도 화면보다 크면 부드러운 효과 없이 이동합니다
 			    map.panTo(moveLatLon);            
 			  }        
 				
 			  //지도 새로 생성하기
-			  var container = document.getElementById('map'); //지도를 담을 영역의 DOM 레퍼런스
-			  var options = { //지도를 생성할 때 필요한 기본 옵션
-			     center: new kakao.maps.LatLng(wii, kyung), //지도의 중심좌표.
+			  var container = document.getElementById('map'); 
+			  var options = {
+			     center: new kakao.maps.LatLng(wii, kyung), 
 			     level: 3 //지도의 레벨(확대, 축소 정도)
 			  };
 			
