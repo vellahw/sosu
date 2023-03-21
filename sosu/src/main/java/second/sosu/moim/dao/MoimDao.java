@@ -295,8 +295,6 @@ public class MoimDao extends AbstractDAO {
 		update("moim.moimSelfClose", map);
 	}
 
-	
-
 	// 모임 탈퇴하기
 	public void moimExit(Map<String, Object> map) throws Exception {
 		update("moim.moimExit", map);
