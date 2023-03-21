@@ -70,9 +70,6 @@ function kaMap() {
        height: height,
    
        oncomplete: function(data) {
-           // 팝업에서 검색결과 항목을 클릭했을때 실행할 코드를 작성하는 부분.
-           // 각 주소의 노출 규칙에 따라 주소를 조합한다.
-           // 내려오는 변수가 값이 없는 경우엔 공백('')값을 가지므로, 이를 참고하여 분기 한다.
            var addr = ''; // 주소 변수
            var extraAddr = ''; // 참고항목 변수
            //사용자가 선택한 주소 타입에 따라 해당 주소 값을 가져온다.
@@ -96,10 +93,7 @@ function kaMap() {
                if(extraAddr !== ''){
                    extraAddr = ' (' + extraAddr + ')';
                }
-               // 조합된 참고항목을 해당 필드에 넣음
-           
-           } else {
-           }
+           } else {}
            
            // 우편번호와 주소 정보를 해당 필드에 넣음
            document.getElementById("ADDRESS").value = addr;
@@ -120,9 +114,9 @@ function kaMap() {
 			  //hidden input value 바꿔주기
 			  $("input[name=WII]").val(wii); 
 			  $("input[name=KYUNG]").val(kyung);
-			  $("#DEADDRESS").val('');
+			  $("#DEADDRESS").val(''); //상세주소 공란 처리
 			  
-   		      // 지도 중심을 부드럽게 이동시킵니다
+   		      // 지도 중심을 부드럽게 이동 시킴
 			  function panTo() {
 			    var moveLatLon = new kakao.maps.LatLng(wii, kyung);
 			    map.panTo(moveLatLon);            
@@ -132,12 +126,11 @@ function kaMap() {
 			  var container = document.getElementById('map'); 
 			  var options = {
 			     center: new kakao.maps.LatLng(wii, kyung), 
-			     level: 3 //지도의 레벨(확대, 축소 정도)
+			     level: 3 
 			  };
 			
               var map = new kakao.maps.Map(container, options); 
 
-              // 결과값으로 받은 위치를 마커로 표시
               var marker = new kakao.maps.Marker({
                   map: map,
                   position: letlng
