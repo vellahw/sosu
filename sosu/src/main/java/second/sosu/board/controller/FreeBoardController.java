@@ -17,6 +17,7 @@ import second.sosu.board.service.FreeBoardService;
 import second.sosu.common.domain.CommandMap;
 
 @Controller
+@RequestMapping("/freeboard")
 public class FreeBoardController {
    Logger log = Logger.getLogger(this.getClass());
    
@@ -24,7 +25,7 @@ public class FreeBoardController {
    private FreeBoardService freeboardService;
    
    //자유게시판 리스트(카테고리 포함)
-   @RequestMapping(value="/freeboard/{FR_CATEGORY}.sosu") 
+   @RequestMapping(value="/{FR_CATEGORY}.sosu") 
    public ModelAndView freeList(@PathVariable String FR_CATEGORY, CommandMap commandMap, HttpSession session) throws Exception {
       
       commandMap.put("MO_CATEGORY", FR_CATEGORY);
@@ -59,7 +60,7 @@ public class FreeBoardController {
 //   }
    
    //자유게시글 상세
-   @RequestMapping(value="/freeboard/{FR_CATEGORY}/{FR_IDX}.sosu")
+   @RequestMapping(value="/{FR_CATEGORY}/{FR_IDX}.sosu")
    public ModelAndView freeDetail(@PathVariable String FR_CATEGORY, @PathVariable int FR_IDX, CommandMap commandMap, HttpSession session, HttpServletRequest request) throws Exception {   
       
       commandMap.put("FR_CATEGORY", FR_CATEGORY);
@@ -79,7 +80,7 @@ public class FreeBoardController {
    }
    
    //자유게시글 작성 폼
-   @RequestMapping(value="/freeboard/insertForm/{FR_CATEGORY}.sosu")
+   @RequestMapping(value="/insertfree/{FR_CATEGORY}.sosu")
    public ModelAndView insertForm(@PathVariable String FR_CATEGORY, CommandMap commandMap) throws Exception {
       commandMap.put("FR_CATEGORY", FR_CATEGORY);
       
@@ -90,8 +91,8 @@ public class FreeBoardController {
    }
    
    //자유게시글 작성
-   @RequestMapping(value="/freeboard/insertfree.sosu") 
-   public ModelAndView insertfree(String FR_CATEGORY,CommandMap commandMap, HttpSession session, HttpServletRequest request) throws Exception {
+   @RequestMapping(value="/insertfree.sosu") 
+   public ModelAndView insertfree(String FR_CATEGORY, CommandMap commandMap, HttpSession session, HttpServletRequest request) throws Exception {
 
       commandMap.put("M_IDX", Integer.parseInt(String.valueOf(session.getAttribute("M_IDX"))));
 
@@ -103,7 +104,7 @@ public class FreeBoardController {
    }
    
    //자유게시글 수정 폼
-   @RequestMapping(value="/freeboard/updateForm/{FR_CATEGORY}/{FR_IDX}.sosu")
+   @RequestMapping(value="/updatefree/{FR_CATEGORY}/{FR_IDX}.sosu")
    public ModelAndView updatefreeForm(@PathVariable String FR_CATEGORY, @PathVariable int FR_IDX, CommandMap commandMap) throws Exception {   
          
       commandMap.put("FR_CATEGORY", FR_CATEGORY);
@@ -124,7 +125,7 @@ public class FreeBoardController {
    }
    
    //자유게시글 수정
-   @RequestMapping(value="/freeboard/updatefree.sosu")
+   @RequestMapping(value="/updatefree.sosu")
    public ModelAndView updatefree(String FR_CATEGORY, int FR_IDX, CommandMap commandMap, HttpSession session, HttpServletRequest request) throws Exception {
       
       ModelAndView mv = new ModelAndView("redirect:/freeboard/" + FR_CATEGORY + "/" + FR_IDX + ".sosu");
@@ -137,7 +138,7 @@ public class FreeBoardController {
    }
       
    //자유게시글 삭제
-   @RequestMapping(value="/freeboard/deletefree.sosu")
+   @RequestMapping(value="/deletefree.sosu")
    public ModelAndView deletefree(CommandMap commandMap) throws Exception {
       
       Map<String, Object> map = freeboardService.freeDetail(commandMap.getMap());
@@ -169,7 +170,7 @@ public class FreeBoardController {
 //      }
    
    //자유게시판 검색
-   @RequestMapping(value="/freeboard/search.sosu") 
+   @RequestMapping(value="/search.sosu") 
    public ModelAndView freeSearch(CommandMap commandMap) throws Exception { 
      
       List<Map<String, Object>> list = freeboardService.freeSearch(commandMap.getMap()); 

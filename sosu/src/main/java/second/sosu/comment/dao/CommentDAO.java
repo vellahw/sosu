@@ -15,9 +15,15 @@ public class CommentDAO extends AbstractDAO {
 		return(List<Map<String, Object>>)selectList("comment.commentList", map);
 	}
 	
-	public void commentInsert(Map<String, Object> map) throws Exception {
-		insert("comment.commentInsert", map);
+	public int commentInsert(Map<String, Object> map) throws Exception {
+		int insertCount = (Integer) insert("comment.commentInsert", map);
+		
+		return insertCount;
 	}
+	
+//	public void commentInsert(Map<String, Object> map) throws Exception {
+//		insert("comment.commentInsert", map);
+//	}
 	
 	public void commentInsert2(Map<String, Object> map) throws Exception {
 		insert("comment.commentInsert2", map);

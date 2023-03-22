@@ -8,9 +8,13 @@ import javax.annotation.Resource;
 import org.apache.log4j.Logger;
 import org.springframework.stereotype.Service;
 
+import lombok.AllArgsConstructor;
+import lombok.extern.log4j.Log4j;
 import second.sosu.comment.dao.CommentDAO;
 
 @Service("commentService")
+@Log4j
+@AllArgsConstructor
 public class CommentServiceImpl implements CommentService {
 	Logger log = Logger.getLogger(this.getClass());
 	
@@ -23,9 +27,16 @@ public class CommentServiceImpl implements CommentService {
 	}
 	
 	@Override
-	public void commentInsert(Map<String, Object> map) throws Exception {
-		commentDAO.commentInsert(map);
+	public int commentInsert(Map<String, Object> map) throws Exception {
+		log.info("오예ㅖㅖ.." + map);
+		return	commentDAO.commentInsert(map);
 	}
+
+//	@Override
+//	public void commentInsert(Map<String, Object> map) throws Exception {
+//		log.info("오예ㅖㅖ.." + map);
+//		commentDAO.commentInsert(map);
+//	}
 	
 	@Override
 	public void commentInsert2(Map<String, Object> map) throws Exception {

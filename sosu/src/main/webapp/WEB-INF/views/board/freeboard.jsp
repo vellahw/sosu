@@ -37,7 +37,7 @@
       
       <%if(session.getAttribute("M_IDX")!=null){ %>
       <div style="text-align: right; margin-top: 20px">
-         <button type="button" onclick="location.href='/freeboard/insertForm/${FR_CATEGORY }.sosu'" class="mrgbtn">글쓰기</button>
+         <button type="button" onclick="location.href='/freeboard/insertfree/${FR_CATEGORY}.sosu'" class="mrgbtn">글쓰기</button>
       </div>
       <% } %>
       

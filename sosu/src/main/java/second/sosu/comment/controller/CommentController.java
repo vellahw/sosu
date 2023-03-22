@@ -12,6 +12,7 @@ import second.sosu.comment.service.CommentService;
 import second.sosu.common.domain.CommandMap;
 
 @Controller
+@RequestMapping("/replies")
 public class CommentController {
 	Logger log = Logger.getLogger(this.getClass());
 	

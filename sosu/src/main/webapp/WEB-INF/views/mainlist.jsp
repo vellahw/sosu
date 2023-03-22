@@ -195,7 +195,7 @@
             %>
             <div style="text-align: right;">
                <button type="button"
-                  onclick="location.href='/freeboard/insertForm/{FR_CATEGORY}.sosu'"
+                  onclick="location.href='/freeboard/insertfree/{FR_CATEGORY}.sosu'"
                   class="mrgbtn">글쓰기</button>
             </div>
             <%
