@@ -7,7 +7,6 @@ import javax.annotation.Resource;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpSession;
 
-import org.apache.log4j.Logger;
 import org.springframework.stereotype.Service;
 
 import second.sosu.common.domain.CommandMap;
@@ -16,8 +15,6 @@ import second.sosu.moim.dao.MoimDao;
 
 @Service("moimService")
 public class MoimServiceImpl implements MoimService {
-
-	Logger log = Logger.getLogger(this.getClass());
 
 	@Resource(name = "moimDao")
 	private MoimDao moimDao;

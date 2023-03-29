@@ -219,19 +219,31 @@
            <c:choose>
             <c:when test="${fn:length(flist) > 0}">
             <th class="header"><label for="file" >기존이미지</label></th>
-            <td class="contents" id="fileDiv">
-              <p> 삭제할 이미지를 체크해주세요.</p>
+            <td class="contents">
+              <p style="font-weight: bold;">삭제할 이미지를 체크해주세요.</p>
                <c:forEach items="${flist}" var="f" >
                <input type = "hidden" value = "${f.F_MAIN_YN}" id ="mImg">
-                 <c:if test = "${f.F_MAIN_YN eq 'Y'}">메인 이미지
-                  <p><img src="${pageContext.request.contextPath}/resources/img/upload/${f.F_SVNAME}" style="width: 300px; height: auto; "/>
-                  <input id="input1" class="check" type="checkbox" name="item0" value="${f.F_SVNAME}" style="text-align: left;">
+                 <c:if test = "${f.F_MAIN_YN eq 'Y'}"><p>메인 이미지</p>
+                  <div style="width: 42%; float: left; margin-bottom: 20px;">
+                  <img src="${pageContext.request.contextPath}/resources/img/upload/${f.F_SVNAME}" style="width: 300px; height: auto; "/>
+                  <div class="check">
+        			<input type="checkbox" id="input1" class="check" name="item0" value="${f.F_SVNAME}">
+        			<label for="check1"></label>
+  			     </div>
+                  </div>
                  </c:if>
                  <c:if test = "${f.F_MAIN_YN eq 'N'}">
-                  <p><img src="${pageContext.request.contextPath}/resources/img/upload/${f.F_SVNAME}" style="width: 300px; height: auto; "/>
-                  <input id="input2" class="check" type="checkbox" name="item1" value="${f.F_SVNAME}" style="text-align: left;">
-                   </c:if>
+                 <div style="width: 100%; float: left;">
+                 <div style="width: 42%; float: left;">
+                  <img src="${pageContext.request.contextPath}/resources/img/upload/${f.F_SVNAME}" style="width: 300px; height: auto; "/>
+                  <div class="check">
+        			<input type="checkbox" id="input2" class="check" name="item0" value="${f.F_SVNAME}">
+        			<label for="check1"></label>
+  			     </div>
                   <br/>
+				 </div>
+				 </div>
+                   </c:if>
                </c:forEach>
                </td>
             </c:when>

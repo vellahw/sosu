@@ -59,8 +59,6 @@ public class MoimController {
 		ModelAndView mv = new ModelAndView("/moim/moimlist");
 		mv.setViewName("moim/moimlist");
 
-		
-
 		if (MO_REGION != null) {
 			commandMap.put("MO_REGION", MO_REGION);
 
@@ -169,12 +167,13 @@ public class MoimController {
 
 	// 모임 상세보기
 	@RequestMapping("/moim/{MO_CATEGORY}/{MO_IDX}.sosu")
-	public ModelAndView moimDetail(@PathVariable int MO_IDX, @PathVariable String MO_CATEGORY, CommandMap commandMap,
-			HttpServletRequest request, HttpSession session) throws Exception {
+	public ModelAndView moimDetail(@PathVariable int MO_IDX,
+								   @PathVariable String MO_CATEGORY,
+		CommandMap commandMap, HttpServletRequest request, HttpSession session) throws Exception {
 
 		commandMap.getMap().put("MO_CATEGORY", MO_CATEGORY);
 		commandMap.getMap().put("MO_IDX", MO_IDX);
-
+		
 		Map<String, Object> map = moimService.moimDetail(commandMap.getMap(), session);
 		
 		// 모임에 참여한 인원 리스트

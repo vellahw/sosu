@@ -14,7 +14,6 @@ import second.sosu.common.domain.CommandMap;
 @Controller
 @RequestMapping("/replies")
 public class CommentController {
-	Logger log = Logger.getLogger(this.getClass());
 	
 	@Resource(name="commentService")
 	private CommentService commentService;
@@ -24,16 +23,6 @@ public class CommentController {
 		ModelAndView mv = new ModelAndView("redirect:/freeboard/Detail");
 		
 		commentService.commentInsert(commandMap.getMap());
-		mv.addObject("B_IDX", commandMap.get("B_IDX"));
-		
-		return mv;
-	}
-	
-	@RequestMapping(value="/sample/commentInsert2/{FR_IDX}")
-	public ModelAndView commentInsert2(CommandMap commandMap, HttpSession session) throws Exception {
-		ModelAndView mv = new ModelAndView("redirect:/freeboard/Detail");
-		
-		commentService.commentInsert2(commandMap.getMap());
 		mv.addObject("B_IDX", commandMap.get("B_IDX"));
 		
 		return mv;

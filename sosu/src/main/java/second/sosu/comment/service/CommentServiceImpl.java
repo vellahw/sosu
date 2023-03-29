@@ -13,10 +13,7 @@ import lombok.extern.log4j.Log4j;
 import second.sosu.comment.dao.CommentDAO;
 
 @Service("commentService")
-@Log4j
-@AllArgsConstructor
 public class CommentServiceImpl implements CommentService {
-	Logger log = Logger.getLogger(this.getClass());
 	
 	@Resource(name="commentDAO")
 	private CommentDAO commentDAO;
@@ -27,20 +24,8 @@ public class CommentServiceImpl implements CommentService {
 	}
 	
 	@Override
-	public int commentInsert(Map<String, Object> map) throws Exception {
-		log.info("오예ㅖㅖ.." + map);
-		return	commentDAO.commentInsert(map);
-	}
-
-//	@Override
-//	public void commentInsert(Map<String, Object> map) throws Exception {
-//		log.info("오예ㅖㅖ.." + map);
-//		commentDAO.commentInsert(map);
-//	}
-	
-	@Override
-	public void commentInsert2(Map<String, Object> map) throws Exception {
-		commentDAO.commentInsert2(map);
+	public void commentInsert(Map<String, Object> map) throws Exception {
+		commentDAO.commentInsert(map);
 	}
 	
 	@Override

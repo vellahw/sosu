@@ -110,16 +110,15 @@
     }
   }
 
+ //참여 승인이 필요한 모임
  function checkJoin2() {
   
    let tmpAge2 = $('#sessage2').val();
    let jumin22= $('#ssgender2').val();
     
-    
     if(maxP != 0) {
-     
      if(presentP >= maxP) {
-      alert('현재 참여인원이 꽉 찼습니다.');
+      alert('현재 참여인원이 모두 찼습니다.');
       return false;
       }
     }
