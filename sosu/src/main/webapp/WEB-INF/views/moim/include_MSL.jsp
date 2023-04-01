@@ -7,14 +7,13 @@
 
 <input type="hidden" value="${sessionss}" id="session">
 
-
 <div class="col-lg-3 menu-item" style="margin-bottom: 80px;">
 	<div class="row gy-5" style="padding-left: 11px;">
 		<div class="row gy-5"
 			onclick="location.href='/moim/${m.MO_CATEGORY}/${m.MO_IDX}.sosu'"
 			style="cursor: pointer;">
-			<input type="hidden" name="M_IDX" value="${m.M_IDX}"> <input
-				type="hidden" name="MO_IDX" value="${m.MO_IDX}">
+			<input type="hidden" name="M_IDX" value="${m.M_IDX}">
+			<input type="hidden" name="MO_IDX" value="${m.MO_IDX}">
 			<c:if test="${m.MF_SVNAME ne '0'}">
 				<img src="/resources/img/upload/${m.MF_SVNAME}" onerror="this.src ='/resources/img/icons/list.png'"
 					<c:if test="${m.MO_CLOSE_YN eq 'N' }">  class="mimg" </c:if>

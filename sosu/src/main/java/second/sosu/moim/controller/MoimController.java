@@ -27,8 +27,6 @@ import second.sosu.moim.service.MoimService;
 @Controller
 public class MoimController {
 
-	Logger log = Logger.getLogger(this.getClass());
-	
     @Autowired SqlSessionTemplate oracle;
 
 	@Resource(name = "moimService")
@@ -104,7 +102,6 @@ public class MoimController {
 		mv.addObject("MO_REGION", commandMap.get(MO_REGION));
 
 		return mv;
-
 	}
 
 	// 모임 검색 리스트
@@ -340,16 +337,12 @@ public class MoimController {
 	// 모임 수정 구동
 	@RequestMapping("/moim/moimModify.pro")
 	public ModelAndView moimModify(@RequestParam("MO_CATEGORY") String MO_CATEGORY,
-			@RequestParam("MO_IDX") String MO_IDX, CommandMap commandMap, HttpServletRequest request, HttpSession session) throws Exception {
+								   @RequestParam("MO_IDX") String MO_IDX,
+			CommandMap commandMap, HttpServletRequest request, HttpSession session) throws Exception {
 		// ajax로 받아오기 위해 @RequestParam 사용
 
 		ModelAndView mv = new ModelAndView("redirect:/moim/" + MO_CATEGORY + "/" + MO_IDX + ".sosu");
 
-		String MO_DETAIL = (String) commandMap.get("MO_DETAIL");
-		
-		MO_DETAIL = MO_DETAIL.replaceAll(System.lineSeparator(), "<br/>");
-		commandMap.put("MO_DETAIL", MO_DETAIL);
-		
 		moimService.moimModify(commandMap.getMap(), request, session);
 		
 		return mv;

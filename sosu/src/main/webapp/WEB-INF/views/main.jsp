@@ -37,7 +37,7 @@
          <div class="mimg" style="display: inline;">
          <span class="fff">
             <a href="/outdoor.sosu">   
-               <img class="mimg" alt="outdoor" src="/resources/img/category/outdoor1.jpg" class="mimg"   style="cursor: pointer;">
+               <img class="mimg" alt="outdoor" src="/resources/img/category/outdoor1.jpg" class="mimg" style="cursor: pointer;">
             </a>
          </span>
          </div>

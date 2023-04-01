@@ -465,82 +465,90 @@ function maxLengthCheck(object){
     }
     
 /* ========== 폼 서브밋 전 alert 유효성 검사 =========*/
-    function check() {
-         
-        if (document.moimR.MO_TITLE.value.trim() == "") {
-           alert("제목를 입력해 주세요.");
-           document.moimR.MO_TITLE.focus();
-           return false;
+function check() {
+	if (document.moimR.MO_TITLE.value.trim() == "") {
+		alert("제목를 입력해 주세요.");
+        document.moimR.MO_TITLE.focus();
+        return false;
+	
+	} else if (document.moimR.MO_DETAILCATEGORY.value.trim() == "") {
+		alert("세부 카테고리를 입력해 주세요.");
+        document.moimR.MO_DETAILCATEGORY.focus();
+        return false;
            
-        } else if (document.moimR.MO_DETAILCATEGORY.value.trim() == "") {
-           alert("세부 카테고리를 입력해 주세요.");
-           document.moimR.MO_DETAILCATEGORY.focus();
-           return false;
+    } else if (document.moimR.MO_MAXAGE.value < document.moimR.MO_MINAGE.value) {
+		alert("참가 최소 연령이 최대 연령보다 큽니다.");
+        document.moimR.MO_MINAGE.focus();
+        return false;   
            
-        } else if ($("input[name=MO_MAXAGE]").val() < $("input[name=MO_MINAGE]").val()) {
-            alert("참가 최소 연령이 최대 연령보다 큽니다.");
-           // $('#age_check_result').css("color", "red");
-          //  $('#age_check_result').html("*참가 최소 연령이 최대 연령보다 큽니다.");
-            $("#MO_MAXAGE").focus();
-            return false;   
+	} else if (document.moimR.MO_MINAGE.value.trim() == "" || document.moimR.MO_MAXAGE.value.trim() == "") {
+        alert("참가 연령을 입력해 주세요.");
+        document.moimR.MO_MINAGE.focus();
+        return false; 
            
-        } else if ($("input[name=MO_MINAGE]").val() == "") {
-           alert("참가 연령을 입력해 주세요.");
-           $("#MO_MINAGE").focus();
-           return false; 
+    } else if (document.moimR.MO_MAXPEOPLE.value.trim() == "") {
+        alert("참가 인원을 입력해 주세요.");
+        document.moimR.MO_MAXPEOPLE.focus();
+        return false; 
            
-        } else if ($("input[name=MO_MAXPEOPLE]").val() == "") {
-           alert("참가 인원을 입력해 주세요.");
-           $("#MO_MAXPEOPLE").focus();
-           return false; 
+    } else if (document.moimR.MO_DEADLINE.value.trim() == "") {
+        alert("모임 날짜를 선택해 주세요.");
+        document.moimR.MO_DEADLINE.focus();
+        return false; 
            
-        } else if ($("input[name=MO_DEADLINE]").val() == "") {
-           alert("모임 날짜를 선택해 주세요.");
-           $("#MO_MAXPEOPLE").focus();
-           return false; 
+    } else if (document.moimR.MO_DEADTIME.value.trim() == "") {
+        alert("모임 시간을 선택해 주세요.");
+        document.moimR.MO_DEADTIME.focus();
+        return false; 
            
-        } else if ($("input[name=MO_DEADTIME]").val() == "") {
-           alert("모임 시간을 선택해 주세요.");
-           $("#MO_MAXPEOPLE").focus();
-           return false; 
+    } else if (document.moimR.MO_DETAIL.value.trim() == "") {
+        alert("내용을 입력해 주세요.");
+        document.moimR.MO_DETAIL.focus();
+        return false;
            
-        } else if (document.moimR.MO_DETAIL.value.trim() == "") {
-           alert("내용을 입력해 주세요.");
-           document.moimR.MO_DETAIL.focus();
-           return false;
-           
-        } else {
-         var mo_cate = $(".mo_cate option:selected").val();
-       	 var m = $("#MO_IDX").val();
+    } else {
+		var mo_cate = document.getElementById("MO_CATEGORY");
+        var resultC = mo_cate.options[mo_cate.selectedIndex].value;
+       	var m = document.getElementById("MO_IDX").value;
       
-       var fnameList = [];        
-         
-       $("input[name=item0]:checked").each(function(i) {
-          fnameList.push($(this).val());
-       });
-         
-       $("input[name=item1]:checked").each(function(i) {
-          fnameList.push($(this).val());
-       });
-          
-       $.ajax({
-          url : "/moim/moimModify.pro",
-          type : "post",
-          data : { MO_CATEGORY : mo_cate, MO_IDX : m},
-          success : function(result){
+    	var fnameList = [];        
+
+        const item0 = document.getElementsByName("item0"); //메인 img
+    
+        //체크박스 반복
+        for (let i = 0; i < item0.length; i++) {
+          if (item0[i].checked == true) {
+            fnameList.push(item0[i].value);
           }
-       }); 
+        } 
+        
+        const item1 = document.getElementsByName("item1"); //세부 img
+    
+        //체크박스 반복
+        for (let i = 0; i < item1.length; i++) {
+          if (item1[i].checked == true) {
+            fnameList.push(item1[i].value);
+          }
+        } 
+          
+       	$.ajax({
+        	url : "/moim/moimModify.pro",
+          	type : "post",
+          	data : { MO_CATEGORY : resultC, MO_IDX : m},
+          	success : function(result){
+        	}
+        }); 
       
-       $.ajax({
-          url : "/moim/moimImgDel.pro", 
-         type : "get",
-         data : { chbox : fnameList },
-         dataType : 'json',
-         success : function(result) {
-         }
-      });
+      	 $.ajax({
+	        url : "/moim/moimImgDel.pro", 
+	        type : "get",
+	        data : { chbox : fnameList },
+	        dataType : 'json',
+	        success : function(result) {
+	        }
+      	});
    
-       alert("수정 되었습니다.");
+   	    alert("수정 되었습니다.");
         return true;
-        }
-   }    
+	}
+}    

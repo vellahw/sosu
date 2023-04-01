@@ -154,7 +154,7 @@
              <c:if test="${modify.MO_MAXPEOPLE == '0' }">display: none;</c:if>">       
              제한 없음
           </button>
-          <input type="button" id="pepolemodi" class="noLB" value="수정하기" style="display: none;">
+          <input type="button" id="pepolemodi" class="noLB" value="수정하기" style="display: none; width: 750px;">
           <input type="button" id="pCancel" class="noLB" value="되돌리기" style="display: none;">
           <input type="button" id="pCancel2" class="noLB" value="되돌리기" style="display: none;">
           </td>
