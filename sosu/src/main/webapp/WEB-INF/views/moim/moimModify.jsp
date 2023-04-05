@@ -227,7 +227,7 @@
                   <div style="width: 42%; float: left; margin-bottom: 20px;">
                   <img src="${pageContext.request.contextPath}/resources/img/upload/${f.F_SVNAME}" style="width: 300px; height: auto; "/>
                   <div class="check">
-        			<input type="checkbox" id="input1" class="check" name="item0" value="${f.F_SVNAME}">
+        			<input type="checkbox" id="input1" class="check" name="item0" value="${f.F_SVNAME}" onclick="showBox(this)">
         			<label for="check1"></label>
   			     </div>
                   </div>

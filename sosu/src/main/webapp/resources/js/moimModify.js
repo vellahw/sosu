@@ -1,21 +1,26 @@
 history.replaceState({}, null, location.pathname);
 
-$(function() {
-    var mF = $("#mImg").val();
-    var mFF = $("#mfsv").val();
+//메인이미지 체크박스 선택시 실행
+var main = document.getElementById("main"); //메인이미지 file input
+
+function showBox(i){
+	if(i.checked) {
+    	main.style.display = 'block';
+    } else {
+    	main.style.display = 'none';
+    }
+}
+
+window.onload = function(){
+    var mF = document.getElementById("mImg").value;
+    var mFF = document.getElementById("mfsv").value;
+    const input1 = document.querySelectorAll('#input1 input'); 
+
 
     if(mF == 'N' || mFF == 0) {
-      $('#main').css('display', 'block');
+        main.style.display = 'block';
     }
-
-    $("#input1").change(function(){
-       if($("#input1").is(":checked")){
-           $('#main').css('display', 'block');               
-       }else{
-           $('#main').css('display', 'none');
-       }
-    });
-    
+     
     /*================= 지도 띄우기 =================*/
     var wii = $('#WII').val(); //위도
     var kyung = $('#KYUNG').val(); //경도
@@ -56,7 +61,7 @@ $(function() {
         });
         infowindow.open(map, marker);
     }
-});
+}
 
 /* 다음 주소검색 및 마커 표시 */
 var geocoder = new kakao.maps.services.Geocoder();
@@ -404,30 +409,29 @@ var today = new Date(now_utc-timeOff).toISOString().split("T")[0];
 document.getElementById("date").setAttribute("min", today);
        
 /*============ 세부 지역 선택을 위한 스크립트 ==========*/
-    function addressKindChange(e) {
-        
-        var jung = ["종로", "인사동", "동대문", "서울역", "이태원", "을지로"];
-        var dong = ["잠실/송파", "왕십리", "건대", "청량리", "올림픽공원", "천호", "하남"];
-        var seo = ["홍대/신촌", "연신내", "마포", "영등포/여의도", "구로", "고양"];
-        var nam = ["강남/역삼/삼성", "신사", "청담", "서초/교대", "성남"];
-        var book = ["강북", "노원/중계", "중랑", "의정부"];
-        var target = document.getElementById("selectRDetail");
+function addressKindChange(e) {
+	var jung = ["종로", "인사동", "동대문", "서울역", "이태원", "을지로"];
+    var dong = ["잠실/송파", "왕십리", "건대", "청량리", "올림픽공원", "천호", "하남"];
+    var seo = ["홍대/신촌", "연신내", "마포", "영등포/여의도", "구로", "고양"];
+    var nam = ["강남/역삼/삼성", "신사", "청담", "서초/교대", "성남"];
+    var book = ["강북", "노원/중계", "중랑", "의정부"];
+    var target = document.getElementById("selectRDetail");
     
-        if(e.value == "중부") var d = jung;
-        else if(e.value == "동부") var d = dong;
-        else if(e.value == "서부") var d = seo;
-        else if(e.value == "남부") var d = nam;
-        else if(e.value == "북부") var d = book;
+	if(e.value == "중부") var d = jung;
+    else if(e.value == "동부") var d = dong;
+    else if(e.value == "서부") var d = seo;
+    else if(e.value == "남부") var d = nam;
+    else if(e.value == "북부") var d = book;
     
-        target.options.length = 0;
+    target.options.length = 0;
     
-        for (x in d) {
-            var opt = document.createElement("option");
-            opt.value = d[x];
-            opt.innerHTML = d[x];
-            target.appendChild(opt);
-        }   
-    }
+    for (x in d) {
+    	var opt = document.createElement("option");
+        opt.value = d[x];
+        opt.innerHTML = d[x];
+        target.appendChild(opt);
+	}   
+}
 
 function maxLengthCheck(object){
     if (object.value.length > object.maxLength){
@@ -435,33 +439,33 @@ function maxLengthCheck(object){
     }    
 }
 
-    /* 입력된 바이트(글자수) 값 제어 */
-    function fn_checkByte(obj) {
-        const maxByte = 1400; //최대 100바이트
-        const text_val = obj.value; //입력한 문자
-        const text_len = text_val.length; //입력한 문자수
+/* 입력된 바이트(글자수) 값 제어 */
+function fn_checkByte(obj) {
+	const maxByte = 1400; //최대 100바이트
+    const text_val = obj.value; //입력한 문자
+    const text_len = text_val.length; //입력한 문자수
     
-        let totalByte = 0;
-        for (let i = 0; i < text_len; i++) {
-            const each_char = text_val.charAt(i);
-            const uni_char = escape(each_char); //유니코드 형식으로 변환
-             if (uni_char.length > 4) {
-                // 한글 : 2Byte
-                totalByte += 3;
-            } else {
-                // 영문,숫자,특수문자 : 1Byte
-                totalByte += 1;
-            }
-        }
-    
-        if (totalByte > maxByte) {
-            alert('최대 1500Byte까지만 입력가능합니다.');
-            document.getElementById("nowByte").innerText = totalByte;
-            document.getElementById("nowByte").style.color = "red";
+    let totalByte = 0;
+    for (let i = 0; i < text_len; i++) {
+    	const each_char = text_val.charAt(i);
+        const uni_char = escape(each_char); //유니코드 형식으로 변환
+        if (uni_char.length > 4) {
+        	// 한글 : 2Byte
+        	totalByte += 3;
         } else {
-            document.getElementById("nowByte").innerText = totalByte;
-            document.getElementById("nowByte").style.color = "green";
+        	// 영문,숫자,특수문자 : 1Byte
+            totalByte += 1;
         }
+	}
+    
+    if (totalByte > maxByte) {
+        alert('최대 1500Byte까지만 입력가능합니다.');
+        document.getElementById("nowByte").innerText = totalByte;
+        document.getElementById("nowByte").style.color = "red";
+    } else {
+        document.getElementById("nowByte").innerText = totalByte;
+        document.getElementById("nowByte").style.color = "green";
+    	}
     }
     
 /* ========== 폼 서브밋 전 alert 유효성 검사 =========*/
