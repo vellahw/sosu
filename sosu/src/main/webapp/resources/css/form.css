@@ -1,10 +1,9 @@
 @charset "UTF-8";
 
 .check{
-	width: 280px;
     float: left;
-    margin-left: 52%;
-    margin-top: -4%;
+    transform: translate(152px, -13px);
+    display: flex;
 }
 
 .check input[type="checkbox"] {
@@ -244,7 +243,7 @@ a {
 
 /* 제한없음 버튼 */
 .noLB {
-   width: 100%;
+   width: 750px;;
    height: 35px;
    border: none;
    background-color: #e9e9e9;

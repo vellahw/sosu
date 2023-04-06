@@ -199,7 +199,7 @@
                <button type="button" class="searchMap"
                   		onclick="kaMap()">주소 검색</button>
                <br/>   		
-               <input type="text" id="DEADDRESS" placeholder="상세주소 입력" name="DEADDRESS" value="${modify.DEADDRESS}">
+               <input type="text" id="DEADDRESS" placeholder="상세주소 입력" name="DEADDRESS" value="${modify.DEADDRESS}" style="margin-top: 5px;">
                <div id="map" style="width:500px; height:400px; margin-top: 10px;"></div>
                <input type="hidden" name="WII" value="${modify.WII}" id="WII"> 
      	 	   <input type="hidden" name="KYUNG" value="${modify.KYUNG}" id="KYUNG"> 

@@ -1,4 +1,4 @@
-history.replaceState({}, null, location.pathname);
+history.replaceState({}, null, location.pathname); 
 
 //메인이미지 체크박스 선택시 실행
 var main = document.getElementById("main"); //메인이미지 file input
@@ -11,57 +11,58 @@ function showBox(i){
     }
 }
 
-window.onload = function(){
-    var mF = document.getElementById("mImg").value;
-    var mFF = document.getElementById("mfsv").value;
-    const input1 = document.querySelectorAll('#input1 input'); 
-
+$(function() {
+    var mF = $("#mImg").val();
+    var mFF = $("#mfsv").val();
+	var main = document.getElementById("main"); //메인이미지 file input
 
     if(mF == 'N' || mFF == 0) {
-        main.style.display = 'block';
+	    main.style.display = 'block';
     }
+});
      
-    /*================= 지도 띄우기 =================*/
-    var wii = $('#WII').val(); //위도
-    var kyung = $('#KYUNG').val(); //경도
-    var addr = $("#ADDRESS").val(); //주소
-    var deaddr = $("#DEADDRESS").val(); //상세주소
+/*================= 지도 띄우기 =================*/
+var wii = document.getElementById("WII").value;
+var kyung = document.getElementById("KYUNG").value; //경도
+var addr = document.getElementById("ADDRESS").value; //주소
+var deaddr = document.getElementById("DEADDRESS").value; //상세주소
     
-    if(wii == '' || wii == undefined || wii == null) {
-    	//var mapDiv = $('#map').detach();
-    }
-    
-    if(wii != null){
-        var container = document.getElementById('map');
-        var options = { //지도를 생성할 때 필요한 기본 옵션
-            center: new kakao.maps.LatLng(wii, kyung),
-            level: 3 //지도의 레벨(확대, 축소 정도)
-        };
-
-        var map = new kakao.maps.Map(container, options); 
-
-        var markerPosition  = new kakao.maps.LatLng(wii, kyung); 
-
-        var marker = new kakao.maps.Marker({
-            position: markerPosition
-        });
-        
-        marker.setMap(map);
-        
-        /*====== undefined 공백으로 바꿔주기====== */
-        function defaultCheckString (checkStr, defaultStr){
-            if(checkStr == undefined || checkStr == null){
-                return defaultStr;
-            }
-        return checkStr;
-        }
-
-        var infowindow = new kakao.maps.InfoWindow({
-        content: '<div style="width:150px;text-align:center;padding:6px 0;">'+addr+'<br>'+defaultCheckString(deaddr, '')+'</div>'
-        });
-        infowindow.open(map, marker);
-    }
+if(wii == '' || wii == undefined || wii == null) {
+	document.getElementById("map").style.display = 'none';
 }
+    
+if(wii != null){
+	var container = document.getElementById('map');
+    var options = { //지도를 생성할 때 필요한 기본 옵션
+    	center: new kakao.maps.LatLng(wii, kyung),
+        level: 3 //지도의 레벨(확대, 축소 정도)
+    };
+
+    var map = new kakao.maps.Map(container, options); 
+
+    var markerPosition  = new kakao.maps.LatLng(wii, kyung); 
+
+    var marker = new kakao.maps.Marker({
+  		position: markerPosition
+    });
+        
+    marker.setMap(map);
+        
+	/*====== undefined 공백으로 바꿔주기====== */
+	function defaultCheckString (checkStr, defaultStr){
+		if(checkStr == undefined || checkStr == null){
+			return defaultStr;
+	    }
+	    return checkStr;
+	}
+	
+	var infowindow = new kakao.maps.InfoWindow({
+		content: '<div style="width:150px;text-align:center;padding:6px 0;">'+addr+'<br>'+defaultCheckString(deaddr, '')+'</div>'
+	});
+	
+	infowindow.open(map, marker);
+}
+
 
 /* 다음 주소검색 및 마커 표시 */
 var geocoder = new kakao.maps.services.Geocoder();
