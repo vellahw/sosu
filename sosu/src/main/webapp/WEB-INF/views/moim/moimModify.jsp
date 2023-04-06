@@ -224,25 +224,17 @@
                <c:forEach items="${flist}" var="f" >
                <input type = "hidden" value = "${f.F_MAIN_YN}" id ="mImg">
                  <c:if test = "${f.F_MAIN_YN eq 'Y'}"><p>메인 이미지</p>
-                  <div style="width: 42%; float: left; margin-bottom: 20px;">
+                  <div style="margin-bottom: 20px;">
                   <img src="${pageContext.request.contextPath}/resources/img/upload/${f.F_SVNAME}" style="width: 300px; height: auto; "/>
-                  <div class="check">
-        			<input type="checkbox" id="input1" class="check" name="item0" value="${f.F_SVNAME}" onclick="showBox(this)">
-        			<label for="check1"></label>
-  			     </div>
+        			<input type="checkbox" id="input1" class="check" name="item0" value="${f.F_SVNAME}" onclick="showBox(this)" style="width: 22px; height: 22px;">
                   </div>
                  </c:if>
                  <c:if test = "${f.F_MAIN_YN eq 'N'}">
-                 <div style="width: 100%; float: left;">
-                 <div style="width: 42%; float: left;">
+                 <div>
                   <img src="${pageContext.request.contextPath}/resources/img/upload/${f.F_SVNAME}" style="width: 300px; height: auto; "/>
-                  <div class="check">
-        			<input type="checkbox" id="input2" class="check" name="item0" value="${f.F_SVNAME}">
-        			<label for="check1"></label>
-  			     </div>
+        			<input type="checkbox" id="input2" class="check" name="item0" value="${f.F_SVNAME}" style="width: 22px; height: 22px;">
+                  </div>
                   <br/>
-				 </div>
-				 </div>
                    </c:if>
                </c:forEach>
                </td>

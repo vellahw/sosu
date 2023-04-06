@@ -143,7 +143,7 @@
         AND F.F_ARTICLE(+) = M.MO_IDX
         AND F.F_DEL_YN = 'N'
         AND M.MO_IDX = #{MO_IDX}
-        ORDER BY F.F_MAIN_YN DESC
+        ORDER BY F.F_REG_DATE
       ]]>
    </select>
 
