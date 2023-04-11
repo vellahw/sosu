@@ -26,8 +26,9 @@ var wii = document.getElementById("WII").value;
 var kyung = document.getElementById("KYUNG").value; //경도
 var addr = document.getElementById("ADDRESS").value; //주소
 var deaddr = document.getElementById("DEADDRESS").value; //상세주소
-    
-if(wii == '' || wii == undefined || wii == null) {
+
+//지도 없을 때     
+if(wii == undefined || wii == null) {
 	document.getElementById("map").style.display = 'none';
 }
     

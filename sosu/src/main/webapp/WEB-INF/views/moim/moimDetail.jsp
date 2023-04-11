@@ -15,10 +15,10 @@
       <input type="hidden" name="MO_IDX" value="${MO_IDX}" id="idx">
       <input type="hidden" name="MO_CATEGORY" value="${MO_CATEGORY}" id="cate"> 
       <input type="hidden" name="sessionss" value="${sessionss}" id="session"> 
-      <input type="hidden" name="WII" value="${Detail.WII}" id="WII"> 
-      <input type="hidden" name="KYUNG" value="${Detail.KYUNG}" id="KYUNG"> 
+      <input type="hidden" name="WII" value="${Detail.WII}" id="latitude"> 
+      <input type="hidden" name="KYUNG" value="${Detail.KYUNG}" id="longitude"> 
       <input type="hidden" name="ADDRESS" value="${Detail.ADDRESS}" id="address"> 
-      <input type="hidden" name="DEADDRESS" value="${Detail.DEADDRESS}" id="deaddress"> 
+      <input type="hidden" name="DEADDRESS" value="${Detail.DEADDRESS}" id="detail-address"> 
       
       <main>
         <div class="detailBody">
@@ -77,7 +77,7 @@
                <p class="showMap-container" style ="margin-bottom:0px" >
                   ⚑ ${Detail.MO_DETAILREGION}
                   <c:if test = "${Detail.MAP_IDX ne null}">
-                  <button class="showMap-title">지도보기</button>
+                  <button type="button" class="showMap-title">지도보기</button>
                   <div class="showMap-answer">
                      <div id="map" style="width:500px;height:400px;margin-top:10px;"></div>
                   </div>
@@ -455,8 +455,8 @@
       </main>
    </div>
 
-   <!-- 스크립트 태그 이 위치에 있어야 하는거 맞아요 -->
-   <script type="text/javascript">
+<!-- 스크립트 태그 이 위치에 있어야 하는거 맞아요 -->
+<script type="text/javascript">
 /* 참여자 리스트 접었다 펴기 */
 window.onload = () => {
      const panelFaqContainer = document.querySelectorAll(".panel-faq-container"); // NodeList 객체
@@ -479,36 +479,6 @@ window.onload = () => {
          showMapAnswer[i].classList.toggle('active');
        });
      };
-     
-     
    }
-
-/* 지도 */
-var wii = $('#WII').val();
-var kyung = $('#KYUNG').val();
-var add = $('#address').val();
-var deadd = $('#deaddress').val();
-var container = document.getElementById('map'); //지도를 담을 영역의 DOM 레퍼런스
-var options = { //지도를 생성할 때 필요한 기본 옵션
-   center: new kakao.maps.LatLng(wii, kyung), //지도의 중심좌표.
-   level: 3 //지도의 레벨(확대, 축소 정도)
-};
-
-var map = new kakao.maps.Map(container, options); //지도 생성 및 객체 리턴
-
-//지도를 클릭한 위치에 표출할 마커
-var marker = new kakao.maps.Marker({ 
-   // 지도 중심좌표에 마커를 생성
-   position: map.getCenter() 
-}); 
-//지도에 마커를 표시
-marker.setMap(map);
-
-// 인포윈도우로 장소에 대한 설명을 표시
-var infowindow = new kakao.maps.InfoWindow({
-    content: '<div style="width:150px;text-align:center;padding:6px 0;">'+add+'<br>'+deadd+'</div>'
-});
-infowindow.open(map, marker);
-
 </script>
 </body>
