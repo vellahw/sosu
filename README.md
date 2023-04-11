@@ -27,4 +27,17 @@ Spring Framework를 활용한 MVC 패턴의 모임 커뮤니티 사이트입니�
 <h2>2. 화면구성</h2>
 <h4>👀 메인화면</h4>
 <img src="https://user-images.githubusercontent.com/112395421/228560674-59f77148-e28e-4f9e-b9a7-558c0056270d.gif"/>
-
+<p>6개의 카테고리 중 선택하여 페이지에 방문할 수 있습니다.</p>
+<br>
+<h4>👀 모임 개설 화면</h4>
+<img src="https://user-images.githubusercontent.com/112395421/230282178-bd813962-74af-472a-98e1-11f2a27d5328.gif"/>
+<p>모임 개설 폼에서 카테고리, 세부카테고리, 참여 인원, 참여 성별, 모일 장소 등을 입력할 수 있습니다.</p>
+<br>
+<h4>👀 모임 참여 화면</h4>
+<img src="https://user-images.githubusercontent.com/112395421/230282293-9b2b043a-ee1f-4fbe-a2a8-881c63650c2e.gif"/>
+<p>모임 상세보기 페이지에서 모임에 대한 정보 열람 및 참여/탈퇴가 가능합니다.</p>
+<br>
+<h4>👀 방장의 참여자 강퇴 기능</h4>
+<img src="https://user-images.githubusercontent.com/112395421/230283421-e8b6741c-f272-4fe4-9ced-97a108c83c11.gif"/>
+<p>방장의 겨우 모임 상세보기 페이지에서 참여자를 강퇴 시킬 수 있습니다.</p>
+<br>
