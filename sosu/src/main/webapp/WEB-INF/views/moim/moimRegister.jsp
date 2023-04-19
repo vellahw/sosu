@@ -93,30 +93,34 @@ history.replaceState({}, null, location.pathname);
                </td>
             </tr>
             <tr>
-            <th class="header"><label for="MO_MINAGE" >참가 연령</label><span style="color:#fd8731;margin-left:3px;">*</span></th>
-            <td class="contents" id="agetd" style="padding-bottom: 0px;">
-            <div class="age_check_result" id="age_check_result"></div>
-               <input type="number" class="form-control" name="MO_MINAGE" id="MO_MINAGE" maxlength="2" oninput="maxLengthCheck(this)"
-                  placeholder="최소 (숫자만 입력해주세요.)" style = "margin-right:12px"><span id = "wave" style = "font-weight:bold">~</span>
-                 <input type="number" class="form-control" name="MO_MAXAGE" id="MO_MAXAGE" maxlength="2" oninput="maxLengthCheck(this)"
-                 placeholder="최대 (숫자만 입력해주세요.)" style = "margin-left:12px">
-                
-            </td>
-             </tr>   
-          <tr>
-             <th></th>
-             <td>
-             <input type="button" id="ageNoLimit" class="noLB" value="제한없음" style="cursor: pointer;">
-             <input type="button" id="Limit" class="noLB" value="되돌리기" style="cursor: pointer; display: none;">
-             </td>
-          </tr>
-       
+	            <th class="header">
+	            	<label for="MO_MINAGE" >참가 연령</label>
+	           		<span style="color:#fd8731;margin-left:3px;">*</span>
+	            </th>
+	            <td class="contents" id="age-td" style="padding-bottom: 0px;">
+	            	<div class="age_check_result" id="age_check_result"></div>
+	                <input type="number" class="form-control" name="MO_MINAGE" id="MO_MINAGE" maxlength="2" oninput="maxLengthCheck(this)"
+	                   	   placeholder="최소 (숫자만 입력해주세요.)" style="margin-right:12px">
+	                <span id="wave" style = "font-weight:bold">~</span>
+	                <input type="number" class="form-control" name="MO_MAXAGE" id="MO_MAXAGE" maxlength="2" oninput="maxLengthCheck(this)"
+	                       placeholder="최대 (숫자만 입력해주세요.)" style="margin-left:12px">
+	            </td>
+            </tr>   
+	        <tr>
+	           <th></th>
+	           <td>
+		    	   <input type="button" id="ageNoLimitBtn" class="noLB" value="제한없음" style="cursor: pointer;">
+		           <input type="button" id="ageLimitCancelBtn" class="noLB" value="되돌리기" style="cursor: pointer; display: none;">
+	           </td>
+	        </tr>
             <tr>
-            <th class="header"><label for="MO_MAXPEOPLE" >참가 인원</label><span style="color:#fd8731;margin-left:3px;">*</span></th>
-            <td class="contents" style="padding-bottom: 0px;">
-            <input type="number" class="form-control" name="MO_MAXPEOPLE" id="MO_MAXPEOPLE"
-                  placeholder="최대 (본인포함, 숫자만 입력해주세요.)" maxlength="100">
-              </td>
+	            <th class="header"><label for="MO_MAXPEOPLE" >참가 인원</label>
+	            	<span style="color:#fd8731;margin-left:3px;">*</span>
+	            </th>
+	            <td class="contents" style="padding-bottom: 0px;">
+	            <input type="number" class="form-control" name="MO_MAXPEOPLE" id="MO_MAXPEOPLE"
+	                   placeholder="최대 (본인포함, 숫자만 입력해주세요.)" maxlength="100">
+            	</td>
          </tr> 
          <tr>
           <th></th>

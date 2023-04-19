@@ -1,35 +1,40 @@
 /* 제한 없음 버튼 제어 */
 /* 참가 연령 */
-var ageNoLimit_btn = document.getElementById('ageNoLimit');
-ageNoLimit_btn.addEventListener("click", function () {
-   var min = $('#MO_MINAGE').detach();
-   var max = $('#MO_MAXAGE').detach();
-   var wv = $('#wave').detach();
+const ageNoLimitBtn = document.getElementById('ageNoLimitBtn');
+const ageLimitCancelBtn = document.getElementById('ageLimitCancelBtn');
+const min_age = document.querySelector('#MO_MINAGE');
+const max_age = document.querySelector('#MO_MAXAGE');
+const wave = document.querySelector('#wave');
 
-   ageNoLimit_btn.style.display = 'none';
-   document.getElementById('Limit').style.display = 'block';
+ageNoLimitBtn.addEventListener("click", function () {
+   min_age.remove();
+   max_age.remove();
+   wave.remove();
+
+   ageNoLimitBtn.style.display = 'none';
+   document.getElementById('ageLimitCancelBtn').style.display = 'block';
 
    const str = document.createElement('div');
    str.innerHTML = "<input type='hidden' name='MO_MINAGE' id='MO_MINAGE2' value='0'>"
    + "<input type='hidden' name='MO_MAXAGE' id='MO_MAXAGE2' value='200'>"
    + "<div id='ll'>제한없음</div>";
    
-   document.querySelector('#agetd').append(str);
+   document.querySelector('#age-td').append(str);
+
+   /* 되돌리기 버튼 클릭 이벤트 */
+   ageLimitCancelBtn.addEventListener('click', function() {
    
-   /* 되돌리기 버튼 */
-   var limit_btn = document.getElementById('Limit');
-   limit_btn.addEventListener('click', function() {
-      document.querySelector('#agetd').append(min);
-      document.querySelector('#agetd').append(max);
-      document.querySelector('#agetd').after(wv);
+      document.querySelector('#agetd').append(min_age);
+      document.querySelector('#agetd').append(max_age);
+      document.querySelector('#agetd').after(wave);
       
       var ll = document.getElementById('ll')
       ll.remove();
       
       document.getElementById('MO_MINAGE2').remove();
       document.getElementById('MO_MAXAGE2').remove();
-      document.getElementById('ageNoLimit').style.display = 'block';      
-      document.getElementById('Limit').style.display = 'none';      
+      document.getElementById('ageNoLimitBtn').style.display = 'block';      
+      document.getElementById('ageLimitCancelBtn').style.display = 'none';      
    });
 });
 
