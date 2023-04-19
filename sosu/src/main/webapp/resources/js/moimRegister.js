@@ -13,30 +13,27 @@ ageNoLimitBtn.addEventListener("click", function () {
    wave.remove();
 
    ageNoLimitBtn.style.display = 'none';
-   document.getElementById('ageLimitCancelBtn').style.display = 'block';
+   ageLimitCancelBtn.style.display = 'block';
 
-   let str = document.createElement('div');
-   str.innerHTML = "<input type='hidden' name='MO_MINAGE' id='MO_MINAGE2' value='0'>"
+   age_td.innerHTML = "<input type='hidden' name='MO_MINAGE' id='MO_MINAGE2' value='0'>"
    + "<input type='hidden' name='MO_MAXAGE' id='MO_MAXAGE2' value='200'>"
    + "<div id='ll'>제한없음</div>";
-   
-   age_td.append(str);
+});
 
-   /* 되돌리기 버튼 클릭 이벤트 */
-   ageLimitCancelBtn.addEventListener('click', function() {
+/* 되돌리기 버튼 클릭 이벤트 */
+ageLimitCancelBtn.addEventListener('click', function() {
+   document.getElementById('MO_MINAGE2').remove();
+   document.getElementById('MO_MAXAGE2').remove();
    
-      document.querySelector('#agetd').append(min_age);
-      document.querySelector('#agetd').append(max_age);
-      document.querySelector('#agetd').after(wave);
-      
-      var ll = document.getElementById('ll')
-      ll.remove();
-      
-      document.getElementById('MO_MINAGE2').remove();
-      document.getElementById('MO_MAXAGE2').remove();
-      document.getElementById('ageNoLimitBtn').style.display = 'block';      
-      document.getElementById('ageLimitCancelBtn').style.display = 'none';      
-   });
+   ageNoLimitBtn.style.display = 'block';      
+   ageLimitCancelBtn.style.display = 'none';      
+   
+   age_td.innerHTML = '<input type="number" class="form-control" name="MO_MINAGE" id="MO_MINAGE" maxlength="2" oninput="maxLengthCheck(this)"'
+                    + 'placeholder="최소 (숫자만 입력해주세요.)" style="margin-right:12px">'
+                    + '<span id="wave" style = "font-weight:bold">~</span>'
+                    + '<input type="number" class="form-control" name="MO_MAXAGE" id="MO_MAXAGE" maxlength="2" oninput="maxLengthCheck(this)"'
+                    + 'placeholder="최대 (숫자만 입력해주세요.)" style="margin-left:12px">';
+
 });
 
 
