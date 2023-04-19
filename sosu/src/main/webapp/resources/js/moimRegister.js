@@ -1,49 +1,81 @@
- /* 파일 추가 버튼 + 제한 없음 버튼 구동 */
- var gfv_count = 1;
-      
-       /* 제한 없음 버튼 제어 */
-       /* 참가 연령 */
-       $('#ageNoLimit').click(function() {
-         var min = $('#MO_MINAGE').detach();
-         var max = $('#MO_MAXAGE').detach();
-         var wv = $('#wave').detach();
+/* 제한 없음 버튼 제어 */
+/* 참가 연령 */
+var ageNoLimit_btn = document.getElementById('ageNoLimit');
+ageNoLimit_btn.addEventListener("click", function () {
+   var min = $('#MO_MINAGE').detach();
+   var max = $('#MO_MAXAGE').detach();
+   var wv = $('#wave').detach();
 
-          $('#ageNoLimit').css('display', 'none');
-          $('#Limit').css('display', 'block');
-          
-          var str = "<input type='hidden' name='MO_MINAGE' id='MO_MINAGE2' value='0'>"
-                + "<input type='hidden' name='MO_MAXAGE' id='MO_MAXAGE2' value='200'>"
-                + "<div id='ll'>제한없음</div>";
-          
-          $('#agetd').append(str);
-          
-          /* 되돌리기 버튼 */
-          $('#Limit').click(function() {
-             $("#agetd").append(min);
-             $("#agetd").append(max);
-             $('#MO_MINAGE').after(wv);
-               $("#ll").remove();
-               $("#MO_MINAGE2").remove();
-               $("#MO_MAXAGE2").remove();
-               $('#ageNoLimit').css('display', 'block');
-              $('#Limit').css('display', 'none');
-          });
-        });
-                 
-       /* 참가 인원 */
-       $('#peopleNoLimit').click(function() {
-          $("#MO_MAXPEOPLE").val('0');
-        });
+   ageNoLimit_btn.style.display = 'none';
+   document.getElementById('Limit').style.display = 'block';
+
+   const str = document.createElement('div');
+   str.innerHTML = "<input type='hidden' name='MO_MINAGE' id='MO_MINAGE2' value='0'>"
+   + "<input type='hidden' name='MO_MAXAGE' id='MO_MAXAGE2' value='200'>"
+   + "<div id='ll'>제한없음</div>";
+   
+   document.querySelector('#agetd').append(str);
+   
+   /* 되돌리기 버튼 */
+   var limit_btn = document.getElementById('Limit');
+   limit_btn.addEventListener('click', function() {
+      document.querySelector('#agetd').append(min);
+      document.querySelector('#agetd').append(max);
+      document.querySelector('#agetd').after(wv);
       
-       
-      $("#addFile").on("click", function(e) { //파일 추가 버튼
-         e.preventDefault();
-         fn_addFile();
+      var ll = document.getElementById('ll')
+      ll.remove();
+      
+      document.getElementById('MO_MINAGE2').remove();
+      document.getElementById('MO_MAXAGE2').remove();
+      document.getElementById('ageNoLimit').style.display = 'block';      
+      document.getElementById('Limit').style.display = 'none';      
+   });
+});
+
+
+// $('#ageNoLimit').click(function() {
+//    var min = $('#MO_MINAGE').detach();
+//    var max = $('#MO_MAXAGE').detach();
+//    var wv = $('#wave').detach();
+
+//    $('#ageNoLimit').css('display', 'none');
+//    $('#Limit').css('display', 'block');
+          
+//    var str = "<input type='hidden' name='MO_MINAGE' id='MO_MINAGE2' value='0'>"
+//            + "<input type='hidden' name='MO_MAXAGE' id='MO_MAXAGE2' value='200'>"
+//            + "<div id='ll'>제한없음</div>";
+          
+//    $('#agetd').append(str);
+          
+//    /* 되돌리기 버튼 */
+//    $('#Limit').click(function() {
+//       $("#agetd").append(min);
+//       $("#agetd").append(max);
+//       $('#MO_MINAGE').after(wv);
+//        $("#ll").remove();
+//       $("#MO_MINAGE2").remove();
+//       $("#MO_MAXAGE2").remove();
+//       $('#ageNoLimit').css('display', 'block');
+//       $('#Limit').css('display', 'none');
+//    });
+// });
+                 
+/* 참가 인원 */
+$('#peopleNoLimit').click(function() {
+   $("#MO_MAXPEOPLE").val('0');
+});
  
-      });
+/* 파일 추가 버튼 + 제한 없음 버튼 구동 */
+var gfv_count = 1;       
+
+$("#addFile").on("click", function(e) { //파일 추가 버튼
+   e.preventDefault();
+   fn_addFile();
+});
  
-      $("a[name='delete']").on("click", function(e) { //삭제 버튼
-         e.preventDefault();
+$("a[name='delete']").on("click", function(e) { //삭제 버튼
+   e.preventDefault();
          fn_deleteFile($(this));
       });
  
@@ -142,7 +174,6 @@ var options = { //지도를 생성할 때 필요한 기본 옵션
 
 var map = new kakao.maps.Map(container, options); //지도 생성 및 객체 리턴 	
 
-
 /* 다음 주소검색 및 마커 표시 */
 var geocoder = new kakao.maps.services.Geocoder();
 
@@ -155,9 +186,6 @@ function kaMap() {
        height: height,
    
        oncomplete: function(data) {
-           // 팝업에서 검색결과 항목을 클릭했을때 실행할 코드를 작성하는 부분.
-           // 각 주소의 노출 규칙에 따라 주소를 조합한다.
-           // 내려오는 변수가 값이 없는 경우엔 공백('')값을 가지므로, 이를 참고하여 분기 한다.
            var addr = ''; // 주소 변수
            var extraAddr = ''; // 참고항목 변수
            //사용자가 선택한 주소 타입에 따라 해당 주소 값을 가져온다.
@@ -183,9 +211,7 @@ function kaMap() {
                }
                // 조합된 참고항목을 해당 필드에 넣음
            
-           } else {
-               
-           }
+           } else { }
            
            // 우편번호와 주소 정보를 해당 필드에 넣음
            document.getElementById("MO_MAP").value = addr;
@@ -203,13 +229,15 @@ function kaMap() {
 			  var wii = result[0].y; //위도
 			  var kyung = result[0].x; //경도
 			  
-			   
-           $("#detailAddress").css("display", "block");
-           $("#map").css("display", "block");
+			  document.getElementById('detailAddress').style.display = 'block';
+			  document.getElementById('map').style.display = 'block';
 				
 			  //hidden input value 바꿔주기
-			  $("input[name=WII]").val(wii); 
-			  $("input[name=KYUNG]").val(kyung);
+	          var hidden_latitude = document.querySelector('input[name="WII"]'); 
+	          hidden_latitude.value = wii;
+	
+	          var hidden_longitude = document.querySelector('input[name="KYUNG"]');
+	          hidden_longitude.value = kyung;
 				
               // 결과값으로 받은 위치를 마커로 표시
               var marker = new kakao.maps.Marker({

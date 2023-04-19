@@ -59,7 +59,6 @@ function exit2() {
  
 //참가 요청 승인 처리
 function approve() {
-    
   if (confirm("승인 허가 하시겠습니까?")) {
     alert("승인 되었습니다.");
     location.href = "/moim/" + cate + "/" + idx + ".sosu";
@@ -88,7 +87,7 @@ function checkJoin() {
 
     if(maxP != 0) { 
       if(presentP >= maxP) {
-      alert('현재 참여인원이 가득 찼습니다.');
+      alert('현재 참여인원이 모두 찼습니다.');
       return false;
       }
     }
