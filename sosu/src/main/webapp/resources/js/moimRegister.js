@@ -5,6 +5,7 @@ const ageLimitCancelBtn = document.getElementById('ageLimitCancelBtn');
 const min_age = document.querySelector('#MO_MINAGE');
 const max_age = document.querySelector('#MO_MAXAGE');
 const wave = document.querySelector('#wave');
+let age_td = document.querySelector('#age-td');
 
 ageNoLimitBtn.addEventListener("click", function () {
    min_age.remove();
@@ -14,12 +15,12 @@ ageNoLimitBtn.addEventListener("click", function () {
    ageNoLimitBtn.style.display = 'none';
    document.getElementById('ageLimitCancelBtn').style.display = 'block';
 
-   const str = document.createElement('div');
+   let str = document.createElement('div');
    str.innerHTML = "<input type='hidden' name='MO_MINAGE' id='MO_MINAGE2' value='0'>"
    + "<input type='hidden' name='MO_MAXAGE' id='MO_MAXAGE2' value='200'>"
    + "<div id='ll'>제한없음</div>";
    
-   document.querySelector('#age-td').append(str);
+   age_td.append(str);
 
    /* 되돌리기 버튼 클릭 이벤트 */
    ageLimitCancelBtn.addEventListener('click', function() {
@@ -304,8 +305,6 @@ function check() {
 
    } else if ($("input[name=MO_MAXAGE]").val() < $("input[name=MO_MINAGE]").val()) {
       alert("참가 최소 연령이 최대 연령보다 큽니다.");
-     // $('#age_check_result').css("color", "red");
-     // $('#age_check_result').html("*참가 최소 연령이 최대 연령보다 큽니다.");
       $("#MO_MAXAGE").focus();
       return false; 
       

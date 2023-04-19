@@ -98,7 +98,6 @@ history.replaceState({}, null, location.pathname);
 	           		<span style="color:#fd8731;margin-left:3px;">*</span>
 	            </th>
 	            <td class="contents" id="age-td" style="padding-bottom: 0px;">
-	            	<div class="age_check_result" id="age_check_result"></div>
 	                <input type="number" class="form-control" name="MO_MINAGE" id="MO_MINAGE" maxlength="2" oninput="maxLengthCheck(this)"
 	                   	   placeholder="최소 (숫자만 입력해주세요.)" style="margin-right:12px">
 	                <span id="wave" style = "font-weight:bold">~</span>
