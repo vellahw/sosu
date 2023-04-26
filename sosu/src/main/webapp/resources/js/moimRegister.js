@@ -13,17 +13,18 @@ ageNoLimitBtn.addEventListener('click', function () {
    ageNoLimitBtn.style.display = 'none';
    ageLimitCancelBtn.style.display = 'block';
 
-   let hiddenMinAgeInput = document.createElement('input');
-   hiddenMinAgeInput.type = 'hidden';
-   hiddenMinAgeInput.name = 'MO_MINAGE'
-   hiddenMinAgeInput.id = 'MO_MINAGE2'
-   hiddenMinAgeInput.value = '0';
-   
-   let hiddenMaxAgeInput = document.createElement('input');
-   hiddenMaxAgeInput.type = 'hidden';
-   hiddenMaxAgeInput.name = 'MO_MAXAGE'
-   hiddenMaxAgeInput.id = 'MO_MAXAGE2'
-   hiddenMaxAgeInput.value = '200';
+   //input 태그 만드는 함수
+   function createInputElement(type, name, id, value) {
+      let inputElement = document.createElement('input');
+      inputElement.type = type;
+      inputElement.name = name;
+      inputElement.id = id;
+      inputElement.value = value;
+      return inputElement;
+   }
+
+   let hiddenMinAgeInput = createInputElement('hidden', 'MO_MINAGE', 'MO_MINAGE2', '0');
+   let hiddenMaxAgeInput = createInputElement('hidden', 'MO_MAXAGE', 'MO_MAXAGE2', '200');
 
    let noLimitDiv = document.createElement('div');
    noLimitDiv.id = 'noLimitText';
@@ -52,34 +53,6 @@ ageLimitCancelBtn.addEventListener('click', function() {
 
 });
 
-
-// $('#ageNoLimit').click(function() {
-//    var min = $('#MO_MINAGE').detach();
-//    var max = $('#MO_MAXAGE').detach();
-//    var wv = $('#wave').detach();
-
-//    $('#ageNoLimit').css('display', 'none');
-//    $('#Limit').css('display', 'block');
-          
-//    var str = "<input type='hidden' name='MO_MINAGE' id='MO_MINAGE2' value='0'>"
-//            + "<input type='hidden' name='MO_MAXAGE' id='MO_MAXAGE2' value='200'>"
-//            + "<div id='ll'>제한없음</div>";
-          
-//    $('#agetd').append(str);
-          
-//    /* 되돌리기 버튼 */
-//    $('#Limit').click(function() {
-//       $("#agetd").append(min);
-//       $("#agetd").append(max);
-//       $('#MO_MINAGE').after(wv);
-//        $("#ll").remove();
-//       $("#MO_MINAGE2").remove();
-//       $("#MO_MAXAGE2").remove();
-//       $('#ageNoLimit').css('display', 'block');
-//       $('#Limit').css('display', 'none');
-//    });
-// });
-                 
 /* 참가 인원 */
 $('#peopleNoLimit').click(function() {
    $("#MO_MAXPEOPLE").val('0');
