@@ -3,6 +3,7 @@
 const ageNoLimitBtn = document.getElementById('ageNoLimitBtn');
 const ageLimitCancelBtn = document.getElementById('ageLimitCancelBtn');
 let age_td = document.querySelector('#age-td');
+const peopleNoLimitBtn = document.getElementById('peopleNoLimit');
 
 /* 제한없음 버튼 클릭 이벤트 */
 ageNoLimitBtn.addEventListener('click', function () {
@@ -50,13 +51,16 @@ ageLimitCancelBtn.addEventListener('click', function() {
                     + '<span id="wave" style = "font-weight:bold">~</span>'
                     + '<input type="number" class="form-control" name="MO_MAXAGE" id="MO_MAXAGE" maxlength="2" oninput="maxLengthCheck(this)"'
                     + 'placeholder="최대 (숫자만 입력해주세요.)" style="margin-left:12px">';
-
 });
 
-/* 참가 인원 */
-$('#peopleNoLimit').click(function() {
-   $("#MO_MAXPEOPLE").val('0');
-});
+/* 참가 인원 버튼 클릭 */
+peopleNoLimitBtn.addEventListener('click', function(){
+   document.getElementById('MO_MAXPEOPLE').value = 0;
+})
+
+// $('#peopleNoLimit').click(function() {
+//    $("#MO_MAXPEOPLE").val('0');
+// });
  
 /* 파일 추가 버튼 + 제한 없음 버튼 구동 */
 var gfv_count = 1;       
