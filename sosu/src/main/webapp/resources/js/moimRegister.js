@@ -2,15 +2,13 @@
 /* 참가 연령 */
 const ageNoLimitBtn = document.getElementById('ageNoLimitBtn');
 const ageLimitCancelBtn = document.getElementById('ageLimitCancelBtn');
-const min_age = document.querySelector('#MO_MINAGE');
-const max_age = document.querySelector('#MO_MAXAGE');
-const wave = document.querySelector('#wave');
 let age_td = document.querySelector('#age-td');
 
+/* 제한없음 버튼 클릭 이벤트 */
 ageNoLimitBtn.addEventListener('click', function () {
-   min_age.remove();
-   max_age.remove();
-   wave.remove();
+   document.getElementById('MO_MINAGE').remove();
+   document.getElementById('MO_MAXAGE').remove();
+   document.querySelector('#wave').remove();
 
    ageNoLimitBtn.style.display = 'none';
    ageLimitCancelBtn.style.display = 'block';
