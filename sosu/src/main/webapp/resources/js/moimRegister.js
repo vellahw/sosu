@@ -4,7 +4,7 @@ const ageNoLimitBtn = document.getElementById('ageNoLimitBtn');
 const ageLimitCancelBtn = document.getElementById('ageLimitCancelBtn');
 let age_td = document.querySelector('#age-td');
 const peopleNoLimitBtn = document.getElementById('peopleNoLimit');
-const addFileBtn = document.getElementById('addFile');
+const addFileBtn = document.getElementById('addFileInput');
 
 /* 제한없음 버튼 클릭 이벤트 */
 ageNoLimitBtn.addEventListener('click', function () {
@@ -60,13 +60,13 @@ peopleNoLimitBtn.addEventListener('click', function(){
 });
 
 /* file input 추가 버튼 클릭이벤트 */
-var count = 1;
-
 addFileBtn.addEventListener('click', function(e){
    e.preventDefault();
    fn_addFileInput();
 });
  
+var count = 1;
+
 //file input 추가
 function fn_addFileInput() {
    let fileDiv = document.getElementById('fileDiv');
@@ -80,8 +80,8 @@ function fn_addFileInput() {
    newFileInput.style = 'border:none; width:auto; padding-left:79px;';
 
    //새로 생성되는 file input 삭제 버튼
-   let newDeleteFileInputBtn = document.createElement('a');
-   newDeleteFileInputBtn.href = '#this';
+   let newDeleteFileInputBtn = document.createElement('button');
+   newDeleteFileInputBtn.type = 'button';
    newDeleteFileInputBtn.class = 'btn';
    newDeleteFileInputBtn.id = 'delete-file-input';
    newDeleteFileInputBtn.textContent = '삭제';
