@@ -4,6 +4,7 @@ const ageNoLimitBtn = document.getElementById('ageNoLimitBtn');
 const ageLimitCancelBtn = document.getElementById('ageLimitCancelBtn');
 let age_td = document.querySelector('#age-td');
 const peopleNoLimitBtn = document.getElementById('peopleNoLimit');
+const addFileBtn = document.getElementById('addFile');
 
 /* 제한없음 버튼 클릭 이벤트 */
 ageNoLimitBtn.addEventListener('click', function () {
@@ -56,49 +57,62 @@ ageLimitCancelBtn.addEventListener('click', function() {
 /* 참가 인원 버튼 클릭 */
 peopleNoLimitBtn.addEventListener('click', function(){
    document.getElementById('MO_MAXPEOPLE').value = 0;
-})
+});
 
-// $('#peopleNoLimit').click(function() {
-//    $("#MO_MAXPEOPLE").val('0');
-// });
- 
-/* 파일 추가 버튼 + 제한 없음 버튼 구동 */
-var gfv_count = 1;       
+/* file input 추가 버튼 클릭이벤트 */
+var count = 1;
 
-$("#addFile").on("click", function(e) { //파일 추가 버튼
+addFileBtn.addEventListener('click', function(e){
    e.preventDefault();
-   fn_addFile();
+   fn_addFileInput();
 });
  
-$("a[name='delete']").on("click", function(e) { //삭제 버튼
-   e.preventDefault();
-         fn_deleteFile($(this));
-      });
- 
-      function fn_addFile() {
-           var str = "<p><input type='file' id='file' name='file_"
-              + (gfv_count++)
-              + "' style='border:none;width: auto;padding-left: 79px;'><a href='#this' class='btn' name='delete' id='delete'>삭제</a></p>";
-    
-       $("#fileDiv").append(str);
-         
-       $("a[name='delete']").on("click", function(e) { //삭제 버튼
-            e.preventDefault();
-            fn_deleteFile($(this));
-         });
-     }
- 
-      function fn_deleteFile(obj) {
-        obj.parent().remove();
-      }
-      
-   function maxLengthCheck(object){
-    if (object.value.length > object.maxLength){
-        object.value = object.value.slice(0, object.maxLength);
-    }    
+//file input 추가
+function fn_addFileInput() {
+   let fileDiv = document.getElementById('fileDiv');
+   let fileName = 'file_' + (count++);
+
+   //새로 생성되는 file input
+   let newFileInput = document.createElement('input');
+   newFileInput.type = 'file';
+   newFileInput.id = 'file';
+   newFileInput.name = fileName;
+   newFileInput.style = 'border:none; width:auto; padding-left:79px;';
+
+   //새로 생성되는 file input 삭제 버튼
+   let newDeleteFileInputBtn = document.createElement('a');
+   newDeleteFileInputBtn.href = '#this';
+   newDeleteFileInputBtn.class = 'btn';
+   newDeleteFileInputBtn.id = 'delete-file-input';
+   newDeleteFileInputBtn.textContent = '삭제';
+   newDeleteFileInputBtn.dataset.fileName = fileName;
+
+   let newFileInputWrapper = document.createElement('p');
+   newFileInputWrapper.appendChild(newFileInput);
+   newFileInputWrapper.appendChild(newDeleteFileInputBtn);
+
+   //추가해주기
+   fileDiv.appendChild(newFileInputWrapper);
+}
+
+document.getElementById('fileDiv').addEventListener('click' , function(e) {
+   //e.preventDefault();
+   if(e.target.matches('[data-file-name]')) {
+      let fileName = e.target;
+      fn_deleteFileInput(e.target);
+   }
+});
+
+function fn_deleteFileInput(fileName) {
+   fileName.parentElement.remove();
+}
+
+function maxLengthCheck(object){
+      if (object.value.length > object.maxLength){
+         object.value = object.value.slice(0, object.maxLength);
+   }
 }
       
- 
  /* 오늘 날짜 이전 날짜는 선택 불가  */
  var now_utc = Date.now() // 지금 날짜를 밀리초로
  //getTimezoneOffset()은 현재 시간과의 차이를 분 단위로 반환
