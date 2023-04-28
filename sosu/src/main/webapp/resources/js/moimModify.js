@@ -1,7 +1,8 @@
 history.replaceState({}, null, location.pathname); 
 
 //메인이미지 체크박스 선택시 실행
-var main = document.getElementById("main"); //메인이미지 file input
+const main = document.getElementById("main"); //메인이미지 file input
+const addFileBtn = document.getElementById('addFileInput');
 
 function showBox(i){
 	if(i.checked) {
@@ -373,33 +374,48 @@ if(maxp2 == '0') {
 }
 
 /*================ 파일 추가 버튼 ================*/      
-var gfv_count = 1;
+addFileBtn.addEventListener('click', function(e){
+   fn_addFileInput();
+});
+ 
+var count = 1;
 
-$("#addFile").on("click", function(e) { //파일 추가 버튼
-   e.preventDefault();
-    fn_addFile();
-});
-    
-$("a[name='delete']").on("click", function(e) { //삭제 버튼
-   e.preventDefault();
-    fn_deleteFile($(this));
-});
-    
-function fn_addFile() {
-   var str = "<p><input type='file' id='file' name='file_"
-              + (gfv_count++)
-              + "' style='border:none;width: auto;padding-left: 79px;'><a href='#this' class='btn' name='delete' id='delete'>삭제</a></p>";
-    
-    $("#fileDiv").append(str);
-            
-    $("a[name='delete']").on("click", function(e) { //삭제 버튼
-       e.preventDefault();
-        fn_deleteFile($(this));
-    });
+//file input 추가
+function fn_addFileInput() {
+   let fileDiv = document.getElementById('fileDiv');
+   let fileName = 'file_' + (count++);
+
+   //새로 생성되는 file input
+   let newFileInput = document.createElement('input');
+   newFileInput.type = 'file';
+   newFileInput.id = 'file';
+   newFileInput.name = fileName;
+   newFileInput.style = 'border:none; width:auto; padding-left:79px;';
+
+   //새로 생성되는 file input 삭제 버튼
+   let newDeleteFileInputBtn = document.createElement('button');
+   newDeleteFileInputBtn.type = 'button';
+   newDeleteFileInputBtn.id = 'delete-file-input';
+   newDeleteFileInputBtn.textContent = '삭제';
+   newDeleteFileInputBtn.dataset.fileName = fileName;
+
+   let newFileInputWrapper = document.createElement('p');
+   newFileInputWrapper.appendChild(newFileInput);
+   newFileInputWrapper.appendChild(newDeleteFileInputBtn);
+
+   //추가해주기
+   fileDiv.appendChild(newFileInputWrapper);
 }
-    
-function fn_deleteFile(obj) {
-   obj.parent().remove();
+
+//삭제
+document.getElementById('fileDiv').addEventListener('click' , function(e) {
+   if(e.target.matches('[data-file-name]')) {
+      fn_deleteFileInput(e.target);
+   }
+});
+
+function fn_deleteFileInput(target) {
+   target.parentElement.remove();
 }
     
 /*======== 오늘 날짜 이전 날짜는 선택 불가 기능  ========*/
