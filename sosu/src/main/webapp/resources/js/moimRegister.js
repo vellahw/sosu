@@ -61,7 +61,6 @@ peopleNoLimitBtn.addEventListener('click', function(){
 
 /* file input 추가 버튼 클릭이벤트 */
 addFileBtn.addEventListener('click', function(e){
-   e.preventDefault();
    fn_addFileInput();
 });
  
@@ -82,7 +81,6 @@ function fn_addFileInput() {
    //새로 생성되는 file input 삭제 버튼
    let newDeleteFileInputBtn = document.createElement('button');
    newDeleteFileInputBtn.type = 'button';
-   newDeleteFileInputBtn.class = 'btn';
    newDeleteFileInputBtn.id = 'delete-file-input';
    newDeleteFileInputBtn.textContent = '삭제';
    newDeleteFileInputBtn.dataset.fileName = fileName;
@@ -96,15 +94,13 @@ function fn_addFileInput() {
 }
 
 document.getElementById('fileDiv').addEventListener('click' , function(e) {
-   //e.preventDefault();
    if(e.target.matches('[data-file-name]')) {
-      let fileName = e.target;
       fn_deleteFileInput(e.target);
    }
 });
 
-function fn_deleteFileInput(fileName) {
-   fileName.parentElement.remove();
+function fn_deleteFileInput(target) {
+   target.parentElement.remove();
 }
 
 function maxLengthCheck(object){
