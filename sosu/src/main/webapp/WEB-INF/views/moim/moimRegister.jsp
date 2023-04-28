@@ -186,8 +186,7 @@ history.replaceState({}, null, location.pathname);
          상세 이미지
             <span>
             <input type="file" id="file" name="file_0" style="border: none; width: auto;">
-               <!-- <a href="#this" class="btn" id="delete-file-input" name='delete'>삭제</a> -->
-               <button type="button" class="btn" id="addFileInput">파일 추가</button>
+               <button type="button" id="addFileInput">파일 추가</button>
             </span>
             <div id="fileDiv"></div>
             </td>

@@ -40,25 +40,24 @@ button {
    font-weight: bold;
 }
 
-#delete {
+#addFileInput {
    border: none;
    background-color: #fd8731;
    color: #fff;
-   font-size: 15px;
-   padding: 4px 8px 4px 8px;
+   padding: 5px 20px 5px 20px;
    border-radius: 10px; 
    cursor: pointer;
-   margin-right: 6px;
+   margin-left: 11px;
 }
 
-#addFile {
+#delete-file-input {
    border: none;
-   background-color: #fd8731;
+   background-color: #c2c2c2;
    color: #fff;
-   font-size: 15px;
    padding: 4px 8px 4px 8px;
    border-radius: 10px; 
    cursor: pointer;
+   margin-left: 15px;
 }
 
 .input-form tbody th {
