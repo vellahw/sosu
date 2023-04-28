@@ -59,7 +59,7 @@ peopleNoLimitBtn.addEventListener('click', function(){
    document.getElementById('MO_MAXPEOPLE').value = 0;
 });
 
-/* file input 추가 버튼 클릭이벤트 */
+/*================ 파일 추가 버튼 ================*/      
 addFileBtn.addEventListener('click', function(e){
    fn_addFileInput();
 });
@@ -93,6 +93,7 @@ function fn_addFileInput() {
    fileDiv.appendChild(newFileInputWrapper);
 }
 
+//삭제
 document.getElementById('fileDiv').addEventListener('click' , function(e) {
    if(e.target.matches('[data-file-name]')) {
       fn_deleteFileInput(e.target);
