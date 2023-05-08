@@ -12,16 +12,15 @@ function showBox(i){
     }
 }
 
-$(function() {
-    var mF = $("#mImg").val();
-    var mFF = $("#mfsv").val();
-	var main = document.getElementById("main"); //메인이미지 file input
-
+ $(function() {
+     var mF = $("#mImg").val();
+     var mFF = $("#mfsv").val();
+ 	var main = document.getElementById("main"); //메인이미지 file input
     if(mF == 'N' || mFF == 0) {
-	    main.style.display = 'block';
-    }
-});
-     
+ 	    main.style.display = 'block';
+     }
+ });
+
 /*================= 지도 띄우기 =================*/
 var wii = document.getElementById("WII").value;
 var kyung = document.getElementById("KYUNG").value; //경도
@@ -29,7 +28,7 @@ var addr = document.getElementById("ADDRESS").value; //주소
 var deaddr = document.getElementById("DEADDRESS").value; //상세주소
 
 //지도 없을 때     
-if(wii == undefined || wii == null) {
+if(wii == '' || wii == undefined || wii == null) {
 	document.getElementById("map").style.display = 'none';
 }
     
@@ -120,9 +119,9 @@ function kaMap() {
 			  var kyung = result[0].x; //경도
 			  
 			  //hidden input value 바꿔주기
-			  $("input[name=WII]").val(wii); 
-			  $("input[name=KYUNG]").val(kyung);
-			  $("#DEADDRESS").val(''); //상세주소 공란 처리
+              document.querySelector('input[name=WII]').value = wii;
+              document.querySelector('input[name=KYUNG]').value = kyung;
+              document.getElementById('DEADDRESS').value = '';
 			  
    		      // 지도 중심을 부드럽게 이동 시킴
 			  function panTo() {
