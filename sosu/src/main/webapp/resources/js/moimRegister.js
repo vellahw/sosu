@@ -128,17 +128,17 @@ function maxLengthCheck(object){
      var target = document.getElementById("selectRDetail");
  
      if(e.value == "중부") var d = jung;
-     else if(e.value == "동부") var d = dong;
-     else if(e.value == "서부") var d = seo;
-     else if(e.value == "남부") var d = nam;
-     else if(e.value == "북부") var d = book;
+     else if(e.value == "동부") var detailRegions = dong;
+     else if(e.value == "서부") var detailRegions = seo;
+     else if(e.value == "남부") var detailRegions = nam;
+     else if(e.value == "북부") var detailRegions = book;
  
      target.options.length = 0;
  
-     for (x in d) {
+     for (x in detailRegions) {
          var opt = document.createElement("option");
-         opt.value = d[x];
-         opt.innerHTML = d[x];
+         opt.value = detailRegions[x];
+         opt.innerHTML = detailRegions[x];
          target.appendChild(opt);
      }   
  }

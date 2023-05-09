@@ -171,67 +171,37 @@ var nam = ["강남/역삼/삼성", "신사", "청담", "서초/교대", "성남"
 var book = ["강북", "노원/중계", "중랑", "의정부"];
 var target = document.getElementById("selectRDetail");
         
-var rr = $("#selectRegion").val();
-        
-if(rr == "중부") {
-   var d = jung;
-            
-    target.options.length = 0;
-            
-    for (x in d) {
-      var opt = document.createElement("option");
-        opt.value = d[x];
-        opt.innerHTML = d[x];
-        target.appendChild(opt);
-   }
-} else if (rr == "동부") {
-   var d = dong;
-            
-   target.options.length = 0;
-            
-    for (x in d) {
-      var opt = document.createElement("option");
-        opt.value = d[x];
-        opt.innerHTML = d[x];
-        target.appendChild(opt);
-   }
-} else if(rr == "서부") {
-   var d = seo;
-            
-    target.options.length = 0;
-            
-    for (x in d) {
-       var opt = document.createElement("option");
-        opt.value = d[x];
-        opt.innerHTML = d[x];
-        target.appendChild(opt);
-       }
-    }
+var selectedRegion = document.getElementById('selectRegion').value;
 
-if(rr == '남부') {
-   var d = nam;
-            
+function appendOptions(detailRegions) {
     target.options.length = 0;
-            
-    for (x in d) {
-       var opt = document.createElement("option");
-        opt.value = d[x];
-        opt.innerHTML = d[x];
-      target.appendChild(opt);
-    }
+
+    for (x in detailRegions) {
+        var opt = document.createElement("option");
+          opt.value = detailRegions[x];
+          opt.innerHTML = detailRegions[x];
+          target.appendChild(opt);
+     }
 }
-        
-if(rr == '북부') {
-   var d = book;
-           
-    target.options.length = 0;
-            
-    for (x in d) {
-       var opt = document.createElement("option");
-        opt.value = d[x];
-        opt.innerHTML = d[x];
-        target.appendChild(opt);
-   }
+
+if(selectedRegion == "중부") {
+    var detailRegions = jung;
+    appendOptions(detailRegions);        
+
+} else if (selectedRegion == "동부") {
+    var detailRegions = dong;
+    appendOptions(detailRegions);      
+
+} else if(selectedRegion == "서부") {
+   var detailRegions = seo;
+   appendOptions(detailRegions);      
+
+} else if(selectedRegion == '남부') {
+   var detailRegions = nam;
+   appendOptions(detailRegions);   
+
+} else if(selectedRegion == '북부') {
+   var detailRegions = book;
 }
             
 /*========== 참가 연령 제한 없음 버튼 클릭 이벤트 ========*/
