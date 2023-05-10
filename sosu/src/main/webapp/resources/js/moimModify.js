@@ -205,12 +205,13 @@ if(selectedRegion == "중부") {
 }
             
 /*========== 참가 연령 제한 없음 버튼 클릭 이벤트 ========*/
-var hiddenA = $('#MO_MAXAGE1').val(); //제한 없음일 때 mo_maxage value
-var age = $('#MO_MAXAGE3').val(); //제한 없음일 때 mo_maxage value = 200
-               
+var hiddenA = document.getElementById('MO_MAXAGE1').value; //제한 없음일 때 mo_maxage value
+var age = document.getElementById('MO_MAXAGE3').value;  //제한 없음일 때 mo_maxage value = 200
+
 //-----------연령이 있을 때-------------
 if(age != '200') {
-$('#ageNoLimit').css('display', 'block'); 
+    document.getElementById('ageNoLimit').style.display = 'block'; 
+//$('#ageNoLimit').css('display', 'block'); 
 
 /* 되돌리기 버튼 */
 $('#cancel').click(function() {
