@@ -205,79 +205,133 @@ if(selectedRegion == "중부") {
 }
             
 /*========== 참가 연령 제한 없음 버튼 클릭 이벤트 ========*/
-var hiddenA = document.getElementById('MO_MAXAGE1').value; //제한 없음일 때 mo_maxage value
-var age = document.getElementById('MO_MAXAGE3').value;  //제한 없음일 때 mo_maxage value = 200
-
-//-----------연령이 있을 때-------------
-if(age != '200') {
-    document.getElementById('ageNoLimit').style.display = 'block'; 
-//$('#ageNoLimit').css('display', 'block'); 
-
-/* 되돌리기 버튼 */
-$('#cancel').click(function() {
-    $('#cancel').css('display', 'none');
-    $("#agetd").append(addmin);
-    $("#ll2").css('display', 'none');
-    $("#MO_MINAGE2").remove();
-    $("#MO_MAXAGE2").remove();
-    $('#ageNoLimit').css('display', 'block');
-});
+const ageTd = document.getElementById('agetd');
+let hiddenAgeValue = document.getElementById('MO_MAXAGE1').value;
+//var age = document.getElementById('MO_MAXAGE3').value;  //제한 없음일 때 mo_maxage value = 200
+const ageNoLimitText = document.getElementById('ageNoLimitText'); //제한없음 text
+const ageNoLimitBtn = document.getElementById('ageNoLimitBtn'); //제한없음 버튼
+const ageModiBtn = document.getElementById('ageModiBtn'); //수정하기 버튼
+const ageUndoBtn = document.getElementById('ageUndoBtn'); //되돌리기 버튼
 
 //---------연령이 '제한없음'일 때---------
- var m3 = '<input type="number" class="form-control" name="MO_MINAGE" id="MO_MINAGE3" maxlength="2" oninput="maxLengthCheck(this)">' +
-          '<span id="wave"> ~ </span>' +
-          '<input type="number" class="form-control" name="MO_MAXAGE" id="MO_MAXAGE3" maxlength="2" oninput="maxLengthCheck(this)">';
-var hainput = "<input type='hidden' name='MO_MINAGE' id='MO_MINAGE2' value='0'>"
-                    + "<input type='hidden' name='MO_MAXAGE' id='MO_MAXAGE2' value='200'>";
+if(hiddenAgeValue == 200) {
+	ageModiBtn.style.display = 'block';
 
- if(hiddenA == '200') {
-   $("#ageLimit").css('display', 'block');
-   $("#ageNoLimit").css('display', 'none');
-   
-   $('#ageLimit').click(function() { //수정하기 버튼 클릭시
-      $('#ageLimit').css('display', 'none');
-      $('#ageNoLimit2').css('display', 'block');
-      $('#ll').css('display', 'none');
-      $('#MO_MINAGE1').remove();
-      $('#MO_MAXAGE1').remove();
-      $('#agetd').append(m3);
-   });
-}   
-   /* 제한없음 버튼2 클릭시 */
-   $('#ageNoLimit2').click(function() {
-      $('#ageNoLimit2').css('display', 'none');
-      $('#ll').css('display', 'block');
-      $('#ll2').css('display', 'none');
-      $('#MO_MINAGE3').remove();
-      $('#MO_MAXAGE3').remove();
-      $('#wave').remove();
-      $('#cancel2').css('display', 'block');
-      $('#agetd').append(hainput);
-      
-   }); 
+    //수정하기 버튼 클릭 이벤트
+    ageModiBtn.addEventListener('click', () => {
+        ageModiBtn.style.display = 'none';
+        ageUndoBtn.style.display = 'block';
+        ageNoLimitText.style.display = 'none';
+        document.getElementById('MO_MINAGE1').remove();
+        document.getElementById('MO_MAXAGE1').remove();
 
-    /* 되돌리기 버튼 */
-   $('#cancel2').click(function() {
-       $('#cancel2').css('display', 'none');
-      $('#ll').css('display', 'none');
-      $('#ll2').css('display', 'none');
-       $("#MO_MINAGE2").remove();
-       $("#MO_MAXAGE2").remove();
-       $('#agetd').append(m3);
-       $('#ageNoLimit').css('display', 'block');
-   }); 
-    
-    $('#ageNoLimit').click(function() { //제한 없음 버튼
-       $('#MO_MINAGE3').remove();
-       $('#MO_MAXAGE3').remove();
-       $('#wave').remove();
-       $('#ageNoLimit').css('display', 'none');
-       $('#agetd').append(hainput);
-       $('#ll').css('display', 'block');        
-       $('#ll2').css('display', 'block');        
-       $('#cancel2').css('display', 'block');         
-    });
+        let wave = document.createElement('span');
+        let waveText = document.createTextNode('~');
+        wave.id = 'wave';
+        wave.style.padding = '0 5px';
+        wave.appendChild(waveText);
+
+        let hiddenMinAge = addNewInput('number', 'form-control', 'MO_MINAGE', 'MO_MINAGE2', '2', '최소 (숫자만 입력해주세요.)');
+        let hiddenMaxAge = addNewInput('number', 'form-control', 'MO_MAXAGE', 'MO_MAXAGE2', '2', '최대 (숫자만 입력해주세요.)');
+        hiddenMinAge.style.width = '353px';
+        hiddenMaxAge.style.width = '353px';
+
+        ageTd.appendChild(hiddenMinAge);
+        ageTd.appendChild(wave);
+        ageTd.appendChild(hiddenMaxAge);
+
+    })
+
+    //input 생성 함수
+    function addNewInput(type, className, name, id, maxLength, placeholder) {
+        let newAgeInput = document.createElement('input');
+        newAgeInput.type = type;
+        newAgeInput.className = className;
+        newAgeInput.name = name;
+        newAgeInput.id = id;
+        newAgeInput.maxLength = maxLength;
+        newAgeInput.placeholder = placeholder;
+
+        return newAgeInput;
+    }
 }
+
+
+//-----------연령이 있을 때-------------
+// if(age != '200') {
+//     document.getElementById('ageNoLimit').style.display = 'block'; 
+// }
+//$('#ageNoLimit').css('display', 'block'); 
+
+// ageCancelBtn.addEventListener('click', () => {
+//     ageCancelBtn.style.display = 'none';
+//     ageAppendTd.appendChild
+
+// })
+// $('#cancel').click(function() {
+//     $('#cancel').css('display', 'none');
+//     $("#agetd").append(addmin);
+//     $("#ll2").css('display', 'none');
+//     $("#MO_MINAGE2").remove();
+//     $("#MO_MAXAGE2").remove();
+//     $('#ageNoLimit').css('display', 'block');
+// });
+
+//---------연령이 '제한없음'일 때---------
+//  var m3 = '<input type="number" class="form-control" name="MO_MINAGE" id="MO_MINAGE3" maxlength="2" oninput="maxLengthCheck(this)">' +
+//           '<span id="wave"> ~ </span>' +
+//           '<input type="number" class="form-control" name="MO_MAXAGE" id="MO_MAXAGE3" maxlength="2" oninput="maxLengthCheck(this)">';
+// var hainput = "<input type='hidden' name='MO_MINAGE' id='MO_MINAGE2' value='0'>"
+//                     + "<input type='hidden' name='MO_MAXAGE' id='MO_MAXAGE2' value='200'>";
+
+//  if(hiddenAgeValue == '200') {
+//    $("#ageLimit").css('display', 'block');
+//    $("#ageNoLimit").css('display', 'none');
+   
+//    $('#ageLimit').click(function() { //수정하기 버튼 클릭시
+//       $('#ageLimit').css('display', 'none');
+//       $('#ageNoLimit2').css('display', 'block');
+//       $('#ll').css('display', 'none');
+//       $('#MO_MINAGE1').remove();
+//       $('#MO_MAXAGE1').remove();
+//       $('#agetd').append(m3);
+//    });
+// }   
+//    /* 제한없음 버튼2 클릭시 */
+//    $('#ageNoLimit2').click(function() {
+//       $('#ageNoLimit2').css('display', 'none');
+//       $('#ll').css('display', 'block');
+//       $('#ll2').css('display', 'none');
+//       $('#MO_MINAGE3').remove();
+//       $('#MO_MAXAGE3').remove();
+//       $('#wave').remove();
+//       $('#cancel2').css('display', 'block');
+//       $('#agetd').append(hainput);
+      
+//    }); 
+
+//     /* 되돌리기 버튼 */
+//    $('#cancel2').click(function() {
+//        $('#cancel2').css('display', 'none');
+//       $('#ll').css('display', 'none');
+//       $('#ll2').css('display', 'none');
+//        $("#MO_MINAGE2").remove();
+//        $("#MO_MAXAGE2").remove();
+//        $('#agetd').append(m3);
+//        $('#ageNoLimit').css('display', 'block');
+//    }); 
+    
+//     $('#ageNoLimit').click(function() { //제한 없음 버튼
+//        $('#MO_MINAGE3').remove();
+//        $('#MO_MAXAGE3').remove();
+//        $('#wave').remove();
+//        $('#ageNoLimit').css('display', 'none');
+//        $('#agetd').append(hainput);
+//        $('#ll').css('display', 'block');        
+//        $('#ll2').css('display', 'block');        
+//        $('#cancel2').css('display', 'block');         
+//     });
+// }
     
 
 /*============== 참가 인원 버튼 클릭 이벤트 ===============*/
@@ -329,14 +383,14 @@ $(pCancel2).click(function() {
 
 //---------------참가 인원이 '제한 없음'이라면----------------
 if(maxp2 == '0') { 
-   $("#pepolemodi").css('display', 'block'); //수정하기 버튼 띄움
+   $("#peopleModiBtn").css('display', 'block'); //수정하기 버튼 띄움
    
     //수정하기 버튼 누르면
-    $('#pepolemodi').click(function() {
+    $('#peopleModiBtn').click(function() {
         if(pCancel2.style.display == 'none') {
             pCancel2.style.display = 'block'; //되돌리기 버튼 띄움
         }
-        $('#pepolemodi').css('display', 'none'); //수정하기 버튼 없앰
+        $('#peopleModiBtn').css('display', 'none'); //수정하기 버튼 없앰
         $('#l2').css('display', 'none');  
         $("#padd").append(str);
         $("#MO_MAXPEOPLE2").remove();
@@ -543,4 +597,4 @@ function check() {
    	    alert("수정 되었습니다.");
         return true;
 	}
-}    
+}

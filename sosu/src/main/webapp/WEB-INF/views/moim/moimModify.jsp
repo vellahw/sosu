@@ -99,35 +99,30 @@
             <tr>
             <th class="header"><label for="MO_MINAGE" >참가 연령</label></th>
             <td class="contents" id="agetd" style="padding-bottom: 0px;">
-             <div class="age_check_result" id="age_check_result"></div>
-            <c:if test="${modify.MO_MAXAGE == '200'}">
-             <input type="hidden" name="MO_MINAGE" id="MO_MINAGE1" value="${modify.MO_MINAGE }">
-             <input type="hidden" name="MO_MAXAGE" id="MO_MAXAGE1" value="${modify.MO_MAXAGE }">
-               <div id="ll">제한없음</div>
-            </c:if>
-            <c:if test="${modify.MO_MAXAGE != '200'}">
-               <div id="ll2" style="display: none;">제한없음</div>
-               <input type="number" class="form-control" name="MO_MINAGE" id="MO_MINAGE3" maxlength="2" oninput="maxLengthCheck(this)"
-                   value="${modify.MO_MINAGE}">
-               <span id="wave"> ~ </span>    
-               <input type="number" class="form-control" name="MO_MAXAGE" id="MO_MAXAGE3" maxlength="2" oninput="maxLengthCheck(this)"
-                   value="${modify.MO_MAXAGE}">
-            </c:if> 
+	            <input type="hidden" name="MO_MINAGE" id="MO_MINAGE1" value="${modify.MO_MINAGE }">
+	            <input type="hidden" name="MO_MAXAGE" id="MO_MAXAGE1" value="${modify.MO_MAXAGE }">
+            	<c:if test="${modify.MO_MAXAGE == '200'}">
+               		<div id="ageNoLimitText">제한없음</div>
+            	</c:if>
+	            <c:if test="${modify.MO_MAXAGE != '200'}">
+	               <input type="number" class="form-control" name="MO_MINAGE" id="MO_MINAGE3" maxlength="2" oninput="maxLengthCheck(this)"
+	                  		 value="${modify.MO_MINAGE}">
+	               <span id="wave"> ~ </span>    
+	               <input type="number" class="form-control" name="MO_MAXAGE" id="MO_MAXAGE3" maxlength="2" oninput="maxLengthCheck(this)"
+	                   value="${modify.MO_MAXAGE}">
+	            </c:if> 
             </td>
-             </tr>   
-             
-          <!-- 연령 제한 버튼 -->
-          <tr>
-             <th></th>
-             <td id="addPB">
-             <input type="button" id="ageNoLimit" class="noLB" value="제한없음" style="width:750px; display: none;">
-             <input type="button" id="ageNoLimit2" class="noLB" value="제한없음" style="width:750px; display: none;">
-             <input type="button" id="ageLimit" class="noLB" value="수정하기" style="width:750px; display: none;">
-             <input type="button" id="cancel" class="noLB" value="되돌리기" style="width:750px; display: none;">
-             <input type="button" id="cancel2" class="noLB" value="되돌리기" style="width:750px; display: none;">
-             </td>
-          </tr>
-             
+            </tr>   
+	        <!-- 연령 제한 버튼 -->
+	        <tr>
+	        <th></th>
+	        <td id="addPB">
+	            <input type="button" id="ageNoLimitBtn" class="noLB" value="제한없음" style="width:750px; display: none;">
+	            <input type="button" id="ageModiBtn" class="noLB" value="수정하기" style="width:750px; display: none;">
+	            <input type="button" id="ageUndoBtn" class="noLB" value="되돌리기" style="width:750px; display: none;">
+	        </td>
+	        </tr>
+	             
              <!-- 참가 인원  -->
             <tr>
             <th class="header"><label for="MO_MAXPEOPLE" >참가 인원</label></th>
@@ -154,7 +149,7 @@
              <c:if test="${modify.MO_MAXPEOPLE == '0' }">display: none;</c:if>">       
              제한 없음
           </button>
-          <input type="button" id="pepolemodi" class="noLB" value="수정하기" style="display: none; width: 750px;">
+          <input type="button" id="peopleModiBtn" class="noLB" value="수정하기" style="display: none; width: 750px;">
           <input type="button" id="pCancel" class="noLB" value="되돌리기" style="display: none;">
           <input type="button" id="pCancel2" class="noLB" value="되돌리기" style="display: none;">
           </td>
