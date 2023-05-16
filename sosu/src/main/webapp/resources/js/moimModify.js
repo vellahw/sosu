@@ -225,57 +225,57 @@ if(hiddenAgeValue == 200) {
         document.getElementById('MO_MINAGE1').remove();
         document.getElementById('MO_MAXAGE1').remove();
 
-        let wave = document.createElement('span');
-        let waveText = document.createTextNode('~');
-        wave.id = 'wave';
-        wave.style.padding = '0 5px';
-        wave.appendChild(waveText);
+        let minAgeinput = addNewInput('number', 'form-control', 'MO_MINAGE', 'MO_MINAGE2', '2', '최소 (숫자만 입력해주세요.)');
+        let maxAgeinput = addNewInput('number', 'form-control', 'MO_MAXAGE', 'MO_MAXAGE2', '2', '최대 (숫자만 입력해주세요.)');
 
-        let hiddenMinAge = addNewInput('number', 'form-control', 'MO_MINAGE', 'MO_MINAGE2', '2', '최소 (숫자만 입력해주세요.)');
-        let hiddenMaxAge = addNewInput('number', 'form-control', 'MO_MAXAGE', 'MO_MAXAGE2', '2', '최대 (숫자만 입력해주세요.)');
-        hiddenMinAge.style.width = '353px';
-        hiddenMaxAge.style.width = '353px';
+        ageTd.appendChild(minAgeinput);
+        ageTd.appendChild(makeWave());
+        ageTd.appendChild(maxAgeinput);
+    });
+
+    //되돌리기 버튼
+    ageUndoBtn.addEventListener('click', () => {
+        ageUndoBtn.style.display = 'none';
+        ageModiBtn.style.display = 'block';
+        ageNoLimitText.style.display = 'block';
+        document.getElementById('MO_MINAGE2').remove();
+        document.getElementById('MO_MAXAGE2').remove();
+        document.getElementById('wave').remove();
+        let hiddenMinAge = addNewInput('hidden', 'form-control', 'MO_MINAGE', 'MO_MINAGE1', '2');
+        hiddenMinAge.value = '0'
+        let hiddenMaxAge = addNewInput('hidden', 'form-control', 'MO_MAXAGE', 'MO_MAXAGE1', '2');
+        hiddenMaxAge.value = '200'
 
         ageTd.appendChild(hiddenMinAge);
-        ageTd.appendChild(wave);
         ageTd.appendChild(hiddenMaxAge);
+    });
 
-    })
+} 
 
-    //input 생성 함수
-    function addNewInput(type, className, name, id, maxLength, placeholder) {
-        let newAgeInput = document.createElement('input');
-        newAgeInput.type = type;
-        newAgeInput.className = className;
-        newAgeInput.name = name;
-        newAgeInput.id = id;
-        newAgeInput.maxLength = maxLength;
-        newAgeInput.placeholder = placeholder;
+//물결 만드는 함수
+function makeWave() {
+    let wave = document.createElement('span');
+    let waveText = document.createTextNode('~');
+    wave.id = 'wave';
+    wave.style.padding = '0 5px';
+    wave.appendChild(waveText);
 
-        return newAgeInput;
-    }
+    return wave;
 }
 
+//input 생성 함수
+function addNewInput(type, className, name, id, maxLength, placeholder) {
+    let newAgeInput = document.createElement('input');
+    newAgeInput.type = type;
+    newAgeInput.className = className;
+    newAgeInput.name = name;
+    newAgeInput.id = id;
+    newAgeInput.maxLength = maxLength;
+    newAgeInput.placeholder = placeholder;
+    newAgeInput.style.width = '353px';
 
-//-----------연령이 있을 때-------------
-// if(age != '200') {
-//     document.getElementById('ageNoLimit').style.display = 'block'; 
-// }
-//$('#ageNoLimit').css('display', 'block'); 
-
-// ageCancelBtn.addEventListener('click', () => {
-//     ageCancelBtn.style.display = 'none';
-//     ageAppendTd.appendChild
-
-// })
-// $('#cancel').click(function() {
-//     $('#cancel').css('display', 'none');
-//     $("#agetd").append(addmin);
-//     $("#ll2").css('display', 'none');
-//     $("#MO_MINAGE2").remove();
-//     $("#MO_MAXAGE2").remove();
-//     $('#ageNoLimit').css('display', 'block');
-// });
+    return newAgeInput;
+}
 
 //---------연령이 '제한없음'일 때---------
 //  var m3 = '<input type="number" class="form-control" name="MO_MINAGE" id="MO_MINAGE3" maxlength="2" oninput="maxLengthCheck(this)">' +

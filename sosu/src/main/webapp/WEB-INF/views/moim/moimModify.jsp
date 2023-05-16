@@ -105,10 +105,10 @@
                		<div id="ageNoLimitText">제한없음</div>
             	</c:if>
 	            <c:if test="${modify.MO_MAXAGE != '200'}">
-	               <input type="number" class="form-control" name="MO_MINAGE" id="MO_MINAGE3" maxlength="2" oninput="maxLengthCheck(this)"
+	               <input type="number" class="form-control" name="MO_MINAGE" id="MO_MINAGE" maxlength="2" oninput="maxLengthCheck(this)"
 	                  		 value="${modify.MO_MINAGE}">
 	               <span id="wave"> ~ </span>    
-	               <input type="number" class="form-control" name="MO_MAXAGE" id="MO_MAXAGE3" maxlength="2" oninput="maxLengthCheck(this)"
+	               <input type="number" class="form-control" name="MO_MAXAGE" id="MO_MAXAGE" maxlength="2" oninput="maxLengthCheck(this)"
 	                   value="${modify.MO_MAXAGE}">
 	            </c:if> 
             </td>
