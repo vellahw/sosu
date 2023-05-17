@@ -329,63 +329,6 @@ function addNewInput(type, className, name, id, maxLength, placeholder) {
     return newAgeInput;
 }
 
-//---------연령이 '제한없음'일 때---------
-//  var m3 = '<input type="number" class="form-control" name="MO_MINAGE" id="MO_MINAGE3" maxlength="2" oninput="maxLengthCheck(this)">' +
-//           '<span id="wave"> ~ </span>' +
-//           '<input type="number" class="form-control" name="MO_MAXAGE" id="MO_MAXAGE3" maxlength="2" oninput="maxLengthCheck(this)">';
-// var hainput = "<input type='hidden' name='MO_MINAGE' id='MO_MINAGE2' value='0'>"
-//                     + "<input type='hidden' name='MO_MAXAGE' id='MO_MAXAGE2' value='200'>";
-
-//  if(hiddenAgeValue == '200') {
-//    $("#ageLimit").css('display', 'block');
-//    $("#ageNoLimit").css('display', 'none');
-   
-//    $('#ageLimit').click(function() { //수정하기 버튼 클릭시
-//       $('#ageLimit').css('display', 'none');
-//       $('#ageNoLimit2').css('display', 'block');
-//       $('#ll').css('display', 'none');
-//       $('#MO_MINAGE1').remove();
-//       $('#MO_MAXAGE1').remove();
-//       $('#agetd').append(m3);
-//    });
-// }   
-//    /* 제한없음 버튼2 클릭시 */
-//    $('#ageNoLimit2').click(function() {
-//       $('#ageNoLimit2').css('display', 'none');
-//       $('#ll').css('display', 'block');
-//       $('#ll2').css('display', 'none');
-//       $('#MO_MINAGE3').remove();
-//       $('#MO_MAXAGE3').remove();
-//       $('#wave').remove();
-//       $('#cancel2').css('display', 'block');
-//       $('#agetd').append(hainput);
-      
-//    }); 
-
-//     /* 되돌리기 버튼 */
-//    $('#cancel2').click(function() {
-//        $('#cancel2').css('display', 'none');
-//       $('#ll').css('display', 'none');
-//       $('#ll2').css('display', 'none');
-//        $("#MO_MINAGE2").remove();
-//        $("#MO_MAXAGE2").remove();
-//        $('#agetd').append(m3);
-//        $('#ageNoLimit').css('display', 'block');
-//    }); 
-    
-//     $('#ageNoLimit').click(function() { //제한 없음 버튼
-//        $('#MO_MINAGE3').remove();
-//        $('#MO_MAXAGE3').remove();
-//        $('#wave').remove();
-//        $('#ageNoLimit').css('display', 'none');
-//        $('#agetd').append(hainput);
-//        $('#ll').css('display', 'block');        
-//        $('#ll2').css('display', 'block');        
-//        $('#cancel2').css('display', 'block');         
-//     });
-// }
-    
-
 /*============== 참가 인원 버튼 클릭 이벤트 ===============*/
 var maxp = $("#MO_MAXPEOPLE").val(); //인원제한 있음
 var maxp2 = $("#MO_MAXPEOPLE2").val(); //(maxpeople=0)
