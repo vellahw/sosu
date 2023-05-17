@@ -206,12 +206,13 @@ if(selectedRegion == "중부") {
             
 /*========== 참가 연령 제한 없음 버튼 클릭 이벤트 ========*/
 const ageTd = document.getElementById('agetd');
-let hiddenAgeValue = document.getElementById('MO_MAXAGE1').value;
-//var age = document.getElementById('MO_MAXAGE3').value;  //제한 없음일 때 mo_maxage value = 200
+let hiddenAgeValue = document.getElementById('hiddenMaxAge').value;
 const ageNoLimitText = document.getElementById('ageNoLimitText'); //제한없음 text
 const ageNoLimitBtn = document.getElementById('ageNoLimitBtn'); //제한없음 버튼
 const ageModiBtn = document.getElementById('ageModiBtn'); //수정하기 버튼
 const ageUndoBtn = document.getElementById('ageUndoBtn'); //되돌리기 버튼
+let minAge = document.getElementById('MO_MINAGE');
+let maxAge = document.getElementById('MO_MAXAGE');
 
 //---------연령이 '제한없음'일 때---------
 if(hiddenAgeValue == 200) {
@@ -222,11 +223,11 @@ if(hiddenAgeValue == 200) {
         ageModiBtn.style.display = 'none';
         ageUndoBtn.style.display = 'block';
         ageNoLimitText.style.display = 'none';
-        document.getElementById('MO_MINAGE1').remove();
-        document.getElementById('MO_MAXAGE1').remove();
+        document.getElementById('hiddenMinAge').remove();
+        document.getElementById('hiddenMaxAge').remove();
 
-        let minAgeinput = addNewInput('number', 'form-control', 'MO_MINAGE', 'MO_MINAGE2', '2', '최소 (숫자만 입력해주세요.)');
-        let maxAgeinput = addNewInput('number', 'form-control', 'MO_MAXAGE', 'MO_MAXAGE2', '2', '최대 (숫자만 입력해주세요.)');
+        let minAgeinput = addNewInput('number', 'form-control', 'MO_MINAGE', 'MO_MINAGE', '2', '최소 (숫자만 입력해주세요.)');
+        let maxAgeinput = addNewInput('number', 'form-control', 'MO_MAXAGE', 'MO_MAXAGE', '2', '최대 (숫자만 입력해주세요.)');
 
         ageTd.appendChild(minAgeinput);
         ageTd.appendChild(makeWave());
@@ -238,21 +239,72 @@ if(hiddenAgeValue == 200) {
         ageUndoBtn.style.display = 'none';
         ageModiBtn.style.display = 'block';
         ageNoLimitText.style.display = 'block';
-        document.getElementById('MO_MINAGE2').remove();
-        document.getElementById('MO_MAXAGE2').remove();
+        document.getElementById('MO_MINAGE').remove();
+        document.getElementById('MO_MAXAGE').remove();
         document.getElementById('wave').remove();
-        let hiddenMinAge = addNewInput('hidden', 'form-control', 'MO_MINAGE', 'MO_MINAGE1', '2');
+        let hiddenMinAge = addNewInput('hidden', 'form-control', 'MO_MINAGE', 'hiddenMinAge', '2');
         hiddenMinAge.value = '0'
-        let hiddenMaxAge = addNewInput('hidden', 'form-control', 'MO_MAXAGE', 'MO_MAXAGE1', '2');
+        let hiddenMaxAge = addNewInput('hidden', 'form-control', 'MO_MAXAGE', 'hiddenMaxAge', '2');
         hiddenMaxAge.value = '200'
 
         ageTd.appendChild(hiddenMinAge);
         ageTd.appendChild(hiddenMaxAge);
     });
 
-} 
+//---------연령 제한 있을 때---------
+} else if(hiddenAgeValue != 200){
+    document.getElementById('hiddenMinAge').remove();
+    document.getElementById('hiddenMaxAge').remove();
+    ageNoLimitBtn.style.display = 'block';
 
-//물결 만드는 함수
+    //제한없음 버튼 클릭 이벤트
+    ageNoLimitBtn.addEventListener('click', noLimitBtnEvent);
+
+    //되돌리기 버튼 클릭 이벤트
+    ageUndoBtn.addEventListener('click', undoBtnEvent);
+}
+
+//---제한없음 ageNoLimitBtn 버튼 이벤트 함수
+function noLimitBtnEvent() {
+    ageNoLimitBtn.style.display = 'none';
+    ageUndoBtn.style.display = 'block';
+    document.getElementById('MO_MINAGE').remove();
+    document.getElementById('MO_MAXAGE').remove();
+    document.getElementById('wave').remove();
+        
+    let ageNoLimitText2 = document.createElement('div');
+    let ageNoLimitTextofTxt = document.createTextNode('제한없음');
+    ageNoLimitText2.id = 'ageNoLimitText';
+    ageNoLimitText2.appendChild(ageNoLimitTextofTxt);
+        
+    let hiddenMinAge = addNewInput('hidden', 'form-control', 'MO_MINAGE', 'hiddenMinAge', '2');
+    hiddenMinAge.value = '0'
+    let hiddenMaxAge = addNewInput('hidden', 'form-control', 'MO_MAXAGE', 'hiddenMaxAge', '2');
+    hiddenMaxAge.value = '200'
+        
+    ageTd.appendChild(ageNoLimitText2);
+    ageTd.appendChild(hiddenMinAge);
+    ageTd.appendChild(hiddenMaxAge);
+}
+
+//---되돌리기 ageUndoBtn 버튼 이벤트 함수
+function undoBtnEvent() {
+    ageUndoBtn.style.display = 'none';
+    ageNoLimitBtn.style.display = 'block';
+    document.getElementById('ageNoLimitText').remove();
+    document.getElementById('hiddenMinAge').remove();
+    document.getElementById('hiddenMaxAge').remove();
+    let minAgeinput = addNewInput('number', 'form-control', 'MO_MINAGE', 'MO_MINAGE', '2', '최소 (숫자만 입력해주세요.)');
+    let maxAgeinput = addNewInput('number', 'form-control', 'MO_MAXAGE', 'MO_MAXAGE', '2', '최대 (숫자만 입력해주세요.)');
+    minAgeinput.value = minAge.value;
+    maxAgeinput.value = maxAge.value;
+
+    ageTd.appendChild(minAgeinput);
+    ageTd.appendChild(makeWave());
+    ageTd.appendChild(maxAgeinput);
+}
+
+//---물결 만드는 함수
 function makeWave() {
     let wave = document.createElement('span');
     let waveText = document.createTextNode('~');
@@ -263,7 +315,7 @@ function makeWave() {
     return wave;
 }
 
-//input 생성 함수
+//---input 생성 함수
 function addNewInput(type, className, name, id, maxLength, placeholder) {
     let newAgeInput = document.createElement('input');
     newAgeInput.type = type;

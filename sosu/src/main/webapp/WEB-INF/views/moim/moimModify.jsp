@@ -99,8 +99,8 @@
             <tr>
             <th class="header"><label for="MO_MINAGE" >참가 연령</label></th>
             <td class="contents" id="agetd" style="padding-bottom: 0px;">
-	            <input type="hidden" name="MO_MINAGE" id="MO_MINAGE1" value="${modify.MO_MINAGE }">
-	            <input type="hidden" name="MO_MAXAGE" id="MO_MAXAGE1" value="${modify.MO_MAXAGE }">
+	            <input type="hidden" name="MO_MINAGE" id="hiddenMinAge" value="${modify.MO_MINAGE }">
+	            <input type="hidden" name="MO_MAXAGE" id="hiddenMaxAge" value="${modify.MO_MAXAGE }">
             	<c:if test="${modify.MO_MAXAGE == '200'}">
                		<div id="ageNoLimitText">제한없음</div>
             	</c:if>
