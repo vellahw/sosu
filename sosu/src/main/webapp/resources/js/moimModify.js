@@ -184,26 +184,29 @@ function appendOptions(detailRegions) {
      }
 }
 
-if(selectedRegion == "중부") {
-    var detailRegions = jung;
-    appendOptions(detailRegions);        
-
-} else if (selectedRegion == "동부") {
-    var detailRegions = dong;
-    appendOptions(detailRegions);      
-
-} else if(selectedRegion == "서부") {
-   var detailRegions = seo;
-   appendOptions(detailRegions);      
-
-} else if(selectedRegion == '남부') {
-   var detailRegions = nam;
-   appendOptions(detailRegions);   
-
-} else if(selectedRegion == '북부') {
-   var detailRegions = book;
+switch (selectedRegion) {
+    case '중부':
+        var detailRegions = jung;
+        appendOptions(detailRegions);
+        break;
+    case '동부':
+        var detailRegions = dong;
+        appendOptions(detailRegions);
+        break;
+    case '서부':
+        var detailRegions = seo;
+        appendOptions(detailRegions);
+        break;
+    case '남부':
+        var detailRegions = nam;
+        appendOptions(detailRegions);
+        break;
+    case '북부':
+        var detailRegions = book;
+        appendOptions(detailRegions);
+        break;
 }
-            
+
 /*========== 참가 연령 제한 없음 버튼 클릭 이벤트 ========*/
 const ageTd = document.getElementById('agetd');
 let hiddenAgeValue = document.getElementById('hiddenMaxAge').value;
