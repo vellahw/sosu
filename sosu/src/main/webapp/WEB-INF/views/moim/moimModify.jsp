@@ -126,16 +126,16 @@
              <!-- 참가 인원  -->
             <tr>
             <th class="header"><label for="MO_MAXPEOPLE" >참가 인원</label></th>
-            <td class="contents" style="padding-bottom: 0px;" id="padd">
+            <td class="contents" style="padding-bottom: 0px;" id="people-td">
+               <input type="hidden" name="MO_MAXPEOPLE" id="hiddenMaxPeople" value="${modify.MO_MAXPEOPLE}">
             
             <c:if test="${modify.MO_MAXPEOPLE ne '0' }">
                <input type="number" class="form-control" name="MO_MAXPEOPLE" id="MO_MAXPEOPLE" value="${modify.MO_MAXPEOPLE }">
-               <div id="l3" style="display: none;">제한없음</div>
+               <div id="peopleNoLimitText" style="display: none;">제한없음</div>
             </c:if>  
 
             <c:if test="${modify.MO_MAXPEOPLE eq '0' }">
-               <input type="hidden" name="MO_MAXPEOPLE" id="MO_MAXPEOPLE2" value="${modify.MO_MAXPEOPLE}">
-            <div id="l2">제한없음</div>
+            <div id="peopleNoLimitText">제한없음</div>
             </c:if>  
               
             </td>
@@ -145,13 +145,12 @@
          <tr>
           <th></th>
           <td id="addbtn" style="text-align: left;">
-          <button type="button" id="peopleNoLimit" class="noLB" style="
+          <button type="button" id="peopleNoLimitBtn" class="noLB" style="
              <c:if test="${modify.MO_MAXPEOPLE == '0' }">display: none;</c:if>">       
              제한 없음
           </button>
           <input type="button" id="peopleModiBtn" class="noLB" value="수정하기" style="display: none; width: 750px;">
-          <input type="button" id="pCancel" class="noLB" value="되돌리기" style="display: none;">
-          <input type="button" id="pCancel2" class="noLB" value="되돌리기" style="display: none;">
+          <input type="button" id="peopleUndoBtn" class="noLB" value="되돌리기" style="display: none;">
           </td>
        </tr>
          
