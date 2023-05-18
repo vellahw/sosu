@@ -333,67 +333,83 @@ function addNewInput(type, className, name, id, maxLength, placeholder) {
 }
 
 /*============== 참가 인원 버튼 클릭 이벤트 ===============*/
+let hiddenMaxPeopleValue = document.getElementById('hiddenMaxPeople').value;
+const peopleNoLimitText = document.getElementById('peopleNoLimitText'); //제한없음 텍스트
+const peopleNoLimitBtn = document.getElementById('peopleNoLimitBtn'); //제한없음 버튼
+const peopleUndoBtn = document.getElementById('peopleUndoBtn'); //되돌리기 버튼
+const maxPeopleInput = document.getElementById('MO_MAXPEOPLE'); //input
+const peopleTd = document.getElementById('people-td'); 
+
 var maxp = $("#MO_MAXPEOPLE").val(); //인원제한 있음
-var maxp2 = $("#MO_MAXPEOPLE2").val(); //(maxpeople=0)
 var str = "<input type='number' class='form-control' name='MO_MAXPEOPLE' id='MO_MAXPEOPLE'>";
 var hmaxp = '<input type="hidden" name="MO_MAXPEOPLE" id="MO_MAXPEOPLE2" value="0">';
-var pCancel = document.getElementById('pCancel');
-var pCancel2 = document.getElementById('pCancel2');
-var l3 = document.getElementById('l3');
  
 //---------------참가 인원이 있다면-------------------
- if(maxp != '0') { 
-   $('#peopleNoLimit').click(function() { //제한 없음 버튼 누르면
-      $('#peopleNoLimit').css('display', 'none'); //제한 없음 버튼 없앰
-      $("#MO_MAXPEOPLE").remove();
+ if(hiddenMaxPeopleValue != 0) { 
+    document.getElementById('hiddenMaxPeople').remove();
+    
+    //제한없음 버튼 클릭 이벤트
+    peopleNoLimitBtn.addEventListener('click', ()=>{
+        peopleNoLimitBtn.style.display = 'none';
+        peopleNoLimitText.style.display = 'block';
+        peopleUndoBtn.style.display = 'block';
+        maxPeopleInput.remove();
+        let minAgeinput = addNewInput('hidden', 'form-control', 'MO_MAXPEOPLE', 'hiddenMaxPeople');
+        minAgeinput.value = 0;
+        peopleTd.appendChild(minAgeinput);
+    })
+
+//    $('#peopleNoLimit').click(function() { //제한 없음 버튼 누르면
+//       $('#peopleNoLimit').css('display', 'none'); //제한 없음 버튼 없앰
+//       $("#MO_MAXPEOPLE").remove();
        
-        //되돌리기 버튼 띄움
-        if(pCancel.style.display == 'none') {
-            pCancel.style.display = 'block'; 
-        }
+//         //되돌리기 버튼 띄움
+//         if(pCancel.style.display == 'none') {
+//             pCancel.style.display = 'block'; 
+//         }
         
-        //제한없음 텍스트 띄움
-        if(l3.style.display == 'none') {
-            l3.style.display = 'block'; 
-        }
+//         //제한없음 텍스트 띄움
+//         if(l3.style.display == 'none') {
+//             l3.style.display = 'block'; 
+//         }
         
-        $("#padd").append(hmaxp); //input hidden
-   });
+//         $("#padd").append(hmaxp); //input hidden
+//    });
  }
 
 //되돌리기 버튼
-$(pCancel).click(function() { 
-      $('#l3').css('display', 'none');
-       $('#pCancel').css('display', 'none'); //되돌리기 버튼 없앰
-      $('#MO_MAXPEOPLE2').remove(); //히든 인풋 
-       $('#peopleNoLimit').css('display', 'block'); //제한없음 버튼 띄움
-       $('#padd').append(str);
-    }); 
+// $(pCancel).click(function() { 
+//       $('#l3').css('display', 'none');
+//        $('#pCancel').css('display', 'none'); //되돌리기 버튼 없앰
+//       $('#MO_MAXPEOPLE2').remove(); //히든 인풋 
+//        $('#peopleNoLimit').css('display', 'block'); //제한없음 버튼 띄움
+//        $('#padd').append(str);
+//     }); 
 
-//되돌리기 버튼2    
-$(pCancel2).click(function() { 
-   $('#l2').css('display', 'block');  
-   $('#MO_MAXPEOPLE').remove();
-   $("#padd").append(hmaxp);
-   $('#pCancel2').css('display', 'none');
-   $('#pepolemodi').css('display', 'block');
-});
+// //되돌리기 버튼2    
+// $(pCancel2).click(function() { 
+//    $('#l2').css('display', 'block');  
+//    $('#MO_MAXPEOPLE').remove();
+//    $("#padd").append(hmaxp);
+//    $('#pCancel2').css('display', 'none');
+//    $('#pepolemodi').css('display', 'block');
+// });
 
-//---------------참가 인원이 '제한 없음'이라면----------------
-if(maxp2 == '0') { 
-   $("#peopleModiBtn").css('display', 'block'); //수정하기 버튼 띄움
+// //---------------참가 인원이 '제한 없음'이라면----------------
+// if(maxp2 == '0') { 
+//    $("#peopleModiBtn").css('display', 'block'); //수정하기 버튼 띄움
    
-    //수정하기 버튼 누르면
-    $('#peopleModiBtn').click(function() {
-        if(pCancel2.style.display == 'none') {
-            pCancel2.style.display = 'block'; //되돌리기 버튼 띄움
-        }
-        $('#peopleModiBtn').css('display', 'none'); //수정하기 버튼 없앰
-        $('#l2').css('display', 'none');  
-        $("#padd").append(str);
-        $("#MO_MAXPEOPLE2").remove();
-    });
-}
+//     //수정하기 버튼 누르면
+//     $('#peopleModiBtn').click(function() {
+//         if(pCancel2.style.display == 'none') {
+//             pCancel2.style.display = 'block'; //되돌리기 버튼 띄움
+//         }
+//         $('#peopleModiBtn').css('display', 'none'); //수정하기 버튼 없앰
+//         $('#l2').css('display', 'none');  
+//         $("#padd").append(str);
+//         $("#MO_MAXPEOPLE2").remove();
+//     });
+// }
 
 /*================ 파일 추가 버튼 ================*/      
 addFileBtn.addEventListener('click', function(e){
