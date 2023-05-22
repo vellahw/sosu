@@ -12,14 +12,13 @@ function showBox(i){
     }
 }
 
- $(function() {
-     var mF = $("#mImg").val();
-     var mFF = $("#mfsv").val();
- 	var main = document.getElementById("main"); //메인이미지 file input
-    if(mF == 'N' || mFF == 0) {
- 	    main.style.display = 'block';
-     }
- });
+/*=========== 메인이미지 존재 여부에 따른  file input 제어 ===========*/
+let mainSavedName = document.getElementById('mfsv').value;
+const mainImgInput = document.getElementById("main");
+
+if(mainSavedName == 0) {
+    mainImgInput.style.display = 'block';
+}
 
 /*================= 지도 띄우기 =================*/
 var wii = document.getElementById("WII").value;
