@@ -20,7 +20,6 @@ Spring Framework를 활용한 MVC 패턴의 모임 커뮤니티 사이트입니�
   <img src="https://user-images.githubusercontent.com/112395421/222424225-67fc6b73-e269-463a-81ca-b61c091c580c.png" width="65" height="90"/>&nbsp;&nbsp;&nbsp;&nbsp;
   <img src="https://user-images.githubusercontent.com/112395421/222424310-b43f81c9-dc3f-4247-8cec-d1560a6ac24c.png" width="90" height="90" />
   <img src="https://user-images.githubusercontent.com/112395421/222424316-be97f8d6-3dcf-46b7-b795-af2943dd3b99.png" width="90" height="90"/>&nbsp;&nbsp;&nbsp;&nbsp;
-  <img src="https://user-images.githubusercontent.com/112395421/222424325-7dcae130-7561-49de-8033-ca1f01a761c5.png" width="75" height="75"/>
 </span>
 <br/><br/><br/><br/>
 
